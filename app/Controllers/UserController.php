@@ -34,7 +34,7 @@ class UserController
         header('Content-Type: text/html');
         echo '
         <script>
-            document.cookie = "yandex-id-logged=1; max-age=5; path=/;";
+            document.cookie = "yandex-id-logged=1; max-age=3; path=/;";
             close();
         </script>';
         die;
