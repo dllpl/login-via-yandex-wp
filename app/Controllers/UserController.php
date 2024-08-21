@@ -37,6 +37,7 @@ class UserController
             document.cookie = "yandex-id-logged=1; max-age=5; path=/;";
             close();
         </script>';
+        die;
     }
 
     private function yandexid_create_user($user_data)

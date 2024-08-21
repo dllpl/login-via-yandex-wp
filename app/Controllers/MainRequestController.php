@@ -70,7 +70,15 @@ class MainRequestController extends WP_REST_Controller
 
         if(!$access_token) {
 
-            return wp_send_json_error('Не указан client secret');
+            header('Content-Type: text/html');
+            echo '
+            <script>
+                document.cookie = "yandex-id-logged=1; max-age=5; path=/;";
+                close();
+            </script>';
+            die;
+
+//            return wp_send_json_error('Не указан client secret');
         } else if (isset($access_token['error'])) {
             return wp_send_json_error($access_token);
         }
