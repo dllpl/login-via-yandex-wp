@@ -69,6 +69,7 @@ class MainRequestController extends WP_REST_Controller
         $access_token = $result->getAccessToken($request['code'])['access_token'];
 
         if(!$access_token) {
+
             return wp_send_json_error('Не указан client secret');
         } else if (isset($access_token['error'])) {
             return wp_send_json_error($access_token);
