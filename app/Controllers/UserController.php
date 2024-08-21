@@ -8,41 +8,35 @@ class UserController
     {
         global $wpdb;
 
-        if (isset($access_token)) {
-
-            $yandexApi = new Yandex();
-            $user_data = $yandexApi->getInfo(sanitize_text_field($access_token));
-
-            if (isset($user_data->default_email)) {
-                $email = $user_data->default_email;
-            } else {
-                $email = null;
-            }
-
-            if (is_null($email)) {
-                return wp_send_json_error('Невозможно авторизовать пользователя.');
-            }
-
-            $table = $wpdb->prefix . "users";
-
-            $sql = "SELECT ID FROM $table WHERE user_email='$email'";
-            $user = $wpdb->get_row($sql);
-
-            if (!is_null($user)) {
-                wp_set_auth_cookie($user->ID);
-            } else {
-                $this->yandexid_create_user($user_data);
-            }
-
-            header('Content-Type: text/html');
-            echo '
-                    <script>
-                        close()
-                        document.cookie = "yandex-id-logged=1; path=/;"
-                    </script>';
-        } else {
-            return wp_send_json_error('Не возможно авторизовать пользователя.');
+        if (empty($access_token)) {
+            return wp_send_json_error('Невозможно авторизовать пользователя.');
         }
+
+        $yandexApi = new Yandex();
+        $user_data = $yandexApi->getInfo(sanitize_text_field($access_token));
+
+        $email = $user_data->default_email ?? null;
+
+        if (is_null($email)) {
+            return wp_send_json_error('Невозможно авторизовать пользователя.');
+        }
+
+        $table = $wpdb->prefix . "users";
+
+        $user = $wpdb->get_row($wpdb->prepare("SELECT ID FROM $table WHERE user_email = %s", $email));
+
+        if ($user) {
+            wp_set_auth_cookie($user->ID);
+        } else {
+            $this->yandexid_create_user($user_data);
+        }
+
+        header('Content-Type: text/html');
+        echo '
+        <script>
+            document.cookie = "yandex-id-logged=1; path=/;";
+            close();
+        </script>';
     }
 
     private function yandexid_create_user($user_data)
