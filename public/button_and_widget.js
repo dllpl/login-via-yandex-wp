@@ -43,7 +43,10 @@ if (!yaWpData.error) {
             if (cookies.includes('yandex-id-logged')) {
                 clearInterval(interval_yandex_auth);
                 document.cookie = "yandex-id-logged=1; max-age=0";
-                location.reload();
+                if (!sessionStorage.getItem('pageReloaded')) {
+                    sessionStorage.setItem('pageReloaded', 'true');
+                    location.reload();
+                }
             }
         }
 
