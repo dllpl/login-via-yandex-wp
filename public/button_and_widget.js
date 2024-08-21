@@ -13,7 +13,7 @@ if (!yaWpData.error) {
                 YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin,
                     {
                         view: "button",
-                        parentId: id,
+                        parentId: yaWpData.container_id,
                         buttonSize: 'xl',
                         buttonView: 'main',
                         buttonTheme: 'light',
