@@ -1,6 +1,6 @@
 <?php
 
-class Uninstall
+class YandexLoginUninstall
 {
 
     public static function make()

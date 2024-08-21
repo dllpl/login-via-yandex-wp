@@ -1,13 +1,13 @@
 <?php
 
-trait Options
+trait YandexLoginOptions
 {
     public static function getOptions()
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'yandexid_webseed_options';
+        $table_name = $wpdb->prefix . 'yandex_login_options';
 
-        $row = $wpdb->get_row("SELECT * FROM $table_name ORDER BY id DESC LIMIT 1");
+        $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM %s ORDER BY id DESC LIMIT 1", $table_name));
 
         if ($row) {
             return [

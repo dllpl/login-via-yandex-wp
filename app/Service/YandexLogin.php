@@ -1,11 +1,11 @@
 <?php
 
-require_once plugin_dir_path(__FILE__) . '../../includes/Options.php';
+require_once plugin_dir_path(__FILE__) . '../../includes/YandexLoginOptions.php';
 
-class Yandex
+class YandexLogin
 {
 
-    use Options;
+    use YandexLoginOptions;
 
     private $login_url = 'https://login.yandex.ru/info?format=json';
 
@@ -15,7 +15,7 @@ class Yandex
 
     public function __construct()
     {
-        $options = Options::getOptions();
+        $options = YandexLoginOptions::getOptions();
         $this->options = $options ?? null;
     }
 
@@ -89,12 +89,5 @@ class Yandex
         } else {
             throw new Exception('cURL - не установлен');
         }
-    }
-
-    public function logs($type, $data)
-    {
-        $file = __DIR__ . '/debug_' . $type . '.txt';
-        $current = var_export($data, true);
-        file_put_contents($file, $current);
     }
 }

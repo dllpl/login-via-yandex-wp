@@ -1,8 +1,8 @@
 <?php
 
-require_once plugin_dir_path(__FILE__) . '../Service/Yandex.php';
+require_once plugin_dir_path(__FILE__) . '../Service/YandexLogin.php';
 
-class UserController
+class YandexLoginUserController
 {
     public function handler($access_token)
     {
@@ -12,7 +12,7 @@ class UserController
             return wp_send_json_error('Невозможно авторизовать пользователя.');
         }
 
-        $yandexApi = new Yandex();
+        $yandexApi = new YandexLogin();
         $user_data = $yandexApi->getInfo(sanitize_text_field($access_token));
 
         $email = $user_data->default_email ?? null;

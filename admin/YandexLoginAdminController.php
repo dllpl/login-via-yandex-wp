@@ -1,22 +1,22 @@
 <?php
 
-require_once plugin_dir_path(__FILE__) . '../includes/Options.php';
+require_once plugin_dir_path(__FILE__) . '../includes/YandexLoginOptions.php';
 
-class AdminController
+class YandexLoginAdminController
 {
-    use Options;
+    use YandexLoginOptions;
 
     private $options;
 
     public function __construct()
     {
-        $options = Options::getOptions();
+        $options = YandexLoginOptions::getOptions();
         $this->options = $options ?? null;
     }
 
     public function addMenu()
     {
-        add_options_page('Интеграция с Яндекс ID', 'Яндекс ID Webseed', 'manage_options', 'yandexid_settings', [$this, 'settingsPage']);
+        add_options_page('Вход через Яндекс', 'Вход через Яндекс от Webseed', 'manage_options', 'yandex_login', [$this, 'settingsPage']);
     }
 
     public function settingsPage()
@@ -30,15 +30,15 @@ class AdminController
             }
         </style>
         <div class="wrap">
-            <h2><?php echo get_admin_page_title() ?></h2>
+            <h2><?php echo sprintf('%s', esc_html(get_admin_page_title())) ?></h2>
             <form>
                 <h3>Данные приложения Яндекс ID и настройки плагина</h3>
                 <label for="client_id">ClientID<span style="color: red">*</span></label> <br>
-                <input type="text" id="client_id" name="client_id" value="<?php echo $options['client_id'] ?? null ?>"
+                <input type="text" id="client_id" name="client_id" value="<?php echo sprintf('%s', esc_html($options['client_id'] ?? '')) ?>"
                        required maxlength="32" minlength="32"><br>
                 <label for="client_secret">Client secret<span style="color: red">*</span></label> <br>
                 <input type="password" id="client_secret" name="client_secret"
-                       value="<?php echo $options['client_secret'] ?? null ?>"
+                       value="<?php echo sprintf('%s', esc_html($options['client_secret'] ?? '')) ?>"
                        required maxlength="32" minlength="32"><br>
                 <h3>Виджет и кнопка <small>(возможны оба варианта, либо только один, либо вообще ни один)</small></h3>
                 <div style="display: flex; margin-bottom: 15px">
@@ -58,7 +58,7 @@ class AdminController
                 <div style="display: flex; flex-direction: column">
                     <label for="container_id">ID - контейнера кнопки</label>
                     <input type="text" id="container_id" name="container_id"
-                           value="<?php echo $options['container_id'] ?? null ?>"
+                           value="<?php echo sprintf('%s',esc_html($options['container_id'] ?? '')) ?>"
                         <?php if (!isset($options['button']) || !$options['button']) echo 'disabled'?>
                         placeholder='Поле активируется, если выбрать "Показать кнопку"'
                     >
@@ -80,7 +80,7 @@ class AdminController
                 }
 
                 const form = document.querySelector('form');
-                const url = '/wp-json/yandexid_webseed/updateSettings';
+                const url = '/wp-json/yandex_login/updateSettings';
 
                 form.addEventListener('submit', (event) => {
                     event.preventDefault();
@@ -99,7 +99,7 @@ class AdminController
                     fetch(url, {
                         method: 'POST',
                         headers: {
-                            'X-WP-Nonce': "<?php echo wp_create_nonce('wp_rest'); ?>",
+                            'X-WP-Nonce': "<?php echo sprintf('%s', esc_html(wp_create_nonce('wp_rest'))) ?>",
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(data)
@@ -141,7 +141,7 @@ class AdminController
         }
 
         global $wpdb;
-        $table_name = $wpdb->prefix . 'yandexid_webseed_options';
+        $table_name = $wpdb->prefix . 'yandex_login_options';
 
         $data = [
             'client_id' => trim($request['client_id']),

@@ -1,6 +1,6 @@
 <?php
 
-class Activator
+class YandexLoginActivator
 {
     /**
      * @return void
@@ -8,7 +8,7 @@ class Activator
     public static function make()
     {
         global $wpdb;
-        $table_options = $wpdb->prefix . 'yandexid_webseed_options';
+        $table_options = $wpdb->prefix . 'yandex_login_options';
         $charset_collate = $wpdb->get_charset_collate();
 
         $sql = ["
