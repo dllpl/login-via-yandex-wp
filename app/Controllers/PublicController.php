@@ -1,16 +1,16 @@
 <?php
 
-require_once plugin_dir_path(__FILE__) . '../../includes/YandexLoginOptions.php';
+require_once plugin_dir_path(__FILE__) . '../../includes/Options.php';
 
-class YandexLoginPublicController
+class PublicController
 {
-    use YandexLoginOptions;
+    use Options;
 
     private $options;
 
     public function __construct()
     {
-        $options = YandexLoginOptions::getOptions();
+        $options = Options::getOptions();
         $this->options = $options ?? null;
     }
 

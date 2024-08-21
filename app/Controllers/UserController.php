@@ -2,7 +2,7 @@
 
 require_once plugin_dir_path(__FILE__) . '../Service/YandexLogin.php';
 
-class YandexLoginUserController
+class UserController
 {
     public function handler($access_token)
     {
@@ -21,9 +21,7 @@ class YandexLoginUserController
             return wp_send_json_error('Невозможно авторизовать пользователя.');
         }
 
-        $table = $wpdb->prefix . "users";
-
-        $user = $wpdb->get_row($wpdb->prepare("SELECT ID FROM $table WHERE user_email = %s", $email));
+        $user = get_user_by('email', $email);
 
         if ($user) {
             wp_set_auth_cookie($user->ID);
@@ -32,11 +30,7 @@ class YandexLoginUserController
         }
 
         header('Content-Type: text/html');
-        echo '
-        <script>
-            document.cookie = "yandex-id-logged=1; max-age=3; path=/;";
-            close();
-        </script>';
+        echo esc_html('<script>document.cookie = "yandex-id-logged=1; max-age=3; path=/;";close();</script>');
         die;
     }
 

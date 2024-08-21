@@ -1,10 +1,10 @@
 <?php
 /**
  * @since             1.0.0
- * @package           Authorization via Yandex ID
+ * @package           Login via Yandex
  *
  * @wordpress-plugin
- * Plugin Name:       Yandex Login - авторизация через Яндекс для WordPress и Woocommerce.
+ * Plugin Name:       Login via Yandex - авторизация через Яндекс для вашего сайта или интернет магазина.
  * Plugin URI:        https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id
  * Description:       Плагин для входа через Яндекс для WordPress и Woocommerce. Укажите Client Token и Secret Token в настройках плагина, а также, выберите тип отображения на сайте (в контейнере или всплывающем окне, или и то и другое).
  * Version:           1.0.0
@@ -31,21 +31,21 @@ register_uninstall_hook(__FILE__, 'uninstall');
 /** Регистрация REST API методов плагина */
 function register_routes()
 {
-    require_once plugin_dir_path(__FILE__) . 'app/Controllers/YandexLoginMainRequestController.php';
-    $controller = new YandexLoginMainRequestController();
+    require_once plugin_dir_path(__FILE__) . 'app/Controllers/MainRequestController.php';
+    $controller = new MainRequestController();
     $controller->registerRoutes();
 }
 
 function admin_menu_init()
 {
-    require_once plugin_dir_path(__FILE__) . 'admin/YandexLoginAdminController.php';
-    $option = new YandexLoginAdminController();
+    require_once plugin_dir_path(__FILE__) . 'admin/AdminController.php';
+    $option = new AdminController();
     $option->addMenu();
 }
 function add_script_to_head() {
 
     if (!is_user_logged_in()) {
-        wp_enqueue_script( 'sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '');
+        wp_enqueue_script( 'sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '1.0.0', 'in_footer');
     }
 
 }
@@ -53,9 +53,9 @@ function add_script_to_head() {
 function add_script_to_footer() {
 
     if (!is_user_logged_in()) {
-        require_once plugin_dir_path(__FILE__) . 'app/Controllers/YandexLoginPublicController.php';
+        require_once plugin_dir_path(__FILE__) . 'app/Controllers/PublicController.php';
 
-        $public = new YandexLoginPublicController();
+        $public = new PublicController();
         $public->scriptInit();
     }
 }
@@ -63,12 +63,12 @@ function add_script_to_footer() {
 
 function activate()
 {
-    require_once plugin_dir_path(__FILE__) . 'includes/YandexLoginActivator.php';
-    YandexLoginActivator::make();
+    require_once plugin_dir_path(__FILE__) . 'includes/Activator.php';
+    Activator::make();
 }
 
 function uninstall()
 {
-    require_once plugin_dir_path(__FILE__) . 'includes/YandexLoginUninstall.php';
-    YandexLoginUninstall::make();
+    require_once plugin_dir_path(__FILE__) . 'includes/Uninstall.php';
+    Uninstall::make();
 }

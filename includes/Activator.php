@@ -1,6 +1,6 @@
 <?php
 
-class YandexLoginActivator
+class Activator
 {
     /**
      * @return void

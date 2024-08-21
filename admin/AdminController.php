@@ -1,16 +1,16 @@
 <?php
 
-require_once plugin_dir_path(__FILE__) . '../includes/YandexLoginOptions.php';
+require_once plugin_dir_path(__FILE__) . '../includes/Options.php';
 
-class YandexLoginAdminController
+class AdminController
 {
-    use YandexLoginOptions;
+    use Options;
 
     private $options;
 
     public function __construct()
     {
-        $options = YandexLoginOptions::getOptions();
+        $options = Options::getOptions();
         $this->options = $options ?? null;
     }
 
@@ -34,11 +34,11 @@ class YandexLoginAdminController
             <form>
                 <h3>Данные приложения Яндекс ID и настройки плагина</h3>
                 <label for="client_id">ClientID<span style="color: red">*</span></label> <br>
-                <input type="text" id="client_id" name="client_id" value="<?php echo sprintf('%s', esc_html($options['client_id'] ?? '')) ?>"
+                <input type="text" id="client_id" name="client_id" value="<?php echo sprintf('%s', esc_attr($options['client_id'] ?? '')) ?>"
                        required maxlength="32" minlength="32"><br>
                 <label for="client_secret">Client secret<span style="color: red">*</span></label> <br>
                 <input type="password" id="client_secret" name="client_secret"
-                       value="<?php echo sprintf('%s', esc_html($options['client_secret'] ?? '')) ?>"
+                       value="<?php echo sprintf('%s', esc_attr($options['client_secret'] ?? '')) ?>"
                        required maxlength="32" minlength="32"><br>
                 <h3>Виджет и кнопка <small>(возможны оба варианта, либо только один, либо вообще ни один)</small></h3>
                 <div style="display: flex; margin-bottom: 15px">
@@ -58,7 +58,7 @@ class YandexLoginAdminController
                 <div style="display: flex; flex-direction: column">
                     <label for="container_id">ID - контейнера кнопки</label>
                     <input type="text" id="container_id" name="container_id"
-                           value="<?php echo sprintf('%s',esc_html($options['container_id'] ?? '')) ?>"
+                           value="<?php echo sprintf('%s', esc_attr($options['container_id'] ?? '')) ?>"
                         <?php if (!isset($options['button']) || !$options['button']) echo 'disabled'?>
                         placeholder='Поле активируется, если выбрать "Показать кнопку"'
                     >
@@ -144,10 +144,10 @@ class YandexLoginAdminController
         $table_name = $wpdb->prefix . 'yandex_login_options';
 
         $data = [
-            'client_id' => trim($request['client_id']),
-            'client_secret' => trim($request['client_secret']),
+            'client_id' => isset($request['client_id']) ? trim(sanitize_text_field($request['client_id'])) : '',
+            'client_secret' => isset($request['client_secret']) ? trim(sanitize_text_field($request['client_secret'])) : '',
             'button' => $request['button'] ?? null,
-            'container_id' => $request['container_id'] ?? null,
+            'container_id' => isset($request['container_id']) ? sanitize_text_field($request['container_id']) : null,
             'widget' => $request['widget'] ?? null,
         ];
 

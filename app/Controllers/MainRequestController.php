@@ -1,6 +1,6 @@
 <?php
 
-class YandexLoginMainRequestController extends WP_REST_Controller
+class MainRequestController extends WP_REST_Controller
 {
     const NAMESPACE = 'yandex_login';
 
@@ -71,7 +71,7 @@ class YandexLoginMainRequestController extends WP_REST_Controller
         if(!$access_token) {
 
             header('Content-Type: text/html');
-            echo '<script>document.cookie = "yandex-id-logged=1; max-age=5; path=/;";close();</script>';
+            echo esc_html('<script>document.cookie = "yandex-id-logged=1; max-age=5; path=/;"; close();</script>');
             die;
 
 //            return wp_send_json_error('Не указан client secret');
@@ -79,16 +79,16 @@ class YandexLoginMainRequestController extends WP_REST_Controller
             return wp_send_json_error($access_token);
         }
 
-        require_once plugin_dir_path(__FILE__) . 'YandexLoginUserController.php';
+        require_once plugin_dir_path(__FILE__) . 'UserController.php';
 
-        $result = new YandexLoginUserController();
+        $result = new UserController();
         return $result->handler($access_token);
     }
 
     public function updateSettings(WP_REST_Request $request)
     {
-        require_once plugin_dir_path(__FILE__) . '../../admin/YandexLoginAdminController.php';
-        return YandexLoginAdminController::updateSettings($request);
+        require_once plugin_dir_path(__FILE__) . '../../admin/AdminController.php';
+        return AdminController::updateSettings($request);
     }
 
 }

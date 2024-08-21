@@ -1,6 +1,6 @@
 <?php
 
-trait YandexLoginOptions
+trait Options
 {
     public static function getOptions()
     {

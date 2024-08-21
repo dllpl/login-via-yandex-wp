@@ -1,4 +1,4 @@
-=== Yandex Login ===
+=== Login via Yandex  ===
 Contributors: dllpl
 Tags: yandex, login, авторизация, через, яндекс
 Donate link: https://boosty.to/webseed/donate
