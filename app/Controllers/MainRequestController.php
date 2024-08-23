@@ -2,7 +2,7 @@
 
 class MainRequestController extends WP_REST_Controller
 {
-    const NAMESPACE = 'yandex_login';
+    const NAMESPACE = 'login_via_yandex';
 
     public function registerRoutes()
     {
