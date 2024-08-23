@@ -16,7 +16,7 @@ class AdminController
 
     public function addMenu()
     {
-        add_options_page('Вход через Яндекс', 'Вход через Яндекс от Webseed', 'manage_options', 'login_via_yandex', [$this, 'settingsPage']);
+        add_options_page('Вход через Яндекс', 'Вход через Яндекс', 'manage_options', 'login_via_yandex', [$this, 'settingsPage']);
     }
 
     public function settingsPage()
@@ -31,6 +31,11 @@ class AdminController
         </style>
         <div class="wrap">
             <h2><?php echo sprintf('%s', esc_html(get_admin_page_title())) ?></h2>
+            <ul>
+                <li><a href="https://github.com/dllpl" target="_blank" title="https://github.com/dllpl">Автор плагина Никита Ив (dllpl)</a><i></i></li>
+                <li><a href="https://github.com/dllpl/login-via-yandex-wp" target="_blank">Репозиторий плагина</a></li>
+                <li><a href="https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id" target="_blank">Руководство по плагину</a></li>
+            </ul>
             <form>
                 <h3>Данные приложения Яндекс ID и настройки плагина</h3>
                 <label for="client_id">ClientID<span style="color: red">*</span></label> <br>
