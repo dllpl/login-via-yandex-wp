@@ -6,8 +6,6 @@ class UserController
 {
     public function handler($access_token)
     {
-        global $wpdb;
-
         if (empty($access_token)) {
             return wp_send_json_error('Невозможно авторизовать пользователя.');
         }
@@ -28,9 +26,8 @@ class UserController
         } else {
             $this->yandexid_create_user($user_data);
         }
-
-        header('Content-Type: text/html');
-        echo esc_html('<script>document.cookie = "yandex-id-logged=1; max-age=3; path=/;";close();</script>');
+        header('Content-Type: text/html; charset=UTF-8');
+        echo "<script>window.opener.parent.location.reload();window.close();</script>";
         die;
     }
 

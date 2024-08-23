@@ -69,12 +69,7 @@ class MainRequestController extends WP_REST_Controller
         $access_token = $result->getAccessToken($request['code'])['access_token'];
 
         if(!$access_token) {
-
-            header('Content-Type: text/html');
-            echo esc_html('<script>document.cookie = "yandex-id-logged=1; max-age=5; path=/;"; close();</script>');
-            die;
-
-//            return wp_send_json_error('Не указан client secret');
+            return wp_send_json_error($access_token);
         } else if (isset($access_token['error'])) {
             return wp_send_json_error($access_token);
         }

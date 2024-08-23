@@ -37,19 +37,6 @@ if (!yaWpData.error) {
                 .catch(error => console.log('Обработка ошибки', error));
         }
 
-        function checkAndReload() {
-            let cookies = document.cookie;
-
-            if (cookies.includes('yandex-id-logged')) {
-                clearInterval(interval_yandex_auth);
-                document.cookie = "yandex-id-logged=1; max-age=3; path=/";
-                location.reload();
-            }
-        }
-
-        if (typeof interval_yandex_auth === 'undefined' || !interval_yandex_auth) {
-            var interval_yandex_auth = setInterval(checkAndReload, 1000);
-        }
     })
 } else {
     console.log(yaWpData.error)

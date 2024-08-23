@@ -7,7 +7,7 @@ trait Options
         global $wpdb;
         $table_name = $wpdb->prefix . 'yandex_login_options';
 
-        $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM %s ORDER BY id DESC LIMIT 1", $table_name));
+        $row = $wpdb->get_row($wpdb->prepare("SELECT {$table_name} FROM %s ORDER BY id DESC LIMIT 1"));
 
         if ($row) {
             return [
