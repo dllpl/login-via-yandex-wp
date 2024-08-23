@@ -5,9 +5,9 @@
 ## Создание приложения в Яндекс ID
 Для начала, вам понадобится перейти по ссылке и создать своё приложение в Яндекс, заполнив анкету из трёх шагов. В поле Webhook URI необходимо обязательно указать адрес, заменив «вашсайт.ру» на ваше доменное имя:
 ```text
-https://вашсайт.ру/wp-json/yandexid_webseed/webhook
+https://вашсайт.ру/wp-json/login_via_yandex/webhook
 ```
-(пример для нашего сайта https://webseed.ru/wp-json/yandexid_webseed/webhook)
+(пример для нашего сайта https://webseed.ru/wp-json/login_via_yandex/webhook)
 
 После заполнения, вы получите ClientID и Client secret, эти токены пригодятся нам при настройки плагина на стороне WordPress.
 
