@@ -16,7 +16,7 @@ class AdminController
 
     public function addMenu()
     {
-        add_options_page('Вход через Яндекс', 'Вход через Яндекс от Webseed', 'manage_options', 'yandex_login', [$this, 'settingsPage']);
+        add_options_page('Вход через Яндекс', 'Вход через Яндекс от Webseed', 'manage_options', 'login_via_yandex', [$this, 'settingsPage']);
     }
 
     public function settingsPage()
@@ -80,7 +80,7 @@ class AdminController
                 }
 
                 const form = document.querySelector('form');
-                const url = '/wp-json/yandex_login/updateSettings';
+                const url = '/wp-json/login_via_yandex/updateSettings';
 
                 form.addEventListener('submit', (event) => {
                     event.preventDefault();
@@ -141,7 +141,7 @@ class AdminController
         }
 
         global $wpdb;
-        $table_name = $wpdb->prefix . 'yandex_login_options';
+        $table_name = $wpdb->prefix . 'login_via_yandex_options';
 
         $data = [
             'client_id' => isset($request['client_id']) ? trim(sanitize_text_field($request['client_id'])) : '',

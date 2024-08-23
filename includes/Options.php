@@ -5,7 +5,7 @@ trait Options
     public static function getOptions()
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'yandex_login_options';
+        $table_name = $wpdb->prefix . 'login_via_yandex_options';
 
         $row = $wpdb->get_row($wpdb->prepare("SELECT {$table_name} FROM %s ORDER BY id DESC LIMIT 1"));
 

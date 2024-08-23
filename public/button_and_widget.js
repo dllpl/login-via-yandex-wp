@@ -3,7 +3,7 @@ if (!yaWpData.error) {
         let oauthQueryParams = {
             client_id: yaWpData.client_id,
             response_type: 'code',
-            redirect_uri: location.origin + "/wp-json/yandex_login/webhook"
+            redirect_uri: location.origin + "/wp-json/login_via_yandex/webhook"
         }
         let tokenPageOrigin = location.origin
 

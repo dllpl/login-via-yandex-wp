@@ -8,7 +8,7 @@ class Activator
     public static function make()
     {
         global $wpdb;
-        $table_options = $wpdb->prefix . 'yandex_login_options';
+        $table_options = $wpdb->prefix . 'login_via_yandex_options';
         $charset_collate = $wpdb->get_charset_collate();
 
         $sql = ["
