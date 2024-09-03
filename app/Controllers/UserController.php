@@ -40,8 +40,20 @@ class UserController
             'user_login' => $user_data->default_email,
             'user_pass' => wp_generate_password(8, false),
             'user_email' => $user_data->default_email,
-            'description' => $user_data->default_phone->number ?? null . ' ' . $user_data->birthday ?? null
+            'meta_input' => [
+                'yandex_phone' => $user_data->default_phone->number ?? null,
+                'yandex_birthday' => $user_data->birthday ?? null,
+                'yandex_gender' => $user_data->sex ?? null,
+                'yandex_login' => $user_data->login ?? null,
+                'yandex_id' => $user_data->id ?? null,
+                'yandex_real_name' => $user_data->real_name ?? null,
+                'yandex_display_name' => $user_data->display_name ?? null,
+            ]
         ];
+
+        if(!empty($user_data->is_avatar_empty)) {
+            $userdata['meta_input']['yandex_avatar'] = "https://avatars.yandex.net/get-yapic/{$user_data->default_avatar_id}/islands-200";
+        }
 
         $user_id = wp_insert_user($userdata);
 
