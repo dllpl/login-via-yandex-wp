@@ -23,7 +23,7 @@ https://вашсайт.ру/wp-json/login_via_yandex/webhook
 После создания приложения в Яндексе, необходимо скачать, установить и настроить сам плагин.
 ## Скачать плагин
 Скачать плагин для интеграции авторизации с Яндекс ID на WordPress и Woocommerce можно на нашем сайте, а также в магазине плагинов WordPress.
-[Скачать плагин для авторизации через Яндекс ID для WordPress](https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id)
+[Скачать плагин для авторизации через Яндекс ID для WordPress](https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id#download)
 
 ## Установка и настройка плагина для авторизации через Яндекс ID
 После скачивания и установки плагина, переходим в "Настройки"->"Вход через Яндекс" и заполняем обязательные поля ClientID и Client secret, а также выбираем тип отображения на сайте. 
