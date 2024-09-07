@@ -5,17 +5,20 @@
         <div class="grid-item a">
             <div class="content yan">
                 <div class="left">
-                    <h1 class="title"><?php echo sprintf('%s', esc_html(get_admin_page_title())) ?></h1>
+                    <h1 class="title"><?php echo sprintf('%s', esc_html(get_admin_page_title())) ?> от <a
+                            href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex"
+                            target="_blank">Webseed.ru</a></h1>
                     <p>
-                        С помощью этого плагина Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Natus nostrum sunt delectus saepe velit iste magnam quia modi dolorum cum fugiat sint,
-                        voluptatibus veniam eum aut accusamus, a accusantium non.</p>
+                        Мы разработали и выложили для вас плагин для входа и регистрации через Яндекс ID. Это полностью
+                        бесплатный и рабочий плагин, который устанавливается и настраивается в "два клика". Всё
+                        происходит моментально — клиент увидит всплывающее окно со своим именем и аватаркой и может
+                        подтвердить вход. Либо можно авторизоваться через кнопку Яндекс ID, размещенную на вашем сайте.
+                        Все это можно настроить в управлении плагина. Мы поддерживаем данный плагин в актуальном состоянии и периодически обновляем его.
+                    </p>
                     <p>
-                        С помощью этого плагина Lorem ipsum dolor sit amet consectetur dipisicing elit. Natus
-                        nostrum
-                        sunt delectus saepe velit iste magnam quia modi dolorum cum fugiat sint, voluptatibus veniam
-                        eum
-                        aut accusamus, a accusantium non.</p>
+                        Повысьте конверсию ваших сайтов вместе с плагином от
+                        <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex"
+                           target="_blank">webseed.ru</a></p> - мы занимаемся разработкой сайтов с нуля без посредников, беремся за самые сложные задачи.
                     <span class="subtitle-modify">Версия - v1.02</span>
                     <span>обновлено 01.02.2020</span>
                 </div>
@@ -129,7 +132,7 @@
 
                         <li class="docs-item">
                             <a class="docs-link"
-                               href="https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id"
+                               href="https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex"
                                target="_blank">
                                     <span class="docs-icon">
                                         <svg width="50" height="50" viewBox="0 0 120 120" fill="none"
