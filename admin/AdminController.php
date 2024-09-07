@@ -16,7 +16,7 @@ class AdminController
 
     public function addMenu()
     {
-        add_options_page('Вход через Яндекс', 'Вход через Яндекс', 'manage_options', 'login_via_yandex', [$this, 'settingsPage']);
+        add_menu_page('Вход через Яндекс от Webseed.ru', 'Вход через Яндекс ', 'manage_options', 'login_via_yandex', [$this, 'settingsPage'], plugin_dir_url(__FILE__) . 'public/plugin-icon.png', "79.8");
     }
 
     public function settingsPage()
