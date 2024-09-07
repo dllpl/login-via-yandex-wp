@@ -293,18 +293,9 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
 <script>
-    document.getElementById('check-btn').onchange = (event) => {
-        if (event.target.checked) {
-            document.getElementById('container_id').removeAttribute('disabled')
-        } else {
-            document.getElementById('container_id').setAttribute("disabled", "disabled");
-        }
-    }
-
     const client_id_error = document.getElementById('client_id_error')
     const client_secret_error = document.getElementById('client_secret_error')
     const container_id_error = document.getElementById('container_id_error')
-
     const url = '/wp-json/login_via_yandex/updateSettings';
 
     function showNotify(title, text, status = 'success') {
@@ -319,8 +310,6 @@
     document.querySelector('.save-btn').addEventListener('click', () => {
 
         let errors = false
-
-        const success = document.getElementById('success')
 
         client_id_error.innerText = ''
         client_secret_error.innerText = ''
@@ -363,7 +352,7 @@
                     client_id: client_id,
                     client_secret: client_secret,
                     widget: widget_checked,
-                    btn: btn_checked,
+                    button: btn_checked,
                     ...(btn_checked && {
                         container_id: container_id
                     })
@@ -381,8 +370,15 @@
                     showNotify('Произошла ошибка', 'Напишите в Telegram, разберемся', 'error')
                 })
         } else {
-            showNotify('Внимание', 'Проверьте поля на ошибки', 'warning')
+            showNotify('Внимание', 'Проверьте поля на ошибки', 'error')
         }
-
     })
+
+    document.getElementById('check-btn').onchange = (event) => {
+        if (event.target.checked) {
+            document.getElementById('container_id').removeAttribute('disabled')
+        } else {
+            document.getElementById('container_id').setAttribute("disabled", "disabled");
+        }
+    }
 </script>

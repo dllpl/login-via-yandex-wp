@@ -13,9 +13,9 @@ trait Options
             return [
                 'client_id' => $row->client_id,
                 'client_secret' => $row->client_secret,
-                'button' => $row->button,
+                'button' => (bool) $row->button,
                 'container_id' => $row->container_id,
-                'widget' => $row->widget,
+                'widget' => (bool) $row->widget,
             ];
         } else {
             return false;
