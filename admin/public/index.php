@@ -18,7 +18,8 @@
                     <p>
                         Повысьте конверсию ваших сайтов вместе с плагином от
                         <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex"
-                           target="_blank">webseed.ru</a></p> - мы занимаемся разработкой сайтов с нуля без посредников, беремся за самые сложные задачи.
+                           target="_blank">webseed.ru</a> - мы занимаемся разработкой сайтов с нуля без посредников,
+                        беремся за самые сложные задачи. </p>
                     <span class="subtitle-modify">Версия - v1.02</span>
                     <span>обновлено 01.02.2020</span>
                 </div>

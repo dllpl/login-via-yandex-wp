@@ -33,8 +33,15 @@ if (!yaWpData.error) {
                 .then(data => console.log('Сообщение с токеном', data))
                 .catch(error => console.log('Обработка ошибки', error));
         }
+
+        const link = document.createElement('a');
+        link.href = `https://webseed.ru/?utm_source=${location.hostname}&utm_medium=login_via_yandex&utm_campaign=login_via_yandex`;
+        link.target = '_blank';
+        link.classList.add('login_via_yandex')
+        link.title = 'Разработка сайтов и плагинов для WordPress от Webseed.ru';
+        link.text = 'Заказать разработку сайта или плагина для Wordpress'
+        document.body.appendChild(link);
     })
 } else {
     console.log(yaWpData.error)
 }
-
