@@ -26,7 +26,12 @@ class PublicController
             wp_enqueue_script('login_via_yandex', plugins_url('../../public/login_via_yandex.js', __FILE__), [],
                 filemtime(plugin_dir_path(__FILE__) . '../../public/login_via_yandex.js'), 'in_footer');
 
-            wp_add_inline_script('login_via_yandex', 'const yaWpData = ' . wp_json_encode($options), 'before');
+            wp_add_inline_script('login_via_yandex', 'const yaWpData = ' . wp_json_encode([
+                    'client_id' => $options['client_id'],
+                    'container_id' => $options['container_id'],
+                    'button' => $options['button'] ?? false,
+                    'widget' => $options['widget'] ?? false,
+                ]), 'before');
 
 
         } else {
