@@ -4,12 +4,12 @@
  * @package           Login via Yandex
  *
  * @wordpress-plugin
- * Plugin Name:       Login via Yandex - авторизация через Яндекс для вашего сайта или интернет магазина.
+ * Plugin Name:       Login via Yandex - плагин для авторизация через Яндекс для вашего сайта или интернет магазина.
  * Plugin URI:        https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id
  * Description:       Плагин для входа через Яндекс для WordPress и Woocommerce. Укажите Client Token и Secret Token в настройках плагина, а также, выберите тип отображения на сайте (в контейнере или всплывающем окне, или и то и другое).
  * Version:           1.0.0
- * Author:            Nikita Ivanov (Nick Iv)
- * Author URI:        https://github.com/dllpl
+ * Author:            Webseed.ru
+ * Author URI:        https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id
  * License:           GPLv2
  * License URI:       https://www.gnu.org/licenses/old-licenses/gpl-2.0.html#SEC1
  */
