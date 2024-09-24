@@ -1,5 +1,11 @@
 if (!yaWpData.error) {
     document.addEventListener("DOMContentLoaded", () => {
+
+        if (window.opener && !window.opener.closed) {
+            window.close()
+            window.opener.parent.location.reload()
+        }
+
         const oauthQueryParams = {
             client_id: yaWpData.client_id,
             response_type: 'code',

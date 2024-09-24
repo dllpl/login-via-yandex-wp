@@ -1,6 +1,6 @@
 <?php
-
-class Uninstall
+if ( ! defined( 'ABSPATH' ) ) exit;
+class LVYID_Uninstall
 {
 
     public static function make()

@@ -1,16 +1,17 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-require_once plugin_dir_path(__FILE__) . '../../includes/Options.php';
+require_once plugin_dir_path(__FILE__) . '../../includes/LVYID_Options.php';
 
-class PublicController
+class LVYID_PublicController
 {
-    use Options;
+    use LVYID_Options;
 
     private $options;
 
     public function __construct()
     {
-        $options = Options::getOptions();
+        $options = LVYID_Options::getOptions();
         $this->options = $options ?? null;
     }
 

@@ -1,6 +1,6 @@
 <?php
-
-class MainRequestController extends WP_REST_Controller
+if ( ! defined( 'ABSPATH' ) ) exit;
+class LVYID_MainRequestController extends WP_REST_Controller
 {
     const NAMESPACE = 'login_via_yandex';
 
@@ -12,7 +12,7 @@ class MainRequestController extends WP_REST_Controller
             'permission_callback' => '__return_true',
             'args' => [
                 'code' => [
-                    'description' => __('code field is missing'),
+                    'description' => 'Проверьте поле code',
                     'type' => 'string',
                     'minLength' => 3,
                     'required' => true,
@@ -27,33 +27,33 @@ class MainRequestController extends WP_REST_Controller
             },
             'args' => [
                 'client_id' => [
-                    'description' => __('Проверьте поле client_id'),
+                    'description' => 'Проверьте поле client_id',
                     'type' => 'string',
                     'minLength' => 32,
                     'maxLength' => 32,
                     'required' => true,
                 ],
                 'client_secret' => [
-                    'description' => __('Проверьте поле client_secret'),
+                    'description' => 'Проверьте поле client_secret',
                     'type' => 'string',
                     'minLength' => 32,
                     'maxLength' => 32,
                     'required' => true,
                 ],
                 'button' => [
-                    'description' => __('Проверьте поле button'),
+                    'description' => 'Проверьте поле button',
                     'type' => 'boolean',
                     'required' => false,
                 ],
                 'container_id' => [
-                    'description' => __('Проверьте поле container_id'),
+                    'description' => 'Проверьте поле container_id',
                     'type' => 'string',
                     'minLength' => 3,
                     'maxLength' => 100,
                     'required' => false,
                 ],
                 'widget' => [
-                    'description' => __('Проверьте поле widget'),
+                    'description' => 'Проверьте поле widget',
                     'type' => 'boolean',
                     'required' => false,
                 ]
@@ -63,9 +63,9 @@ class MainRequestController extends WP_REST_Controller
 
     public function webhookHandler(WP_REST_Request $request)
     {
-        require_once plugin_dir_path(__FILE__) . '../Service/YandexLogin.php';
+        require_once plugin_dir_path(__FILE__) . '../Service/LVYID_YandexLogin.php';
 
-        $result = new YandexLogin();
+        $result = new LVYID_YandexLogin();
         $access_token = $result->getAccessToken($request['code'])['access_token'];
 
         if(!$access_token) {
@@ -74,16 +74,16 @@ class MainRequestController extends WP_REST_Controller
             return wp_send_json_error($access_token);
         }
 
-        require_once plugin_dir_path(__FILE__) . 'UserController.php';
+        require_once plugin_dir_path(__FILE__) . 'LVYID_UserController.php';
 
-        $result = new UserController();
+        $result = new LVYID_UserController();
         return $result->handler($access_token);
     }
 
     public function updateSettings(WP_REST_Request $request)
     {
-        require_once plugin_dir_path(__FILE__) . '../../admin/AdminController.php';
-        return AdminController::updateSettings($request);
+        require_once plugin_dir_path(__FILE__) . '../../admin/LVYID_AdminController.php';
+        return LVYID_AdminController::updateSettings($request);
     }
 
 }

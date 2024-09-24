@@ -1,11 +1,12 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-require_once plugin_dir_path(__FILE__) . '../../includes/Options.php';
+require_once plugin_dir_path(__FILE__) . '../../includes/LVYID_Options.php';
 
-class YandexLogin
+class LVYID_YandexLogin
 {
 
-    use Options;
+    use LVYID_Options;
 
     private $login_url = 'https://login.yandex.ru/info?format=json';
 
@@ -15,7 +16,7 @@ class YandexLogin
 
     public function __construct()
     {
-        $options = Options::getOptions();
+        $options = LVYID_Options::getOptions();
         $this->options = $options ?? null;
     }
 

@@ -1,16 +1,17 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-require_once plugin_dir_path(__FILE__) . '../includes/Options.php';
+require_once plugin_dir_path(__FILE__) . '../includes/LVYID_Options.php';
 
-class AdminController
+class LVYID_AdminController
 {
-    use Options;
+    use LVYID_Options;
 
     private $options;
 
     public function __construct()
     {
-        $options = Options::getOptions();
+        $options = LVYID_Options::getOptions();
         $this->options = $options ?? null;
     }
 
@@ -22,7 +23,10 @@ class AdminController
     public function settingsPage()
     {
         $options = $this->options;
+
+        wp_enqueue_style('login_via_yandex_admin', plugins_url('public/css/style.css',__FILE__), [], '1.0.0');
         include plugin_dir_path(__FILE__) . 'public/index.php';
+        wp_enqueue_script('login_via_yandex_admin', plugins_url('public/js/script.js',__FILE__), [], '1.0.0', true);
     }
 
     public static function updateSettings(WP_REST_Request $request)

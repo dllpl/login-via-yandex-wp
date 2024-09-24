@@ -18,31 +18,31 @@ if (!defined('WPINC')) {
     die;
 }
 
-add_action('rest_api_init', 'register_routes');
+add_action('rest_api_init', 'lvyid_register_routes');
 
-add_action( 'wp_head', 'add_script_to_head' );
-add_action( 'wp_footer', 'add_script_to_footer' );
+add_action( 'wp_head', 'lvyid_add_script_to_head' );
+add_action( 'wp_footer', 'lvyid_add_script_to_footer' );
 
-add_action('admin_menu', 'admin_menu_init');
+add_action('admin_menu', 'lvyid_admin_menu_init');
 
-register_activation_hook(__FILE__, 'activate');
-register_uninstall_hook(__FILE__, 'uninstall');
+register_activation_hook(__FILE__, 'lvyid_activate');
+register_uninstall_hook(__FILE__, 'lvyid_uninstall');
 
 /** Регистрация REST API методов плагина */
-function register_routes()
+function lvyid_register_routes()
 {
-    require_once plugin_dir_path(__FILE__) . 'app/Controllers/MainRequestController.php';
-    $controller = new MainRequestController();
+    require_once plugin_dir_path(__FILE__) . 'app/Controllers/LVYID_MainRequestController.php';
+    $controller = new LVYID_MainRequestController();
     $controller->registerRoutes();
 }
 
-function admin_menu_init()
+function lvyid_admin_menu_init()
 {
-    require_once plugin_dir_path(__FILE__) . 'admin/AdminController.php';
-    $option = new AdminController();
+    require_once plugin_dir_path(__FILE__) . 'admin/LVYID_AdminController.php';
+    $option = new LVYID_AdminController();
     $option->addMenu();
 }
-function add_script_to_head() {
+function lvyid_add_script_to_head() {
 
     if (!is_user_logged_in()) {
         wp_enqueue_script( 'sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '1.0.0', 'in_footer');
@@ -50,25 +50,25 @@ function add_script_to_head() {
 
 }
 
-function add_script_to_footer() {
+function lvyid_add_script_to_footer() {
 
     if (!is_user_logged_in()) {
-        require_once plugin_dir_path(__FILE__) . 'app/Controllers/PublicController.php';
+        require_once plugin_dir_path(__FILE__) . 'app/Controllers/LVYID_PublicController.php';
 
-        $public = new PublicController();
+        $public = new LVYID_PublicController();
         $public->scriptInit();
     }
 }
 
 
-function activate()
+function lvyid_activate()
 {
-    require_once plugin_dir_path(__FILE__) . 'includes/Activator.php';
-    Activator::make();
+    require_once plugin_dir_path(__FILE__) . 'includes/LVYID_Activator.php';
+    LVYID_Activator::make();
 }
 
-function uninstall()
+function lvyid_uninstall()
 {
-    require_once plugin_dir_path(__FILE__) . 'includes/Uninstall.php';
-    Uninstall::make();
+    require_once plugin_dir_path(__FILE__) . 'includes/LVYID_Uninstall.php';
+    LVYID_Uninstall::make();
 }

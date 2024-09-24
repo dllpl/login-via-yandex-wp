@@ -1,6 +1,6 @@
 <?php
-
-trait Options
+if ( ! defined( 'ABSPATH' ) ) exit;
+trait LVYID_Options
 {
     public static function getOptions()
     {

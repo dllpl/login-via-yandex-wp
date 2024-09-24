@@ -1,6 +1,6 @@
 <?php
-
-class Activator
+if ( ! defined( 'ABSPATH' ) ) exit;
+class LVYID_Activator
 {
     /**
      * @return void

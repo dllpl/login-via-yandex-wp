@@ -1,8 +1,9 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-require_once plugin_dir_path(__FILE__) . '../Service/YandexLogin.php';
+require_once plugin_dir_path(__FILE__) . '../Service/LVYID_YandexLogin.php';
 
-class UserController
+class LVYID_UserController
 {
     public function handler($access_token)
     {
@@ -10,7 +11,7 @@ class UserController
             return wp_send_json_error('Невозможно авторизовать пользователя.');
         }
 
-        $yandexApi = new YandexLogin();
+        $yandexApi = new LVYID_YandexLogin();
         $user_data = $yandexApi->getInfo(sanitize_text_field($access_token));
 
         $email = $user_data->default_email ?? null;
@@ -26,9 +27,8 @@ class UserController
         } else {
             $this->yandexid_create_user($user_data);
         }
-        header('Content-Type: text/html; charset=UTF-8');
-        echo "<script>window.opener.parent.location.reload();window.close();</script>";
-        die;
+        wp_redirect(site_url());
+        exit;
     }
 
     private function yandexid_create_user($user_data)
