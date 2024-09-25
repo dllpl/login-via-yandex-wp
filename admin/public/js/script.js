@@ -4,12 +4,7 @@ const container_id_error = document.getElementById('container_id_error')
 const url = '/wp-json/login_via_yandex/updateSettings';
 
 function showNotify(title, text, status = 'success') {
-    new Notify({
-        title, text, status,
-        position: 'right top',
-        effect: 'slide',
-        customClass: 'notify-custom',
-    });
+    alert(text)
 }
 
 document.querySelector('.save-btn').addEventListener('click', () => {
