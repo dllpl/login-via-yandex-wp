@@ -50,7 +50,7 @@ document.querySelector('.save-btn').addEventListener('click', () => {
         fetch(url, {
             method: 'POST',
             headers: {
-                'X-WP-Nonce': "<?php echo sprintf('%s', esc_html(wp_create_nonce('wp_rest'))) ?>",
+                'X-WP-Nonce': REST_API_data.nonce,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({

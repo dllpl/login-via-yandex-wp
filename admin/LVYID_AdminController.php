@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) exit;
 
 require_once plugin_dir_path(__FILE__) . '../includes/LVYID_Options.php';
 
@@ -24,14 +24,17 @@ class LVYID_AdminController
     {
         $options = $this->options;
 
-        wp_enqueue_style('login_via_yandex_admin', plugins_url('public/css/style.css',__FILE__), [], '1.0.0');
+        wp_enqueue_style('login_via_yandex_admin', plugins_url('public/css/style.css', __FILE__), [], '1.0.0');
         include plugin_dir_path(__FILE__) . 'public/index.php';
-        wp_enqueue_script('login_via_yandex_admin', plugins_url('public/js/script.js',__FILE__), [], '1.0.0', true);
+        wp_enqueue_script('login_via_yandex_admin', plugins_url('public/js/script.js', __FILE__), [], '1.0.0', true);
+        wp_add_inline_script('login_via_yandex_admin', 'const REST_API_data = ' . wp_json_encode([
+                'nonce' => wp_create_nonce('wp_rest'),
+            ]), 'before');
     }
 
     public static function updateSettings(WP_REST_Request $request)
     {
-        if(!empty($request['button']) && empty($request['container_id'])) {
+        if (!empty($request['button']) && empty($request['container_id'])) {
             return wp_send_json_error('Заполните поле "ID - контейнера кнопки"');
         }
 

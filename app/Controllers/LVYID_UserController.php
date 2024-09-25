@@ -27,7 +27,12 @@ class LVYID_UserController
         } else {
             $this->yandexid_create_user($user_data);
         }
-        wp_redirect(site_url());
+
+        header('Content-Type: text/html; charset=UTF-8');
+
+        /** I can't escape this because I need to run this script to close the popup and reboot the parent */
+        /** I think it's safe */
+        echo "<script>window.opener.parent.location.reload();window.close();</script>";
         exit;
     }
 
