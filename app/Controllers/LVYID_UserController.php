@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) exit;
 
 require_once plugin_dir_path(__FILE__) . '../Service/LVYID_YandexLogin.php';
 
@@ -56,7 +56,7 @@ class LVYID_UserController
             ]
         ];
 
-        if(isset($user_data->is_avatar_empty) && !$user_data->is_avatar_empty) {
+        if (isset($user_data->is_avatar_empty) && !$user_data->is_avatar_empty) {
             $userdata['meta_input']['yandex_avatar'] = "https://avatars.yandex.net/get-yapic/{$user_data->default_avatar_id}/islands-200";
         }
 

@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) exit;
 
 require_once plugin_dir_path(__FILE__) . '../../includes/LVYID_Options.php';
 
@@ -72,7 +72,7 @@ class LVYID_YandexLogin
         $response = wp_remote_get($this->login_url, $args);
 
         if (is_wp_error($response)) {
-            throw new Exception('Ошибка: ' . sprintf('%s',esc_html($response->get_error_message())));
+            throw new Exception('Ошибка: ' . sprintf('%s', esc_html($response->get_error_message())));
         }
 
         $response_body = wp_remote_retrieve_body($response);

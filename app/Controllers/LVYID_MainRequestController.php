@@ -1,5 +1,6 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) exit;
+
 class LVYID_MainRequestController extends WP_REST_Controller
 {
     const NAMESPACE = 'login_via_yandex';
@@ -68,7 +69,7 @@ class LVYID_MainRequestController extends WP_REST_Controller
         $result = new LVYID_YandexLogin();
         $access_token = $result->getAccessToken($request['code'])['access_token'];
 
-        if(!$access_token) {
+        if (!$access_token) {
             return wp_send_json_error($access_token);
         } else if (isset($access_token['error'])) {
             return wp_send_json_error($access_token);

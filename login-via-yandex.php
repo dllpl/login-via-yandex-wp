@@ -14,14 +14,16 @@
  * License URI:       https://www.gnu.org/licenses/old-licenses/gpl-2.0.html#SEC1
  */
 
+if (!defined('ABSPATH')) exit;
+
 if (!defined('WPINC')) {
     die;
 }
 
 add_action('rest_api_init', 'lvyid_register_routes');
 
-add_action( 'wp_head', 'lvyid_add_script_to_head' );
-add_action( 'wp_footer', 'lvyid_add_script_to_footer' );
+add_action('wp_head', 'lvyid_add_script_to_head');
+add_action('wp_footer', 'lvyid_add_script_to_footer');
 
 add_action('admin_menu', 'lvyid_admin_menu_init');
 
@@ -42,15 +44,18 @@ function lvyid_admin_menu_init()
     $option = new LVYID_AdminController();
     $option->addMenu();
 }
-function lvyid_add_script_to_head() {
+
+function lvyid_add_script_to_head()
+{
 
     if (!is_user_logged_in()) {
-        wp_enqueue_script( 'sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '1.0.0', 'in_footer');
+        wp_enqueue_script('sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '1.0.0', 'in_footer');
     }
 
 }
 
-function lvyid_add_script_to_footer() {
+function lvyid_add_script_to_footer()
+{
 
     if (!is_user_logged_in()) {
         require_once plugin_dir_path(__FILE__) . 'app/Controllers/LVYID_PublicController.php';

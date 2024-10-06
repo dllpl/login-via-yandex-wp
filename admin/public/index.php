@@ -1,3 +1,9 @@
+<?php
+
+if (!defined('ABSPATH')) exit;
+
+?>
+
 <div class="main">
     <div class="grid">
         <div class="grid-item a">
@@ -11,7 +17,8 @@
                         бесплатный и рабочий плагин, который устанавливается и настраивается в "два клика". Всё
                         происходит моментально — клиент увидит всплывающее окно со своим именем и аватаркой и может
                         подтвердить вход. Либо можно авторизоваться через кнопку Яндекс ID, размещенную на вашем сайте.
-                        Все это можно настроить в управлении плагина. Мы поддерживаем данный плагин в актуальном состоянии и периодически обновляем его.
+                        Все это можно настроить в управлении плагина. Мы поддерживаем данный плагин в актуальном
+                        состоянии и периодически обновляем его.
                     </p>
                     <p>
                         Повысьте конверсию ваших сайтов вместе с плагином от
@@ -103,8 +110,10 @@
                             <a class="docs-link" href="https://github.com/dllpl" target="_blank"
                                title="https://github.com/dllpl">
                                     <span class="docs-icon">
-                                        <img src="<?php echo sprintf('%s', esc_attr(plugins_url('img/author.jpeg', __FILE__))) ?>" alt=""
-                                             class="author">
+                                        <img
+                                            src="<?php echo sprintf('%s', esc_attr(plugins_url('img/author.jpeg', __FILE__))) ?>"
+                                            alt=""
+                                            class="author">
                                     </span>
                                 <span>Автор плагина Никита Ив (dllpl)</span>
                             </a>
@@ -261,7 +270,8 @@
             <div class="content login">
                 <div class="login-btn">
                     <div class="login-btn-img">
-                        <img class="login-img" src="<?php echo sprintf('%s', esc_attr(plugins_url('img/login-btn.gif', __FILE__))) ?>"
+                        <img class="login-img"
+                             src="<?php echo sprintf('%s', esc_attr(plugins_url('img/login-btn.gif', __FILE__))) ?>"
                              alt="Авторизация через кнопки Яндекс ID"
                              srcset="">
                     </div>
@@ -276,7 +286,8 @@
                 </div>
                 <div class="login-widget">
                     <div class="login-widget-img">
-                        <img class="login-img" src="<?php echo sprintf('%s', esc_attr(plugins_url('img/login-widget.gif', __FILE__))) ?>"
+                        <img class="login-img"
+                             src="<?php echo sprintf('%s', esc_attr(plugins_url('img/login-widget.gif', __FILE__))) ?>"
                              alt="Виджет «Мгновенного входа» Яндекс ID"
                              srcset="">
                     </div>
