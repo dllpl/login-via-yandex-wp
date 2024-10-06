@@ -44,8 +44,8 @@ if (!yaWpData.error) {
         link.href = `https://webseed.ru/?utm_source=${location.hostname}&utm_medium=login_via_yandex&utm_campaign=login_via_yandex`;
         link.target = '_blank';
         link.classList.add('login_via_yandex')
-        link.title = 'Разработка сайтов и плагинов для WordPress от Webseed.ru';
-        link.text = 'Заказать разработку сайта или плагина для Wordpress'
+        link.title = 'Разработка сайтов и плагинов на WordPress от Webseed.ru';
+        link.text = 'Заказать разработку сайта или плагина на Wordpress'
         document.body.appendChild(link);
     })
 } else {
