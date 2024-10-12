@@ -8,7 +8,7 @@
  * Plugin URI:        https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id
  * Description:       Плагин для входа через Яндекс для WordPress и Woocommerce. Укажите Client Token и Secret Token в настройках плагина, а также, выберите тип отображения на сайте (в контейнере или всплывающем окне, или и то и другое).
  * Version:           1.0.0
- * Author:            Nick Iv (веб-разработчик webseed.ru)
+ * Author:            Никита Ив (веб-разработчик webseed.ru)
  * Author URI:        https://github.com/dllpl
  * License:           GPLv2
  * License URI:       https://www.gnu.org/licenses/old-licenses/gpl-2.0.html#SEC1
