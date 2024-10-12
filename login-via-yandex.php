@@ -4,7 +4,7 @@
  * @package           Login via Yandex
  *
  * @wordpress-plugin
- * Plugin Name:       Login via Yandex - плагин для авторизация через Яндекс для вашего сайта или интернет магазина.
+ * Plugin Name:       Login via Yandex - авторизация через Яндекс для вашего сайта или интернет магазина.
  * Plugin URI:        https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id
  * Description:       Плагин для входа через Яндекс для WordPress и Woocommerce. Укажите Client Token и Secret Token в настройках плагина, а также, выберите тип отображения на сайте (в контейнере или всплывающем окне, или и то и другое).
  * Version:           1.0.0
@@ -27,6 +27,8 @@ add_action('wp_footer', 'lvyid_add_script_to_footer');
 
 add_action('admin_menu', 'lvyid_admin_menu_init');
 
+add_filter('plugin_action_links', 'lvyid_plugin_action_links', 10, 2);
+
 register_activation_hook(__FILE__, 'lvyid_activate');
 register_uninstall_hook(__FILE__, 'lvyid_uninstall');
 
@@ -36,6 +38,18 @@ function lvyid_register_routes()
     require_once plugin_dir_path(__FILE__) . 'app/Controllers/LVYID_MainRequestController.php';
     $controller = new LVYID_MainRequestController();
     $controller->registerRoutes();
+}
+
+function lvyid_plugin_action_links( $actions, $plugin_file ){
+
+    if( false === strpos( $plugin_file, basename(__FILE__) ) ){
+        return $actions;
+    }
+
+    $settings_link = '<a href="admin.php?page=login-via-yandex">Настройки</a>';
+    array_unshift( $actions, $settings_link );
+
+    return $actions;
 }
 
 function lvyid_admin_menu_init()

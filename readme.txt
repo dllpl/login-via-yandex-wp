@@ -1,6 +1,6 @@
-=== Login via Yandex – вход и регистрация через Яндекс ID ===
+=== Login via Yandex – вход через Яндекс ID ===
 Contributors: dllpl
-Tags: yandex, login, авторизация, через, яндекс
+Tags: yandexid, login, авторизация, через, яндекс
 Donate link: https://boosty.to/webseed/donate
 Requires at least: 5.3
 Tested up to: 6.6
@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPLv2
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html#SEC1
 
-Wordpress плагин для авторизации через Яндекс позволяет легко регистрироваться и входить на сайт Wordpress и Woocommerce через Яндекс аккаунт.
+Wordpress плагин для входа через Яндекс позволяет легко регистрироваться и входить на сайт Wordpress и Woocommerce через YandexID.
 
 == Description ==
 
