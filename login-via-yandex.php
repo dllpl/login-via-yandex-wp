@@ -9,7 +9,7 @@
  * Description:       Плагин для входа через Яндекс для WordPress и Woocommerce. Укажите Client Token и Secret Token в настройках плагина, а также, выберите тип отображения на сайте (в контейнере или всплывающем окне, или и то и другое).
  * Version:           1.0.0
  * Author:            Никита Ив (веб-разработчик webseed.ru)
- * Author URI:        https://github.com/dllpl
+ * Author URI:        https://webseed.ru
  * License:           GPLv2
  * License URI:       https://www.gnu.org/licenses/old-licenses/gpl-2.0.html#SEC1
  */
@@ -46,7 +46,7 @@ function lvyid_plugin_action_links( $actions, $plugin_file ){
         return $actions;
     }
 
-    $settings_link = '<a href="admin.php?page=login-via-yandex">Настройки</a>';
+    $settings_link = '<a href="admin.php?page=login_via_yandex">Настройки</a>';
     array_unshift( $actions, $settings_link );
 
     return $actions;

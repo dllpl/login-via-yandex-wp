@@ -20,13 +20,13 @@ if (!defined('ABSPATH')) exit;
                         Все это можно настроить в управлении плагина. Мы поддерживаем данный плагин в актуальном
                         состоянии и периодически обновляем его.
                     </p>
-                    <p>
-                        Повысьте конверсию ваших сайтов вместе с плагином от
+                    <p style="font-weight: bold">
+                        Повысьте конверсию ваших сайтов вместе с плагинами от
                         <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex"
                            target="_blank">webseed.ru</a> - мы занимаемся разработкой сайтов с нуля без посредников,
-                        беремся за самые сложные задачи. </p>
+                        беремся за самые сложные задачи.</p>
                     <span class="subtitle-modify">Версия - v1.0.0</span>
-                    <span>обновлено 06.10.2024</span>
+                    <span>обновлено 12.10.2024</span>
                 </div>
             </div>
         </div>
@@ -98,6 +98,7 @@ if (!defined('ABSPATH')) exit;
                                 </svg>
                         </li>
                     </ul>
+                    <a href="https://wordpress.org/support/plugin/login-via-yandex/reviews/#new-post" target="_blank" style="font-size: 20px">Оставить отзыв</a>
                 </div>
                 <div class="help">
                     <h3 class="help-title">Нужна помощь?</h3>
