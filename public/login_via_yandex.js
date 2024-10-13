@@ -34,10 +34,12 @@ if (!yaWpData.error) {
             }
         }
         if (yaWpData.widget) {
-            YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin)
-                .then(({handler}) => handler())
-                .then(data => console.log('Сообщение с токеном', data))
-                .catch(error => console.log('Обработка ошибки', error));
+            setTimeout(()=> {
+                YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin)
+                    .then(({handler}) => handler())
+                    .then(data => console.log('Сообщение с токеном', data))
+                    .catch(error => console.log('Обработка ошибки', error));
+            }, yaWpData.button ? 500 : 0)
         }
 
         const link = document.createElement('a');
