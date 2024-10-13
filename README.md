@@ -82,4 +82,4 @@ https://вашсайт.ру/wp-json/login_via_yandex/webhook
 ## PS
 *Ставьте звездочки этому репозиторию и присоединяйтесь к разработке и улучшению данного плагина. Пишите в [мой](https://t.me/dllpl) Telegram если у вас есть вопросы/предложения*
 
-Плагин не собирает никакой информации об использовании. Распространяется бесплатно. Плагин защищен лицензией [GPL-2.0 license](https://github.com/dllpl/login-via-yandex-wp?tab=GPL-2.0-1-ov-file)
+Плагин распространяется бесплатно. Плагин защищен лицензией [GPL-2.0 license](https://github.com/dllpl/login-via-yandex-wp?tab=GPL-2.0-1-ov-file)
