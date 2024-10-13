@@ -28,8 +28,7 @@ https://вашсайт.ру/wp-json/login_via_yandex/webhook
 После скачивания и установки плагина, переходим в "Настройки"->"Вход через Яндекс" и заполняем обязательные поля ClientID и Client secret, а также выбираем тип отображения на сайте. 
 Настройки плагина
 :-------------------------:|
-![image](https://github.com/user-attachments/assets/4391f717-240b-4fb5-ac9a-78b446780566)
-
+![image](https://github.com/user-attachments/assets/2c7e4113-9a85-4edb-8c3c-7dc6cf500ab3)
 
 
 Доступны следующие варианты отображения:
