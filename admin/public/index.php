@@ -25,8 +25,8 @@ if (!defined('ABSPATH')) exit;
                         <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex"
                            target="_blank">webseed.ru</a> - мы занимаемся разработкой сайтов с нуля без посредников,
                         беремся за самые сложные задачи.</p>
-                    <span class="subtitle-modify">Версия - v1.0.0</span>
-                    <span>обновлено 12.10.2024</span>
+<!--                    <span class="subtitle-modify">Версия - v1.0.0</span>-->
+<!--                    <span>обновлено 12.10.2024</span>-->
                 </div>
             </div>
         </div>
