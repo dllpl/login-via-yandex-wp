@@ -21,19 +21,22 @@ class LVYID_UserController
         }
 
         $user = get_user_by('email', $email);
+        $result = ['status' => true];
 
         if ($user) {
             wp_set_auth_cookie($user->ID);
+            //TODO Update user
         } else {
-            $this->yandexid_create_user($user_data);
+            $result = $this->yandexid_create_user($user_data);
         }
 
-        header('Content-Type: text/html; charset=UTF-8');
-
-        /** I can't escape this because I need to run this script to close the popup and reboot the parent */
-        /** I think it's safe */
-        echo "<script>window.opener.parent.location.reload();window.close();</script>";
-        exit;
+        if ($result['status']) {
+            header('Content-Type: text/html; charset=UTF-8');
+            echo "<script>window.opener.parent.location.reload();window.close();</script>";
+            exit;
+        } else {
+            return wp_send_json_error($result['message']);
+        }
     }
 
     private function yandexid_create_user($user_data)
@@ -56,7 +59,7 @@ class LVYID_UserController
             ]
         ];
 
-        if (isset($user_data->is_avatar_empty) && !$user_data->is_avatar_empty) {
+        if (isset($user_data->is_avatar_empty, $user_data->default_avatar_id) && !$user_data->is_avatar_empty && !empty($user_data->default_avatar_id)) {
             $userdata['meta_input']['yandex_avatar'] = "https://avatars.yandex.net/get-yapic/{$user_data->default_avatar_id}/islands-200";
         }
 
@@ -65,10 +68,9 @@ class LVYID_UserController
         if (!is_wp_error($user_id)) {
             wp_set_auth_cookie($user_id);
             wp_send_new_user_notifications($user_id);
-            return true;
+            return ['status' => true];
         } else {
-            $user_id->get_error_message();
-            return false;
+            return ['status' => false, 'message' => $user_id->get_error_message()];
         }
     }
 }
