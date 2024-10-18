@@ -57,3 +57,5 @@ https://www.youtube.com/watch?v=iEn4-2ybuHI
 == Changelog ==
 = 1.0.1 =
 * create user exception
+= 1.0.2 =
+* log class, fix error from yandex server
