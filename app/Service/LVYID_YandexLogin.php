@@ -2,6 +2,7 @@
 if (!defined('ABSPATH')) exit;
 
 require_once plugin_dir_path(__FILE__) . '../../includes/LVYID_Options.php';
+require_once plugin_dir_path(__FILE__) . '../../app/LVYID_Logger.php';
 
 class LVYID_YandexLogin
 {
@@ -14,10 +15,13 @@ class LVYID_YandexLogin
 
     private $options;
 
+    private $log_class;
+
     public function __construct()
     {
         $options = LVYID_Options::getOptions();
         $this->options = $options ?? null;
+        $this->log_class = new LVYID_Logger();
     }
 
 
@@ -28,6 +32,7 @@ class LVYID_YandexLogin
         $grant_type = 'authorization_code';
 
         if (empty($options['client_id']) || empty($options['client_secret'])) {
+            $this->log_class->error('not set client_secret or client_id');
             return false;
         }
 
@@ -47,11 +52,12 @@ class LVYID_YandexLogin
 
         $response = wp_remote_post($url, $args);
 
-        if (is_wp_error($response)) {
-            return 'Ошибка: ' . $response->get_error_message();
+        if ($response['response']['code'] !== 200) {
+            $this->log_class->error('getAccessToken error: ' . $response['body']);
+            return ['status' => false, 'error' => json_decode($response['body'])];
         } else {
             $response_body = wp_remote_retrieve_body($response);
-            return json_decode($response_body, true);
+            return ['status' => true, 'access_token' => json_decode($response_body, true)['access_token']];
         }
     }
 

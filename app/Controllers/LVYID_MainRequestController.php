@@ -67,18 +67,16 @@ class LVYID_MainRequestController extends WP_REST_Controller
         require_once plugin_dir_path(__FILE__) . '../Service/LVYID_YandexLogin.php';
 
         $result = new LVYID_YandexLogin();
-        $access_token = $result->getAccessToken($request['code'])['access_token'];
+        $data = $result->getAccessToken($request['code']);
 
-        if (!$access_token) {
-            return wp_send_json_error($access_token);
-        } else if (isset($access_token['error'])) {
-            return wp_send_json_error($access_token);
+        if (!$data['status']) {
+            return wp_send_json_error($data['error']);
         }
 
         require_once plugin_dir_path(__FILE__) . 'LVYID_UserController.php';
 
         $result = new LVYID_UserController();
-        return $result->handler($access_token);
+        return $result->handler($data['access_token']);
     }
 
     public function updateSettings(WP_REST_Request $request)
