@@ -4,7 +4,7 @@ Tags: yandexid, login, авторизация, через, яндекс
 Donate link: https://boosty.to/webseed/donate
 Requires at least: 5.3
 Tested up to: 6.6
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html#SEC1
 
