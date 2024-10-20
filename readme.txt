@@ -2,9 +2,9 @@
 Contributors: dllpl
 Tags: yandexid, login, авторизация, через, яндекс
 Donate link: https://boosty.to/webseed/donate
-Requires at least: 5.3
+Requires at least: 4.7
 Tested up to: 6.6
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html#SEC1
 
@@ -59,3 +59,5 @@ https://www.youtube.com/watch?v=iEn4-2ybuHI
 * create user exception
 = 1.0.2 =
 * log class, fix error from yandex server
+= 1.0.3 =
+* rest_authentication_errors prevent, and clearfy pro whitelist for login_via_yandex
