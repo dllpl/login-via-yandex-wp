@@ -258,6 +258,16 @@ if (!defined('ABSPATH')) exit;
                         </div>
                         <h3 class="check-title">Добавить виджет</h3>
                     </li>
+                    <li class="check-item">
+                        <div class="">
+                            <input type="checkbox"
+                                   id="alternative" <?php if (isset($options['alternative']) && $options['alternative']) echo 'checked' ?> />
+                            <label for="alternative" class="check">
+                                <span class="move"></span>
+                            </label>
+                        </div>
+                        <h3 class="check-title">Авторизация по коду</h3>
+                    </li>
                     <li>
                         <button class="save-btn">
                             Сохранить изменения

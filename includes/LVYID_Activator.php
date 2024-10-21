@@ -20,12 +20,11 @@ class LVYID_Activator
             `button` BOOLEAN DEFAULT NULL,
             `container_id` VARCHAR(100) DEFAULT NULL,
             `widget` BOOLEAN DEFAULT NULL,
+            `alternative` BOOLEAN DEFAULT FALSE,
             `created_at` DATETIME DEFAULT NOW(),
             PRIMARY KEY (`id`)
         ) $charset_collate"];
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
-
-
     }
 }

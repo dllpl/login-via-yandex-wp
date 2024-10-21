@@ -16,6 +16,7 @@ trait LVYID_Options
                 'button' => (bool) $row->button,
                 'container_id' => $row->container_id,
                 'widget' => (bool) $row->widget,
+                'alternative' => (bool) $row->alternative,
             ];
         } else {
             return false;

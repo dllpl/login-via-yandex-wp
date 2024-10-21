@@ -22,6 +22,8 @@ document.querySelector('.save-btn').addEventListener('click', () => {
     const widget_checked = document.getElementById('check-widget').checked
     const btn_checked = document.getElementById('check-btn').checked
 
+    const alternative_checked = document.getElementById('alternative').checked
+
 
     if (client_id.length !== 32) {
         client_id_error.innerText = 'ClientID должен содержать 32 символа'
@@ -53,6 +55,7 @@ document.querySelector('.save-btn').addEventListener('click', () => {
                 client_secret: client_secret,
                 widget: widget_checked,
                 button: btn_checked,
+                alternative: alternative_checked,
                 ...(btn_checked && {
                     container_id: container_id
                 })

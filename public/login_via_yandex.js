@@ -1,17 +1,14 @@
 if (!yaWpData.error) {
     document.addEventListener("DOMContentLoaded", () => {
 
-        if (window.opener && !window.opener.closed) {
-            window.close()
-            window.opener.parent.location.reload()
-        }
-
         const oauthQueryParams = {
             client_id: yaWpData.client_id,
-            response_type: 'code',
+            response_type: yaWpData.alternative ? 'code' : 'token',
             redirect_uri: location.origin + "/wp-json/login_via_yandex/webhook"
         }
+
         const tokenPageOrigin = location.origin
+
         if (yaWpData.button) {
             if (yaWpData.container_id) {
                 if (document.getElementById(yaWpData.container_id)) {
@@ -27,7 +24,11 @@ if (!yaWpData.error) {
                         }
                     )
                         .then(({handler}) => handler())
-                        .then(data => console.log('Сообщение с токеном', data))
+                        .then(data => {
+                            if(!yaWpData.alternative) {
+                                console.log('Сообщение с токеном', data)
+                            }
+                        })
                         .catch(error => console.log('Обработка ошибки', error))
                 }
             } else {
@@ -38,7 +39,11 @@ if (!yaWpData.error) {
             setTimeout(() => {
                 YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin)
                     .then(({handler}) => handler())
-                    .then(data => console.log('Сообщение с токеном', data))
+                    .then(data => {
+                        if(!yaWpData.alternative) {
+                            console.log('Сообщение с токеном', data)
+                        }
+                    })
                     .catch(error => console.log('Обработка ошибки', error));
             }, yaWpData.button ? 500 : 0)
         }

@@ -47,6 +47,7 @@ class LVYID_AdminController
             'button' => $request['button'] ?? null,
             'container_id' => isset($request['container_id']) ? sanitize_text_field($request['container_id']) : null,
             'widget' => $request['widget'] ?? null,
+            'alternative' => $request['alternative'] ?? null,
         ];
 
         $result = $wpdb->insert($table_name, $data);

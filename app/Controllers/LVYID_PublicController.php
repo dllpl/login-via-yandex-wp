@@ -32,6 +32,7 @@ class LVYID_PublicController
                     'container_id' => $options['container_id'],
                     'button' => $options['button'] ?? false,
                     'widget' => $options['widget'] ?? false,
+                    'alternative' => $options['alternative'] ?? false
                 ]), 'before');
 
 
