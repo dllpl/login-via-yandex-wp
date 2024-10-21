@@ -13,7 +13,7 @@ if (!yaWpData.error) {
         }
         const tokenPageOrigin = location.origin
         if (yaWpData.button) {
-            if (yaWpData.container_id) {
+            if (yaWpData.container_id && document.getElementById(yaWpData.container_id)) {
                 YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin,
                     {
                         view: "button",
