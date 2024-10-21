@@ -24,9 +24,9 @@ class LVYID_AdminController
     {
         $options = $this->options;
 
-        wp_enqueue_style('login_via_yandex_admin', plugins_url('public/css/style.css', __FILE__), [], '1.0.3');
+        wp_enqueue_style('login_via_yandex_admin', plugins_url('public/css/style.css', __FILE__), [], '1.0.4');
         include plugin_dir_path(__FILE__) . 'public/index.php';
-        wp_enqueue_script('login_via_yandex_admin', plugins_url('public/js/script.js', __FILE__), [], '1.0.3', true);
+        wp_enqueue_script('login_via_yandex_admin', plugins_url('public/js/script.js', __FILE__), [], '1.0.4', true);
         wp_add_inline_script('login_via_yandex_admin', 'const REST_API_data = ' . wp_json_encode([
                 'nonce' => wp_create_nonce('wp_rest'),
             ]), 'before');
