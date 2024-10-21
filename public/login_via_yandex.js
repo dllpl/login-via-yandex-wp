@@ -12,7 +12,7 @@ if (!yaWpData.error) {
             redirect_uri: location.origin + "/wp-json/login_via_yandex/webhook"
         }
         const tokenPageOrigin = location.origin
-        if (yaWpData.button && document.getElementById(yaWpData.container_id)) {
+        if (yaWpData.button && document.getElementById(yaWpData?.container_id)) {
             if (yaWpData.container_id) {
                 YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin,
                     {
