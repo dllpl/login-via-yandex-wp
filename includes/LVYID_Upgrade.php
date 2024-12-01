@@ -42,7 +42,7 @@ class LVYID_Upgrade
 
                 $data = [
                     'version' => $new_version,
-                    'last_updated' => date('d.m.Y H:i:s'),
+                    'updated_at' => date('d.m.Y H:i:s'),
                 ];
 
                 file_put_contents($file_path, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));

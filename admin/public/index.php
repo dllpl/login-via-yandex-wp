@@ -202,7 +202,7 @@ if (!defined('ABSPATH')) exit;
         <div class="grid-item c">
             <h2 class="title">Настройки плагина</h2>
             <div class="content">
-                <h3 class="content-title">Данные приложения Яндекс ID</h3>
+                <h3 class="content-title">Данные приложения Яндекс ID <a href="https://oauth.yandex.ru/client/new/id/" target="_blank">(получить)</a></h3>
                 <div class="form">
                     <ul class="form-list">
                         <li class="form-item">
