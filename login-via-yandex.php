@@ -34,6 +34,21 @@ add_filter('rest_authentication_errors', 'lvyid_rest_api_wp', 999);
 register_activation_hook(__FILE__, 'lvyid_activate');
 register_uninstall_hook(__FILE__, 'lvyid_uninstall');
 
+
+//TODO Тут
+
+if (class_exists('WooCommerce') && has_action('woocommerce_login_form_end')) {
+    add_action('woocommerce_login_form_end', 'add_custom_button_to_woocommerce_login');
+}
+
+function add_custom_login_button() {
+    echo '<p class="custom-login-button">
+            <a href="https://example.com/your-login-action" class="button">Войти через что-то</a>
+          </p>';
+}
+add_action('login_form', 'add_custom_login_button');
+
+
 add_filter('clearfy_rest_api_white_list', function ($white_list) {
     $white_list[] = 'login_via_yandex';
     return $white_list;
