@@ -282,6 +282,7 @@ input[type=checkbox] {
 
 #check-btn:checked+.check .move,
 #alternative:checked+.check .move,
+#button_default:checked+.check .move,
 #check-widget:checked+.check .move {
     margin-left: 21px;
     transition: margin-left 0.5s ease;
@@ -289,6 +290,7 @@ input[type=checkbox] {
 
 #check-btn:checked+.check,
 #alternative:checked+.check,
+#button_default:checked+.check,
 #check-widget:checked+.check {
     border: 2px solid #4DD132;
     background-color: #4DD132;

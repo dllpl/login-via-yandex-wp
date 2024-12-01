@@ -16,9 +16,9 @@ class LVYID_Upgrade
 
                 $this->log_class = new LVYID_Logger();
 
-                if (file_exists(plugin_dir_path(__FILE__) . 'plugin_data.json')) {
+                if (file_exists(plugin_dir_path(__FILE__)  . '../plugin_data.json')) {
 
-                    $plugin_data = json_decode(file_get_contents(plugin_dir_path(__FILE__) . 'plugin_data.json'), true);
+                    $plugin_data = json_decode(file_get_contents(plugin_dir_path(__FILE__)  . '../plugin_data.json'), true);
 
                     if ($plugin_data && isset($plugin_data['version'])) {
                         $this->log_class->info('Текущая параметры плагина: ' . json_encode($plugin_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
@@ -27,7 +27,9 @@ class LVYID_Upgrade
                     }
 
                 } else {
-                    $this->log_class->info('Файл plugin_data.json не найден');
+                    $this->log_class->info('Файл plugin_data.json не найден, создаем');
+
+                    file_put_contents(plugin_dir_path(__FILE__)  . '../plugin_data.json', '{}');
                 }
 
                 $this->log_class->log('Обновление плагина');
@@ -38,7 +40,7 @@ class LVYID_Upgrade
 
                 $this->log_class->log('Новая версия плагина: ' . $new_version);
 
-                $file_path = plugin_dir_path(__FILE__) . 'plugin_data.json';
+                $file_path = plugin_dir_path(__FILE__)  . '../plugin_data.json';
 
                 $data = [
                     'version' => $new_version,
@@ -55,7 +57,36 @@ class LVYID_Upgrade
                     $this->log_class->info('Работаем с добавлением столбца `alternative`');
                     $this->add_alternative_column();
                 }
+
+                if($new_version === '1.0.6') {
+                    $this->log_class->info('Работаем с добавлением столбца `button_default`');
+                    $this->add_button_default_column();
+                }
             }
+        }
+    }
+
+    private function add_button_default_column()
+    {
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . 'login_via_yandex_options';
+
+        $column_exists = $wpdb->get_results(
+            $wpdb->prepare(
+                "SHOW COLUMNS FROM `$table_name` LIKE %s",
+                'button_default'
+            )
+        );
+
+        if (empty($column_exists)) {
+            $wpdb->query(
+                "ALTER TABLE `$table_name`
+             ADD COLUMN `button_default` BOOLEAN DEFAULT TRUE;"
+            );
+            $this->log_class->info("Столбец `button_default` был успешно добавлен в таблицу опций плагина");
+        } else {
+            $this->log_class->info("Столбец `button_default` уже существует в таблице опций плагина");
         }
     }
 

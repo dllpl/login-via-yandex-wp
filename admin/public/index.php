@@ -219,6 +219,16 @@ if (!defined('ABSPATH')) exit;
                                    required maxlength="32" minlength="32">
                             <div class="form-error hidden" id="client_secret_error"></div>
                         </li>
+                        <li class="check-item">
+                            <div class="">
+                                <input type="checkbox"
+                                       id="alternative" <?php if (isset($options['alternative']) && $options['alternative']) echo 'checked' ?> />
+                                <label for="alternative" class="check">
+                                    <span class="move"></span>
+                                </label>
+                            </div>
+                            <h3 class="check-title">Альтернативная авторизация</h3>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -227,7 +237,6 @@ if (!defined('ABSPATH')) exit;
             <h2 class="title">Управление</h2>
             <div class="content">
                 <ul class="check-list">
-
                     <li class="check-item">
                         <div class="">
                             <input type="checkbox"
@@ -261,12 +270,12 @@ if (!defined('ABSPATH')) exit;
                     <li class="check-item">
                         <div class="">
                             <input type="checkbox"
-                                   id="alternative" <?php if (isset($options['alternative']) && $options['alternative']) echo 'checked' ?> />
-                            <label for="alternative" class="check">
+                                   id="button_default" <?php if (isset($options['button_default']) && $options['button_default']) echo 'checked' ?> />
+                            <label for="button_default" class="check">
                                 <span class="move"></span>
                             </label>
                         </div>
-                        <h3 class="check-title">Авторизация по коду</h3>
+                        <h3 class="check-title">Размещение кнопок по умолчанию</h3>
                     </li>
                     <li>
                         <button class="save-btn">
@@ -282,12 +291,16 @@ if (!defined('ABSPATH')) exit;
             <div class="content">
                 <ul>
                     <li>
+                        <h3>Что значит размещение кнопок по умолчанию?</h3>
+                        <p>- Кнопки автоматически разместятся после форм входа и регистрации на вашем сайте. Работает в Wordpress и Woocommerce.</p>
+                    </li>
+                    <li>
                         <h3>Нажимаю на виджет/кнопку, прохожу авторизацию в Яндекс, окно закрывается и ничего не происходит:</h3>
                         <p>- Проверьте нет ли плагинов "безопасности", блокирующих работу WP JSON API. Если нашли, отключите эту опцию, либо добавьте плагин в исключение. Login Via Yandex активно использует возможности WP JSON API</p>
                     </li>
                     <li>
                         <h3>Нажимаю на виджет/кнопку, прохожу авторизацию в Яндекс, окно закрывается, страница перезагружается и ничего не происходит:</h3>
-                        <p>- Попробуйте активировать "Авторизация по коду" в настройках плагина</p>
+                        <p>- Попробуйте активировать "Альтернативная авторизация" в настройках плагина.</p>
                     </li>
                     <li>
                         <h3>Не могу вывести кнопку авторизации:</h3>
@@ -299,7 +312,7 @@ if (!defined('ABSPATH')) exit;
         <div class="grid-item d-2">
             <h2 class="title">Видео-объяснение</h2>
             <div class="content">
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/iEn4-2ybuHI?si=Q3DVUg6K6xAzpeJo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe width="100%" height="400" src="https://rutube.ru/play/embed/5c9a1ea4e1d64606b1534945655643a3/" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
             </div>
         </div>
         <div class="grid-item e">

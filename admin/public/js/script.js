@@ -21,6 +21,7 @@ document.querySelector('.save-btn').addEventListener('click', () => {
 
     const widget_checked = document.getElementById('check-widget').checked
     const btn_checked = document.getElementById('check-btn').checked
+    const button_default = document.getElementById('button_default').checked
 
     const alternative_checked = document.getElementById('alternative').checked
 
@@ -55,6 +56,7 @@ document.querySelector('.save-btn').addEventListener('click', () => {
                 client_secret: client_secret,
                 widget: widget_checked,
                 button: btn_checked,
+                button_default: button_default,
                 alternative: alternative_checked,
                 ...(btn_checked && {
                     container_id: container_id

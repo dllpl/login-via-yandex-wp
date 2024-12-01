@@ -1,13 +1,13 @@
 <?php
 /**
- * @since             1.0.5
+ * @since             1.0.6
  * @package           Login via Yandex
  *
  * @wordpress-plugin
  * Plugin Name:       Login via Yandex - авторизация через Яндекс для вашего сайта или интернет магазина.
  * Plugin URI:        https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id
  * Description:       Плагин для входа через Яндекс для WordPress и Woocommerce. Укажите Client Token и Secret Token в настройках плагина, а также, выберите тип отображения на сайте (в контейнере или всплывающем окне, или и то и другое).
- * Version:           1.0.5
+ * Version:           1.0.6
  * Author:            Никита Ив (веб-разработчик webseed.ru)
  * Author URI:        https://webseed.ru
  * License:           GPLv2
@@ -85,7 +85,7 @@ function lvyid_upgrade_function($upgrader_object, $options)
 function lvyid_add_script_to_head()
 {
     if (!is_user_logged_in()) {
-        wp_enqueue_script('sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '1.0.5', 'in_footer');
+        wp_enqueue_script('sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '1.0.6', 'in_footer');
     }
 
 }
