@@ -35,6 +35,7 @@ ul {
     grid-template-areas:
         "a a a a b"
         "c c d d b"
+        "c-2 c-2 d-2 d-2 b"
         "e e e e e";
 }
 
@@ -57,6 +58,14 @@ ul {
 
 .d {
     grid-area: d;
+}
+
+.c-2 {
+    grid-area: c-2;
+}
+
+.d-2 {
+    grid-area: d-2;
 }
 
 .e {
@@ -316,6 +325,7 @@ input[type=checkbox] {
         grid-template-areas:
             "a a "
             "c d"
+            "c-2 d-2"
             "e e"
             "b b";
     }
@@ -348,6 +358,8 @@ input[type=checkbox] {
             "a"
             "c"
             "d"
+            "c-2"
+            "d-2"
             "e"
             "b";
     }

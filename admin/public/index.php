@@ -25,8 +25,8 @@ if (!defined('ABSPATH')) exit;
                         <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex"
                            target="_blank">webseed.ru</a> - мы занимаемся разработкой сайтов с нуля без посредников,
                         беремся за самые сложные задачи.</p>
-<!--                    <span class="subtitle-modify">Версия - v1.0.2</span>-->
-<!--                    <span>обновлено 12.10.2024</span>-->
+                    <!--                    <span class="subtitle-modify">Версия - v1.0.2</span>-->
+                    <!--                    <span>обновлено 12.10.2024</span>-->
                 </div>
             </div>
         </div>
@@ -275,6 +275,31 @@ if (!defined('ABSPATH')) exit;
                     </li>
                 </ul>
 
+            </div>
+        </div>
+        <div class="grid-item c-2">
+            <h2 class="title">FAQ</h2>
+            <div class="content">
+                <ul>
+                    <li>
+                        <h3>Нажимаю на виджет/кнопку, прохожу авторизацию в Яндекс, окно закрывается и ничего не происходит:</h3>
+                        <p>- Проверьте нет ли плагинов "безопасности", блокирующих работу WP JSON API. Если нашли, отключите эту опцию, либо добавьте плагин в исключение. Login Via Yandex активно использует возможности WP JSON API</p>
+                    </li>
+                    <li>
+                        <h3>Нажимаю на виджет/кнопку, прохожу авторизацию в Яндекс, окно закрывается, страница перезагружается и ничего не происходит:</h3>
+                        <p>- Попробуйте активировать "Авторизация по коду" в настройках плагина</p>
+                    </li>
+                    <li>
+                        <h3>Не могу вывести кнопку авторизации:</h3>
+                        <p>- Посмотрите <a href="https://youtu.be/iEn4-2ybuHI" target="_blank">видео-объяснение</a> по работе с плагином</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="grid-item d-2">
+            <h2 class="title">Видео-объяснение</h2>
+            <div class="content">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/iEn4-2ybuHI?si=Q3DVUg6K6xAzpeJo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </div>
         <div class="grid-item e">
