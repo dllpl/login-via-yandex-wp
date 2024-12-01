@@ -8,6 +8,7 @@ if (!yaWpData.error) {
         }
 
         const tokenPageOrigin = location.origin
+        const authUserUri = "/wp-json/login_via_yandex/authUser"
 
         if (yaWpData.button) {
             if (yaWpData.container_id) {
@@ -26,7 +27,11 @@ if (!yaWpData.error) {
                         .then(({handler}) => handler())
                         .then(data => {
                             if(!yaWpData.alternative) {
-                                console.log('Сообщение с токеном', data)
+                                fetch(authUserUri, {
+                                    method: "POST",
+                                    headers: {"Content-Type": "application/json",},
+                                    body: JSON.stringify({access_token: data.access_token})
+                                }).then(() => window.location.reload())
                             }
                         })
                         .catch(error => console.log('Обработка ошибки', error))
@@ -41,20 +46,16 @@ if (!yaWpData.error) {
                     .then(({handler}) => handler())
                     .then(data => {
                         if(!yaWpData.alternative) {
-                            console.log('Сообщение с токеном', data)
+                            fetch(authUserUri, {
+                                method: "POST",
+                                headers: {"Content-Type": "application/json",},
+                                body: JSON.stringify({access_token: data.access_token})
+                            }).then(() => window.location.reload())
                         }
                     })
                     .catch(error => console.log('Обработка ошибки', error));
             }, yaWpData.button ? 500 : 0)
         }
-
-        const link = document.createElement('a');
-        link.href = `https://webseed.ru/?utm_source=${location.hostname}&utm_medium=login_via_yandex&utm_campaign=login_via_yandex`;
-        link.target = '_blank';
-        link.classList.add('login_via_yandex')
-        link.title = 'Разработка сайтов и плагинов на WordPress от Webseed.ru';
-        link.text = 'Заказать разработку сайта или плагина на Wordpress'
-        document.body.appendChild(link);
     })
 } else {
     console.log(yaWpData.error)

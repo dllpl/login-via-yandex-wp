@@ -97,6 +97,7 @@ class LVYID_MainRequestController extends WP_REST_Controller
 
         if ($this->options) {
             if (!$this->options['alternative']) {
+                header('Content-Type: text/html; charset=utf-8');
                 include plugin_dir_path(__FILE__) . '../../public/login_via_yandex.html';
                 exit;
             }
