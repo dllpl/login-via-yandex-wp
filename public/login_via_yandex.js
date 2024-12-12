@@ -57,7 +57,7 @@ if (!yaWpData.error) {
                                         method: "POST",
                                         headers: {"Content-Type": "application/json",},
                                         body: JSON.stringify({access_token: data.access_token})
-                                    }).then(() => window.location.reload())
+                                    }).then(() => window.location.href = location.origin)
                                 }
                             })
                             .catch(error => console.log('Обработка ошибки', error))
@@ -77,7 +77,7 @@ if (!yaWpData.error) {
                                 method: "POST",
                                 headers: {"Content-Type": "application/json",},
                                 body: JSON.stringify({access_token: data.access_token})
-                            }).then(() => window.location.reload())
+                            }).then(() => window.location.href = location.origin)
                         }
                     })
                     .catch(error => console.log('Обработка ошибки', error));
