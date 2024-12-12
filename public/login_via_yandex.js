@@ -81,7 +81,7 @@ if (!yaWpData.error) {
                         }
                     })
                     .catch(error => console.log('Обработка ошибки', error));
-            }, yaWpData.button ? 500 : 0)
+            }, yaWpData.button || yaWpData.button_default ? 500 : 0)
         }
     })
 } else {
