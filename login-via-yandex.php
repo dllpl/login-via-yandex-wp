@@ -23,6 +23,10 @@ if (!defined('WPINC')) {
 add_action('rest_api_init', 'lvyid_register_routes');
 add_action('wp_head', 'lvyid_add_script_to_head');
 add_action('wp_footer', 'lvyid_init_script_and_style');
+
+add_action('login_head', 'lvyid_add_script_to_head');
+add_action('login_footer', 'lvyid_init_script_and_style');
+
 add_action('admin_menu', 'lvyid_admin_menu_init');
 add_action('upgrader_process_complete', 'lvyid_upgrade_function', 10, 2);
 add_action('wp_footer', 'lvyid_add_copyright');
@@ -34,25 +38,23 @@ add_filter('rest_authentication_errors', 'lvyid_rest_api_wp', 999);
 register_activation_hook(__FILE__, 'lvyid_activate');
 register_uninstall_hook(__FILE__, 'lvyid_uninstall');
 
+add_action('login_form', 'lvyid_add_default_auth_button');
+add_action('register_form', 'lvyid_add_default_auth_button');
 
-//TODO Тут
-
-if (class_exists('WooCommerce') && has_action('woocommerce_login_form_end')) {
-    add_action('woocommerce_login_form_end', 'add_custom_button_to_woocommerce_login');
-}
-
-function add_custom_login_button() {
-    echo '<p class="custom-login-button">
-            <a href="https://example.com/your-login-action" class="button">Войти через что-то</a>
-          </p>';
-}
-add_action('login_form', 'add_custom_login_button');
-
+add_action('woocommerce_register_form_end', 'lvyid_add_default_auth_button');
+add_action('woocommerce_login_form_end', 'lvyid_add_default_auth_button');
 
 add_filter('clearfy_rest_api_white_list', function ($white_list) {
     $white_list[] = 'login_via_yandex';
     return $white_list;
 });
+
+function lvyid_add_default_auth_button()
+{
+    require_once plugin_dir_path(__FILE__) . 'app/Controllers/LVYID_PublicController.php';
+    $public = new LVYID_PublicController();
+    $public->defaultAuthButtonsInit();
+}
 
 function lvyid_rest_api_wp($result)
 {

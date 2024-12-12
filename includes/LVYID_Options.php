@@ -1,5 +1,6 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) exit;
+
 trait LVYID_Options
 {
     public static function getOptions()
@@ -11,13 +12,13 @@ trait LVYID_Options
 
         if ($row) {
             return [
-                'client_id' => $row->client_id,
-                'client_secret' => $row->client_secret,
-                'button' => (bool) $row->button,
-                'container_id' => $row->container_id,
-                'widget' => (bool) $row->widget,
-                'alternative' => (bool) $row->alternative,
-                'button_default' => (bool) $row->button_default,
+                'client_id' => $row->client_id ?? null,
+                'client_secret' => $row->client_secret ?? null,
+                'button' => (bool)$row->button ?? false,
+                'container_id' => $row->container_id ?? null,
+                'widget' => (bool)$row->widget ?? false,
+                'alternative' => (bool)$row->alternative ?? false,
+                'button_default' => (bool)$row->button_default ?? false,
             ];
         } else {
             return false;

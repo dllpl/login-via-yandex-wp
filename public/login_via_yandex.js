@@ -10,11 +10,11 @@ if (!yaWpData.error) {
         const tokenPageOrigin = location.origin
         const authUserUri = "/wp-json/login_via_yandex/authUser"
 
-        if(document.getElementById('ya_auth_default')) {
+        if (yaWpData.button_default && document.getElementById('lvyid_auth_default')) {
             YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin,
                 {
                     view: "button",
-                    parentId: 'ya_auth_default',
+                    parentId: 'lvyid_auth_default',
                     buttonSize: 'xl',
                     buttonView: 'main',
                     buttonTheme: 'light',
@@ -24,7 +24,7 @@ if (!yaWpData.error) {
             )
                 .then(({handler}) => handler())
                 .then(data => {
-                    if(!yaWpData.alternative) {
+                    if (!yaWpData.alternative) {
                         fetch(authUserUri, {
                             method: "POST",
                             headers: {"Content-Type": "application/json",},
@@ -38,28 +38,30 @@ if (!yaWpData.error) {
         if (yaWpData.button) {
             if (yaWpData.container_id) {
                 if (document.getElementById(yaWpData.container_id)) {
-                    YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin,
-                        {
-                            view: "button",
-                            parentId: yaWpData.container_id,
-                            buttonSize: 'xl',
-                            buttonView: 'main',
-                            buttonTheme: 'light',
-                            buttonBorderRadius: "0",
-                            buttonIcon: 'ya',
-                        }
-                    )
-                        .then(({handler}) => handler())
-                        .then(data => {
-                            if(!yaWpData.alternative) {
-                                fetch(authUserUri, {
-                                    method: "POST",
-                                    headers: {"Content-Type": "application/json",},
-                                    body: JSON.stringify({access_token: data.access_token})
-                                }).then(() => window.location.reload())
+                    setTimeout(() => {
+                        YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin,
+                            {
+                                view: "button",
+                                parentId: yaWpData.container_id,
+                                buttonSize: 'xl',
+                                buttonView: 'main',
+                                buttonTheme: 'light',
+                                buttonBorderRadius: "0",
+                                buttonIcon: 'ya',
                             }
-                        })
-                        .catch(error => console.log('Обработка ошибки', error))
+                        )
+                            .then(({handler}) => handler())
+                            .then(data => {
+                                if (!yaWpData.alternative) {
+                                    fetch(authUserUri, {
+                                        method: "POST",
+                                        headers: {"Content-Type": "application/json",},
+                                        body: JSON.stringify({access_token: data.access_token})
+                                    }).then(() => window.location.reload())
+                                }
+                            })
+                            .catch(error => console.log('Обработка ошибки', error))
+                    }, yaWpData.button_default ? 500 : 0)
                 }
             } else {
                 console.log('Не указан ID контейнера для кнопки авторизации через Яндекс ID')
@@ -70,7 +72,7 @@ if (!yaWpData.error) {
                 YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin)
                     .then(({handler}) => handler())
                     .then(data => {
-                        if(!yaWpData.alternative) {
+                        if (!yaWpData.alternative) {
                             fetch(authUserUri, {
                                 method: "POST",
                                 headers: {"Content-Type": "application/json",},

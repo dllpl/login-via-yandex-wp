@@ -87,6 +87,11 @@ class LVYID_MainRequestController extends WP_REST_Controller
                     'type' => 'boolean',
                     'required' => false,
                 ],
+                'button_default' => [
+                    'description' => 'Проверьте поле button_default',
+                    'type' => 'boolean',
+                    'required' => false,
+                ]
             ]
         ]);
     }

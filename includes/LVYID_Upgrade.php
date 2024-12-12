@@ -7,18 +7,21 @@ class LVYID_Upgrade
 {
     private $log_class;
 
+    public function __construct()
+    {
+        $this->log_class = new LVYID_Logger();
+    }
+
     public function make($upgrader_object, $options)
     {
-        if ($options['type'] === 'plugin' && isset($options['plugins'])) {
+        if ($options['action'] === 'update' && $options['type'] === 'plugin' && isset($options['plugins'])) {
             $current_plugin = plugin_basename(__FILE__);
 
             if (in_array($current_plugin, $options['plugins'])) {
 
-                $this->log_class = new LVYID_Logger();
+                if (file_exists(plugin_dir_path(__FILE__) . '../update/plugin_data.json')) {
 
-                if (file_exists(plugin_dir_path(__FILE__)  . '../plugin_data.json')) {
-
-                    $plugin_data = json_decode(file_get_contents(plugin_dir_path(__FILE__)  . '../plugin_data.json'), true);
+                    $plugin_data = json_decode(file_get_contents(plugin_dir_path(__FILE__) . '../update/plugin_data.json'), true);
 
                     if ($plugin_data && isset($plugin_data['version'])) {
                         $this->log_class->info('Текущая параметры плагина: ' . json_encode($plugin_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
@@ -29,7 +32,7 @@ class LVYID_Upgrade
                 } else {
                     $this->log_class->info('Файл plugin_data.json не найден, создаем');
 
-                    file_put_contents(plugin_dir_path(__FILE__)  . '../plugin_data.json', '{}');
+                    file_put_contents(plugin_dir_path(__FILE__) . '../update/plugin_data.json', '{}');
                 }
 
                 $this->log_class->log('Обновление плагина');
@@ -40,7 +43,7 @@ class LVYID_Upgrade
 
                 $this->log_class->log('Новая версия плагина: ' . $new_version);
 
-                $file_path = plugin_dir_path(__FILE__)  . '../plugin_data.json';
+                $file_path = plugin_dir_path(__FILE__) . '../update/plugin_data.json';
 
                 $data = [
                     'version' => $new_version,
@@ -58,7 +61,7 @@ class LVYID_Upgrade
                     $this->add_alternative_column();
                 }
 
-                if($new_version === '1.0.6') {
+                if ($new_version === '1.0.6') {
                     $this->log_class->info('Работаем с добавлением столбца `button_default`');
                     $this->add_button_default_column();
                 }
@@ -66,7 +69,7 @@ class LVYID_Upgrade
         }
     }
 
-    private function add_button_default_column()
+    public function add_button_default_column()
     {
         global $wpdb;
 
@@ -88,9 +91,10 @@ class LVYID_Upgrade
         } else {
             $this->log_class->info("Столбец `button_default` уже существует в таблице опций плагина");
         }
+        return true;
     }
 
-    private function add_alternative_column()
+    public function add_alternative_column()
     {
         global $wpdb;
 
@@ -112,5 +116,6 @@ class LVYID_Upgrade
         } else {
             $this->log_class->info("Столбец `alternative` уже существует в таблице опций плагина");
         }
+        return true;
     }
 }

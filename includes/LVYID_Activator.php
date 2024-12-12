@@ -21,7 +21,7 @@ class LVYID_Activator
             `container_id` VARCHAR(100) DEFAULT NULL,
             `widget` BOOLEAN DEFAULT NULL,
             `alternative` BOOLEAN DEFAULT FALSE,
-            `button_default` BOOLEAN DEFAULT TRUE,
+            `button_default` BOOLEAN DEFAULT FALSE,
             `created_at` DATETIME DEFAULT NOW(),
             PRIMARY KEY (`id`)
         ) $charset_collate"];

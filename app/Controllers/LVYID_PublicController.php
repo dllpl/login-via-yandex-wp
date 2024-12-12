@@ -29,7 +29,8 @@ class LVYID_PublicController
                     'container_id' => $options['container_id'],
                     'button' => $options['button'] ?? false,
                     'widget' => $options['widget'] ?? false,
-                    'alternative' => $options['alternative'] ?? false
+                    'alternative' => $options['alternative'] ?? false,
+                    'button_default' => $options['button_default'] ?? false
                 ]), 'before');
 
         } else {
@@ -42,5 +43,14 @@ class LVYID_PublicController
     {
         wp_enqueue_style('login_via_yandex', plugins_url('../../public/login_via_yandex.css', __FILE__), [],
             filemtime(plugin_dir_path(__FILE__) . '../../public/login_via_yandex.css'), 'all');
+    }
+
+    public function defaultAuthButtonsInit()
+    {
+        $options = $this->options;
+
+        if ($options && is_array($options) && !empty($options['client_id'] && !empty($options['client_secret'])) && $options['button_default']) {
+            echo '<div id="lvyid_auth_default"></div>';
+        }
     }
 }

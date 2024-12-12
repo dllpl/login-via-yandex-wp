@@ -2,6 +2,7 @@
 if (!defined('ABSPATH')) exit;
 
 require_once plugin_dir_path(__FILE__) . '../includes/LVYID_Options.php';
+require_once plugin_dir_path(__FILE__) . '../includes/LVYID_Upgrade.php';
 
 class LVYID_AdminController
 {
@@ -48,7 +49,12 @@ class LVYID_AdminController
             'container_id' => isset($request['container_id']) ? sanitize_text_field($request['container_id']) : null,
             'widget' => $request['widget'] ?? null,
             'alternative' => $request['alternative'] ?? null,
+            'button_default' => $request['button_default'] ?? null
         ];
+
+        $upgrade = new LVYID_Upgrade();
+        $upgrade->add_button_default_column();
+        $upgrade->add_alternative_column();
 
         $result = $wpdb->insert($table_name, $data);
 
