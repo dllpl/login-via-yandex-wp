@@ -123,7 +123,7 @@ function lvyid_add_copyright()
 {
     if (!is_user_logged_in()) {
         $hostname = $_SERVER['HTTP_HOST'];
-        echo '<a title="Заказать сайт на WordPress и Woocommerce. Разработка сайтов и плагинов на WordPress от Webseed.ru" class="login_via_yandex" href="' . esc_url("https://webseed.ru/?utm_source=$hostname&utm_medium=login_via_yandex&utm_campaign=login_via_yandex") . '">Заказать разработку сайта или плагина на Wordpress</a>';
+        echo '<a title="Заказать сайт. Разработка сайтов и плагинов на WordPress от Webseed.ru" class="login_via_yandex" href="' . esc_url("https://webseed.ru/?utm_source=$hostname&utm_medium=login_via_yandex&utm_campaign=login_via_yandex") . '">Заказать разработку сайта или плагина на Wordpress</a>';
     }
 }
 
