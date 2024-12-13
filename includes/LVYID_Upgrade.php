@@ -85,7 +85,7 @@ class LVYID_Upgrade
         if (empty($column_exists)) {
             $wpdb->query(
                 "ALTER TABLE `$table_name`
-             ADD COLUMN `button_default` BOOLEAN DEFAULT TRUE;"
+             ADD COLUMN `button_default` BOOLEAN DEFAULT FALSE;"
             );
             $this->log_class->info("Столбец `button_default` был успешно добавлен в таблицу опций плагина");
         } else {
