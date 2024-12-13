@@ -10,6 +10,14 @@ if (!yaWpData.error) {
         const tokenPageOrigin = location.origin
         const authUserUri = "/wp-json/login_via_yandex/authUser"
 
+        function redirect_handler() {
+            if (yaWpData.woo_active || location.pathname !== '/wp-login.php') {
+                window.location.reload()
+            } else {
+                window.location.href = location.origin
+            }
+        }
+
         if (yaWpData.button_default && document.getElementById('lvyid_auth_default')) {
             YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin,
                 {
@@ -29,7 +37,7 @@ if (!yaWpData.error) {
                             method: "POST",
                             headers: {"Content-Type": "application/json",},
                             body: JSON.stringify({access_token: data.access_token})
-                        }).then(() => window.location.reload())
+                        }).then(() => redirect_handler())
                     }
                 })
                 .catch(error => console.log('Обработка ошибки', error))
@@ -57,7 +65,7 @@ if (!yaWpData.error) {
                                         method: "POST",
                                         headers: {"Content-Type": "application/json",},
                                         body: JSON.stringify({access_token: data.access_token})
-                                    }).then(() => window.location.reload())
+                                    }).then(() => redirect_handler())
                                 }
                             })
                             .catch(error => console.log('Обработка ошибки', error))
@@ -77,11 +85,11 @@ if (!yaWpData.error) {
                                 method: "POST",
                                 headers: {"Content-Type": "application/json",},
                                 body: JSON.stringify({access_token: data.access_token})
-                            }).then(() => window.location.reload())
+                            }).then(() => redirect_handler())
                         }
                     })
                     .catch(error => console.log('Обработка ошибки', error));
-            }, yaWpData.button || yaWpData.button_default ? 1000 : 0)
+            }, yaWpData.button || yaWpData.button_default ? 1500 : 0)
         }
     })
 } else {

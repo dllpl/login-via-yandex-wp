@@ -21,6 +21,8 @@ class LVYID_PublicController
 
         if ($options && is_array($options) && !empty($options['client_id'] && !empty($options['client_secret']))) {
 
+            $woo_active = (bool)is_plugin_active('woocommerce/woocommerce.php');
+
             wp_enqueue_script('login_via_yandex', plugins_url('../../public/login_via_yandex.js', __FILE__), [],
                 filemtime(plugin_dir_path(__FILE__) . '../../public/login_via_yandex.js'), 'in_footer');
 
@@ -30,7 +32,8 @@ class LVYID_PublicController
                     'button' => $options['button'] ?? false,
                     'widget' => $options['widget'] ?? false,
                     'alternative' => $options['alternative'] ?? false,
-                    'button_default' => $options['button_default'] ?? false
+                    'button_default' => $options['button_default'] ?? false,
+                    'woo_active' => $woo_active,
                 ]), 'before');
 
         } else {
