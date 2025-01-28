@@ -4,7 +4,7 @@ Tags: yandexid, login, авторизация, через, яндекс
 Donate link: https://boosty.to/webseed/donate
 Requires at least: 4.7
 Tested up to: 6.7
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html#SEC1
 
@@ -69,3 +69,5 @@ https://www.youtube.com/watch?v=iEn4-2ybuHI
 * Автоматическое размещение кнопок входа через яндекс
 = 1.0.7 =
 * Изменено поведение при авторизации
+= 1.0.8 =
+* Добавлена проверка на существование функции
