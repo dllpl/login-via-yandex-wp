@@ -44,10 +44,29 @@ add_action('register_form', 'lvyid_add_default_auth_button');
 add_action('woocommerce_register_form_end', 'lvyid_add_default_auth_button');
 add_action('woocommerce_login_form_end', 'lvyid_add_default_auth_button');
 
+/** AJAX-авторизация (работает даже при заблокированном WP JSON API) */
+add_action('wp_ajax_nopriv_lvyid_auth_user', 'lvyid_ajax_auth_user');
+add_action('wp_ajax_lvyid_auth_user', 'lvyid_ajax_auth_user');
+
 add_filter('clearfy_rest_api_white_list', function ($white_list) {
     $white_list[] = 'login_via_yandex';
     return $white_list;
 });
+
+function lvyid_ajax_auth_user()
+{
+    check_ajax_referer('lvyid_auth_nonce', 'nonce');
+
+    $access_token = isset($_POST['access_token']) ? sanitize_text_field(wp_unslash($_POST['access_token'])) : '';
+
+    if (empty($access_token)) {
+        wp_send_json_error('Не передан access_token');
+    }
+
+    require_once plugin_dir_path(__FILE__) . 'app/Controllers/LVYID_UserController.php';
+    $result = new LVYID_UserController();
+    $result->handler($access_token);
+}
 
 function lvyid_add_default_auth_button()
 {

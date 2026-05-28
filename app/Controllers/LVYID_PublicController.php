@@ -19,7 +19,7 @@ class LVYID_PublicController
     {
         $options = $this->options;
 
-        if ($options && is_array($options) && !empty($options['client_id'] && !empty($options['client_secret']))) {
+        if ($options && is_array($options) && !empty($options['client_id']) && !empty($options['client_secret'])) {
 
             if(function_exists('is_plugin_active')) {
                 $woo_active = (bool)is_plugin_active('woocommerce/woocommerce.php');
@@ -31,13 +31,15 @@ class LVYID_PublicController
                 filemtime(plugin_dir_path(__FILE__) . '../../public/login_via_yandex.js'), 'in_footer');
 
             wp_add_inline_script('login_via_yandex', 'const yaWpData = ' . wp_json_encode([
-                    'client_id' => $options['client_id'],
+                    'client_id'    => $options['client_id'],
                     'container_id' => $options['container_id'],
-                    'button' => $options['button'] ?? false,
-                    'widget' => $options['widget'] ?? false,
-                    'alternative' => $options['alternative'] ?? false,
+                    'button'       => $options['button'] ?? false,
+                    'widget'       => $options['widget'] ?? false,
+                    'alternative'  => $options['alternative'] ?? false,
                     'button_default' => $options['button_default'] ?? false,
-                    'woo_active' => $woo_active,
+                    'woo_active'   => $woo_active,
+                    'ajaxurl'      => admin_url('admin-ajax.php'),
+                    'ajax_nonce'   => wp_create_nonce('lvyid_auth_nonce'),
                 ]), 'before');
 
         } else {
@@ -56,7 +58,7 @@ class LVYID_PublicController
     {
         $options = $this->options;
 
-        if ($options && is_array($options) && !empty($options['client_id'] && !empty($options['client_secret'])) && $options['button_default']) {
+        if ($options && is_array($options) && !empty($options['client_id']) && !empty($options['client_secret']) && $options['button_default']) {
             echo '<div id="lvyid_auth_default"></div>';
         }
     }

@@ -25,7 +25,7 @@ class LVYID_UserController
 
         if ($user) {
             wp_set_auth_cookie($user->ID);
-            //TODO Update user
+            $this->yandexid_update_user($user->ID, $user_data);
         } else {
             $result = $this->yandexid_create_user($user_data);
         }
@@ -39,12 +39,44 @@ class LVYID_UserController
         }
     }
 
+    private function yandexid_update_user($user_id, $user_data)
+    {
+        $userdata = [
+            'ID'           => $user_id,
+            'first_name'   => $user_data->first_name ?? '',
+            'last_name'    => $user_data->last_name ?? '',
+            'display_name' => ($user_data->first_name ?? '') . ' ' . ($user_data->last_name ?? ''),
+        ];
+
+        wp_update_user($userdata);
+
+        $meta = [
+            'yandex_phone'        => $user_data->default_phone->number ?? null,
+            'yandex_birthday'     => $user_data->birthday ?? null,
+            'yandex_gender'       => $user_data->sex ?? null,
+            'yandex_login'        => $user_data->login ?? null,
+            'yandex_id'           => $user_data->id ?? null,
+            'yandex_real_name'    => $user_data->real_name ?? null,
+            'yandex_display_name' => $user_data->display_name ?? null,
+        ];
+
+        if (isset($user_data->is_avatar_empty, $user_data->default_avatar_id) && !$user_data->is_avatar_empty && !empty($user_data->default_avatar_id)) {
+            $meta['yandex_avatar'] = "https://avatars.yandex.net/get-yapic/{$user_data->default_avatar_id}/islands-200";
+        }
+
+        foreach ($meta as $key => $value) {
+            if (!is_null($value)) {
+                update_user_meta($user_id, $key, $value);
+            }
+        }
+    }
+
     private function yandexid_create_user($user_data)
     {
         $userdata = [
             'first_name' => $user_data->first_name ?? null,
             'last_name' => $user_data->last_name ?? null,
-            'display_name' => $user_data->first_name ?? null . ' ' . $user_data->last_name ?? null,
+            'display_name' => ($user_data->first_name ?? '') . ' ' . ($user_data->last_name ?? ''),
             'user_login' => $user_data->default_email,
             'user_pass' => wp_generate_password(8, false),
             'user_email' => $user_data->default_email,

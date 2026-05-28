@@ -8,7 +8,6 @@ if (!yaWpData.error) {
         }
 
         const tokenPageOrigin = location.origin
-        const authUserUri = "/wp-json/login_via_yandex/authUser"
 
         function redirect_handler() {
             if (yaWpData.woo_active || location.pathname !== '/wp-login.php') {
@@ -16,6 +15,23 @@ if (!yaWpData.error) {
             } else {
                 window.location.href = location.origin
             }
+        }
+
+        /**
+         * Авторизация через admin-ajax.php вместо WP REST API.
+         * admin-ajax.php практически никогда не блокируется плагинами безопасности.
+         */
+        function authUser(access_token) {
+            const formData = new FormData()
+            formData.append('action', 'lvyid_auth_user')
+            formData.append('nonce', yaWpData.ajax_nonce)
+            formData.append('access_token', access_token)
+
+            return fetch(yaWpData.ajaxurl, {
+                method: 'POST',
+                body: formData
+            }).then(() => redirect_handler())
+              .catch(error => console.log('Ошибка авторизации', error))
         }
 
         if (yaWpData.button_default && document.getElementById('lvyid_auth_default')) {
@@ -33,11 +49,7 @@ if (!yaWpData.error) {
                 .then(({handler}) => handler())
                 .then(data => {
                     if (!yaWpData.alternative) {
-                        fetch(authUserUri, {
-                            method: "POST",
-                            headers: {"Content-Type": "application/json",},
-                            body: JSON.stringify({access_token: data.access_token})
-                        }).then(() => redirect_handler())
+                        authUser(data.access_token)
                     }
                 })
                 .catch(error => console.log('Обработка ошибки', error))
@@ -61,11 +73,7 @@ if (!yaWpData.error) {
                             .then(({handler}) => handler())
                             .then(data => {
                                 if (!yaWpData.alternative) {
-                                    fetch(authUserUri, {
-                                        method: "POST",
-                                        headers: {"Content-Type": "application/json",},
-                                        body: JSON.stringify({access_token: data.access_token})
-                                    }).then(() => redirect_handler())
+                                    authUser(data.access_token)
                                 }
                             })
                             .catch(error => console.log('Обработка ошибки', error))
@@ -75,20 +83,17 @@ if (!yaWpData.error) {
                 console.log('Не указан ID контейнера для кнопки авторизации через Яндекс ID')
             }
         }
+
         if (yaWpData.widget) {
             setTimeout(() => {
                 YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin)
                     .then(({handler}) => handler())
                     .then(data => {
                         if (!yaWpData.alternative) {
-                            fetch(authUserUri, {
-                                method: "POST",
-                                headers: {"Content-Type": "application/json",},
-                                body: JSON.stringify({access_token: data.access_token})
-                            }).then(() => redirect_handler())
+                            authUser(data.access_token)
                         }
                     })
-                    .catch(error => console.log('Обработка ошибки', error));
+                    .catch(error => console.log('Обработка ошибки', error))
             }, yaWpData.button || yaWpData.button_default ? 1500 : 0)
         }
     })
