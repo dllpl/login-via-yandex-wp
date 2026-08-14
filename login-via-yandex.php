@@ -93,6 +93,16 @@ function lvyid_add_default_auth_button()
     $public->defaultAuthButtonsInit();
 }
 
+/** Регистрация шорткодов [login_via_yandex] и [yandex_login] */
+add_shortcode('login_via_yandex', 'lvyid_shortcode_auth_button');
+add_shortcode('yandex_login', 'lvyid_shortcode_auth_button');
+
+function lvyid_shortcode_auth_button($atts = [])
+{
+    require_once plugin_dir_path(__FILE__) . 'app/Controllers/LVYID_PublicController.php';
+    return LVYID_PublicController::shortcodeButton($atts);
+}
+
 function lvyid_rest_api_wp($result)
 {
     if (!empty($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/wp-json/login_via_yandex/') !== false) {
