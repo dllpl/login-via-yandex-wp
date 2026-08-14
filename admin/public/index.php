@@ -1,346 +1,457 @@
 <?php
-
 if (!defined('ABSPATH')) exit;
 
+$woo_installed = function_exists('is_plugin_active') ? is_plugin_active('woocommerce/woocommerce.php') : class_exists('WooCommerce');
+$is_configured = !empty($options['client_id']) && !empty($options['client_secret']);
 ?>
 
-<div class="main">
-    <div class="grid">
-        <div class="grid-item a">
-            <div class="content yan">
-                <div class="left">
-                    <h1 class="title"><?php echo sprintf('%s', esc_html(get_admin_page_title())) ?> от <a
-                            href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex"
-                            target="_blank">Webseed.ru</a></h1>
-                    <p>
-                        Мы разработали и выложили для вас плагин для входа и регистрации через Яндекс ID. Это полностью
-                        бесплатный и рабочий плагин, который устанавливается и настраивается в "два клика". Всё
-                        происходит моментально — клиент увидит всплывающее окно со своим именем и аватаркой и может
-                        подтвердить вход. Либо можно авторизоваться через кнопку Яндекс ID, размещенную на вашем сайте.
-                        Все это можно настроить в управлении плагина. Мы поддерживаем данный плагин в актуальном
-                        состоянии и периодически обновляем его.
-                    </p>
-                    <p style="font-weight: bold">
-                        Повысьте конверсию ваших сайтов вместе с плагинами от
-                        <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex"
-                           target="_blank">webseed.ru</a> - мы занимаемся разработкой сайтов с нуля без посредников,
-                        беремся за самые сложные задачи.</p>
-                    <!--                    <span class="subtitle-modify">Версия - v1.0.2</span>-->
-                    <!--                    <span>обновлено 12.10.2024</span>-->
+<div class="lvyid-app-container">
+    <!-- Header Bar -->
+    <header class="lvyid-header">
+        <div class="lvyid-header-left">
+            <div class="lvyid-brand-logo">
+                <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="48" rx="12" fill="#FFCC00"/>
+                    <path d="M26.5 13H22.2C17.7 13 14.5 16.2 14.5 20.7C14.5 24.3 16.6 27 20 28.1L14 36H19L24.8 28.3H26.5V36H31V13H26.5ZM26.5 24.2H22.5C20.3 24.2 18.9 22.8 18.9 20.7C18.9 18.5 20.3 17.1 22.5 17.1H26.5V24.2Z" fill="#111111"/>
+                </svg>
+            </div>
+            <div class="lvyid-brand-info">
+                <div class="lvyid-title-row">
+                    <h1 class="lvyid-app-title">Вход через Яндекс ID</h1>
+                    <span class="lvyid-version-tag">v2.0.0</span>
+                    <?php if ($woo_installed): ?>
+                        <span class="lvyid-badge lvyid-badge-woo">WooCommerce Active</span>
+                    <?php endif; ?>
                 </div>
+                <p class="lvyid-app-desc">Разработка и поддержка: <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex" target="_blank" rel="noopener">Webseed.ru</a> — создание сайтов и плагинов</p>
             </div>
         </div>
-        <div class="grid-item b">
-            <div class="content">
-
-                <div class="rating">
-                    <h3 class="rating_title">Оцените плагин</h3>
-                    <p>Ваша оценка очень важна для нас</p>
-                    <ul class="star-list">
-                        <li class="star-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" x="0" y="0"
-                                 viewBox="0 0 32 32" style="enable-background:new 0 0 512 512" xml:space="preserve"
-                                 class="">
-                                    <g>
-                                        <path
-                                            d="M28.94 10.79 21.7 9.74a.4.4 0 0 1-.31-.22l-3.24-6.57c-.4-.82-1.23-1.33-2.15-1.33s-1.75.51-2.15 1.33l-3.24 6.57a.4.4 0 0 1-.31.22l-7.24 1.05c-.91.14-1.66.76-1.94 1.64-.29.87-.05 1.82.61 2.46L6.97 20c.1.09.14.22.12.35l-1.24 7.22c-.16.91.21 1.81.95 2.35.75.54 1.72.61 2.53.18l6.49-3.4c.11-.07.25-.07.37 0l6.48 3.4c.35.19.74.28 1.12.28.49 0 .99-.15 1.41-.46.74-.54 1.11-1.44.95-2.35l-1.24-7.22c-.02-.13.02-.26.12-.35l5.24-5.11c.66-.64.9-1.59.61-2.46-.28-.88-1.03-1.5-1.94-1.64z"
-                                            fill="#FFD700" opacity="1" data-original="#000000" class=""></path>
-                                    </g>
-                                </svg>
-                        </li>
-                        <li class="star-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" x="0" y="0"
-                                 viewBox="0 0 32 32" style="enable-background:new 0 0 512 512" xml:space="preserve"
-                                 class="">
-                                    <g>
-                                        <path
-                                            d="M28.94 10.79 21.7 9.74a.4.4 0 0 1-.31-.22l-3.24-6.57c-.4-.82-1.23-1.33-2.15-1.33s-1.75.51-2.15 1.33l-3.24 6.57a.4.4 0 0 1-.31.22l-7.24 1.05c-.91.14-1.66.76-1.94 1.64-.29.87-.05 1.82.61 2.46L6.97 20c.1.09.14.22.12.35l-1.24 7.22c-.16.91.21 1.81.95 2.35.75.54 1.72.61 2.53.18l6.49-3.4c.11-.07.25-.07.37 0l6.48 3.4c.35.19.74.28 1.12.28.49 0 .99-.15 1.41-.46.74-.54 1.11-1.44.95-2.35l-1.24-7.22c-.02-.13.02-.26.12-.35l5.24-5.11c.66-.64.9-1.59.61-2.46-.28-.88-1.03-1.5-1.94-1.64z"
-                                            fill="#FFD700" opacity="1" data-original="#000000" class=""></path>
-                                    </g>
-                                </svg>
-                        </li>
-                        <li class="star-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" x="0" y="0"
-                                 viewBox="0 0 32 32" style="enable-background:new 0 0 512 512" xml:space="preserve"
-                                 class="">
-                                    <g>
-                                        <path
-                                            d="M28.94 10.79 21.7 9.74a.4.4 0 0 1-.31-.22l-3.24-6.57c-.4-.82-1.23-1.33-2.15-1.33s-1.75.51-2.15 1.33l-3.24 6.57a.4.4 0 0 1-.31.22l-7.24 1.05c-.91.14-1.66.76-1.94 1.64-.29.87-.05 1.82.61 2.46L6.97 20c.1.09.14.22.12.35l-1.24 7.22c-.16.91.21 1.81.95 2.35.75.54 1.72.61 2.53.18l6.49-3.4c.11-.07.25-.07.37 0l6.48 3.4c.35.19.74.28 1.12.28.49 0 .99-.15 1.41-.46.74-.54 1.11-1.44.95-2.35l-1.24-7.22c-.02-.13.02-.26.12-.35l5.24-5.11c.66-.64.9-1.59.61-2.46-.28-.88-1.03-1.5-1.94-1.64z"
-                                            fill="#FFD700" opacity="1" data-original="#000000" class=""></path>
-                                    </g>
-                                </svg>
-                        </li>
-                        <li class="star-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" x="0" y="0"
-                                 viewBox="0 0 32 32" style="enable-background:new 0 0 512 512" xml:space="preserve"
-                                 class="">
-                                    <g>
-                                        <path
-                                            d="M28.94 10.79 21.7 9.74a.4.4 0 0 1-.31-.22l-3.24-6.57c-.4-.82-1.23-1.33-2.15-1.33s-1.75.51-2.15 1.33l-3.24 6.57a.4.4 0 0 1-.31.22l-7.24 1.05c-.91.14-1.66.76-1.94 1.64-.29.87-.05 1.82.61 2.46L6.97 20c.1.09.14.22.12.35l-1.24 7.22c-.16.91.21 1.81.95 2.35.75.54 1.72.61 2.53.18l6.49-3.4c.11-.07.25-.07.37 0l6.48 3.4c.35.19.74.28 1.12.28.49 0 .99-.15 1.41-.46.74-.54 1.11-1.44.95-2.35l-1.24-7.22c-.02-.13.02-.26.12-.35l5.24-5.11c.66-.64.9-1.59.61-2.46-.28-.88-1.03-1.5-1.94-1.64z"
-                                            fill="#FFD700" opacity="1" data-original="#000000" class=""></path>
-                                    </g>
-                                </svg>
-                        </li>
-                        <li class="star-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" x="0" y="0"
-                                 viewBox="0 0 32 32" style="enable-background:new 0 0 512 512" xml:space="preserve"
-                                 class="">
-                                    <g>
-                                        <path
-                                            d="M28.942 10.795 21.696 9.74a.404.404 0 0 1-.303-.219l-3.24-6.567C17.744 2.13 16.92 1.617 16 1.617s-1.745.513-2.152 1.338l-3.241 6.566a.403.403 0 0 1-.302.22l-7.247 1.054a2.383 2.383 0 0 0-1.938 1.633 2.382 2.382 0 0 0 .607 2.46l5.245 5.113c.094.091.137.224.114.354L5.85 27.573c-.156.908.21 1.807.955 2.348a2.381 2.381 0 0 0 2.528.183l6.483-3.409a.4.4 0 0 1 .37 0l6.484 3.409a2.393 2.393 0 0 0 2.527-.183 2.383 2.383 0 0 0 .955-2.348l-1.237-7.22a.398.398 0 0 1 .115-.353l5.244-5.112c.66-.641.893-1.585.607-2.46a2.383 2.383 0 0 0-1.938-1.633zm-.065 2.662-5.243 5.11a2.396 2.396 0 0 0-.69 2.126l1.236 7.218a.384.384 0 0 1-.16.392.385.385 0 0 1-.42.031l-6.482-3.408a2.397 2.397 0 0 0-2.235 0l-6.481 3.408a.386.386 0 0 1-.422-.031.384.384 0 0 1-.16-.392l1.237-7.217a2.396 2.396 0 0 0-.69-2.125l-5.244-5.112a.386.386 0 0 1-.102-.41.386.386 0 0 1 .324-.274l7.248-1.054a2.4 2.4 0 0 0 1.807-1.312l3.24-6.567c.096-.195.267-.223.36-.223s.264.028.36.223l3.24 6.568a2.4 2.4 0 0 0 1.808 1.311l7.247 1.054a.386.386 0 0 1 .324.273.386.386 0 0 1-.102.41z"
-                                            fill="#929292" opacity="1" data-original="#000000" class=""></path>
-                                    </g>
-                                </svg>
-                        </li>
-                    </ul>
-                    <a href="https://wordpress.org/support/plugin/login-via-yandex/reviews/#new-post" target="_blank" style="font-size: 20px">Оставить отзыв</a>
-                </div>
-                <div class="help">
-                    <h3 class="help-title">Нужна помощь?</h3>
-                    <p>Не переживай, мы с тобой! Первым делом загляни на наш сайт – там много полезной
-                        информации! 📚 Также не забудь почитать пост на нашем сайте, он точно тебе
-                        поможет! И если у тебя остались вопросы, смело обращайся к нам в социальных сетях – мы
-                        всегда на связи и готовы помочь! 💬</p>
-                    <ul>
-                        <li class="docs-item">
-                            <a class="docs-link" href="https://webseed.ru/dllpl" target="_blank"
-                               title="https://webseed.ru/dllpl">
-                                    <span class="docs-icon">
-                                        <img
-                                            src="<?php echo sprintf('%s', esc_attr(plugins_url('img/author.jpeg', __FILE__))) ?>"
-                                            alt=""
-                                            class="author">
-                                    </span>
-                                <span>Автор плагина Никита Ив (dllpl)</span>
-                            </a>
-                        </li>
-
-                        <li class="docs-item">
-                            <a class="docs-link"
-                               href="https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex"
-                               target="_blank">
-                                    <span class="docs-icon">
-                                        <svg width="50" height="50" viewBox="0 0 120 120" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M0 60C0 26.8629 26.8629 0 60 0C93.1371 0 120 26.8629 120 60C120 93.1371 93.1371 120 60 120C26.8629 120 0 93.1371 0 60Z"
-                                                fill="black"/>
-                                            <path
-                                                d="M54.6714 109.675L54.2339 82.8417M54.2339 82.8417C52.7125 72.1783 69.4641 53.7268 92.1505 52.8C93.5953 74.1509 79.3407 90.7631 60.3589 91.4459M54.2339 82.8417C50.2703 71.9998 39.9263 65.3896 27.2547 66.0709C26.5417 77.1711 32.7316 88.996 49.7131 91.4459"
-                                                stroke="#CFE741" stroke-width="5" stroke-linecap="round"/>
-                                            <circle cx="60" cy="60" r="50" stroke="#CFE741" stroke-width="5"/>
-                                        </svg>
-                                    </span>
-                                <span>Руководство по плагину</span>
-                            </a>
-                        </li>
-                        <li class="docs-item">
-                            <a class="docs-link docs-social" href="https://t.me/dllpl" target="_blank">
-                                    <span class="docs-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" x="0"
-                                             y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512"
-                                             xml:space="preserve">
-                                            <defs>
-                                                <linearGradient id="a" x1="-1980.761" x2="-1980.761" y1="6242.157"
-                                                                y2="6241.649"
-                                                                gradientTransform="matrix(1000 0 0 -1000 1981017 6242157)"
-                                                                gradientUnits="userSpaceOnUse">
-                                                    <stop offset="0" stop-color="#2aabee"></stop>
-                                                    <stop offset="1" stop-color="#229ed9"></stop>
-                                                </linearGradient>
-                                            </defs>
-                                            <g>
-                                                <linearGradient id="a" x1="-1980.761" x2="-1980.761" y1="6242.157"
-                                                                y2="6241.649"
-                                                                gradientTransform="matrix(1000 0 0 -1000 1981017 6242157)"
-                                                                gradientUnits="userSpaceOnUse">
-                                                    <stop offset="0" stop-color="#2aabee"></stop>
-                                                    <stop offset="1" stop-color="#229ed9"></stop>
-                                                </linearGradient>
-                                                <g fill-rule="evenodd" clip-rule="evenodd">
-                                                    <circle cx="256" cy="256" r="256" fill="url(&quot;#a&quot;)"
-                                                            opacity="1" data-original="url(#a)"></circle>
-                                                    <path fill="#FFFFFF"
-                                                          d="M115.88 253.298c74.629-32.515 124.394-53.951 149.293-64.307 71.094-29.57 85.867-34.707 95.495-34.877 2.118-.037 6.853.488 9.92 2.977 4.55 3.692 4.576 11.706 4.071 17.01-3.853 40.48-20.523 138.713-29.004 184.051-3.589 19.184-10.655 25.617-17.495 26.246-14.866 1.368-26.155-9.825-40.554-19.263-22.531-14.77-35.26-23.964-57.131-38.376-25.275-16.656-8.89-25.81 5.514-40.771 3.77-3.915 69.271-63.494 70.539-68.899.159-.676.306-3.196-1.191-4.526s-3.706-.876-5.3-.514c-2.26.513-38.254 24.304-107.982 71.372-10.217 7.016-19.471 10.434-27.762 10.255-9.141-.197-26.723-5.168-39.794-9.417-16.032-5.211-28.774-7.967-27.664-16.817.578-4.611 6.926-9.325 19.045-14.144z"
-                                                          opacity="1" data-original="#ffffff"></path>
-                                                </g>
-                                            </g>
-                                        </svg>
-                                    </span>
-                                <span>Написать в Telegram</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <div class="lvyid-header-right">
+            <button type="button" id="lvyid-open-whats-new-btn" class="lvyid-btn-whats-new">
+                <span class="lvyid-btn-icon">✨</span> Что нового в 2.0.0
+            </button>
+            <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex" target="_blank" rel="noopener" class="lvyid-btn-social">
+                🌐 Webseed.ru
+            </a>
         </div>
-        <div class="grid-item c">
-            <h2 class="title">Настройки плагина</h2>
-            <div class="content">
-                <h3 class="content-title">Данные приложения Яндекс ID <a href="https://oauth.yandex.ru/client/new/id/" target="_blank">(получить)</a></h3>
-                <div class="form">
-                    <ul class="form-list">
-                        <li class="form-item">
-                            <label class="form-label" for="client_id">ClientID</label>
-                            <input class="form-input" type="text" id="client_id" name="client_id"
-                                   value="<?php echo sprintf('%s', esc_attr($options['client_id'] ?? '')) ?>" required
-                                   maxlength="32" minlength="32">
-                            <div class="form-error hidden" id="client_id_error"></div>
-                        </li>
-                        <li class="form-item">
-                            <label class="form-label" for="client_secret">Client secret</label>
-                            <input class="form-input" type="password" id="client_secret" name="client_secret"
-                                   value="<?php echo sprintf('%s', esc_attr($options['client_secret'] ?? '')) ?>"
-                                   required maxlength="32" minlength="32">
-                            <div class="form-error hidden" id="client_secret_error"></div>
-                        </li>
-                        <li class="check-item">
-                            <div class="">
-                                <input type="checkbox"
-                                       id="alternative" <?php if (isset($options['alternative']) && $options['alternative']) echo 'checked' ?> />
-                                <label for="alternative" class="check">
-                                    <span class="move"></span>
-                                </label>
+    </header>
+
+    <!-- Main 2-Column Layout -->
+    <div class="lvyid-layout">
+        
+        <!-- Left Column: Settings & Documentation -->
+        <main class="lvyid-main-col">
+            
+            <!-- Card 1: API Keys -->
+            <section class="lvyid-card">
+                <div class="lvyid-card-header">
+                    <div class="lvyid-card-icon" style="background: #fff8e1; color: #f57f17;">🔑</div>
+                    <div>
+                        <h2 class="lvyid-card-title">Данные приложения Яндекс ID</h2>
+                        <p class="lvyid-card-subtitle">Введите ключи доступа из кабинета <a href="https://oauth.yandex.ru/client/new/id/" target="_blank" rel="noopener">oauth.yandex.ru</a></p>
+                    </div>
+                </div>
+                <div class="lvyid-card-body">
+                    <div class="lvyid-form-grid">
+                        <div class="lvyid-input-group">
+                            <label class="lvyid-label" for="client_id">
+                                ClientID <span class="lvyid-required">*</span>
+                            </label>
+                            <div class="lvyid-input-wrapper">
+                                <input class="lvyid-input" type="text" id="client_id" name="client_id"
+                                       value="<?php echo sprintf('%s', esc_attr($options['client_id'] ?? '')) ?>"
+                                       placeholder="32-значный идентификатор приложения" required maxlength="32" minlength="32">
+                                <button type="button" class="lvyid-input-action" onclick="navigator.clipboard.writeText(document.getElementById('client_id').value); this.innerText='✓'; setTimeout(()=>this.innerText='📋', 1500);" title="Копировать">📋</button>
                             </div>
-                            <h3 class="check-title">Альтернативная авторизация</h3>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item d">
-            <h2 class="title">Управление</h2>
-            <div class="content">
-                <ul class="check-list">
-                    <li class="check-item">
-                        <div class="">
-                            <input type="checkbox"
-                                   id="check-btn" <?php if (isset($options['button']) && $options['button']) echo 'checked' ?> />
-                            <label for="check-btn" class="check">
-                                <span class="move"></span>
-                            </label>
+                            <div class="lvyid-form-error hidden" id="client_id_error"></div>
                         </div>
-                        <h3 class="check-title">Добавить кнопку</h3>
-                    </li>
-                    <li class="form-item">
-                        <label class="form-label" for="container_id" style="font-size: 14px;">При выборе "Кнопки"
-                            необходимо указать id его
-                            контейнера/оберточного блока</label>
-                        <input class="form-input" type="text" id="container_id" name="container_id"
-                               value="<?php echo sprintf('%s', esc_attr($options['container_id'] ?? '')) ?>"
-                               placeholder='ID контейнера' <?php if (!isset($options['button']) || !$options['button']) echo 'disabled' ?>
-                        >
-                        <div class="form-error hidden" id="container_id_error"></div>
-                    </li>
-                    <li class="check-item">
-                        <div class="">
-                            <input type="checkbox"
-                                   id="check-widget" <?php if (isset($options['widget']) && $options['widget']) echo 'checked' ?> />
-                            <label for="check-widget" class="check">
-                                <span class="move"></span>
-                            </label>
-                        </div>
-                        <h3 class="check-title">Добавить виджет</h3>
-                    </li>
-                    <li class="check-item">
-                        <div class="">
-                            <input type="checkbox"
-                                   id="button_default" <?php if (isset($options['button_default']) && $options['button_default']) echo 'checked' ?> />
-                            <label for="button_default" class="check">
-                                <span class="move"></span>
-                            </label>
-                        </div>
-                        <h3 class="check-title">Автоматическое размещение кнопок</h3>
-                    </li>
-                    <li class="check-item" style="opacity: 0.85; margin-top: 10px;">
-                        <div class="">
-                            <input type="checkbox"
-                                   id="copyright" <?php if (!isset($options['copyright']) || $options['copyright']) echo 'checked' ?> />
-                            <label for="copyright" class="check">
-                                <span class="move"></span>
-                            </label>
-                        </div>
-                        <h3 class="check-title" style="font-size: 13px; font-weight: normal; color: #666;">Поддержать разработчиков ссылкой в подвале</h3>
-                    </li>
-                    <li>
-                        <button class="save-btn">
-                            Сохранить изменения
-                        </button>
-                    </li>
-                </ul>
 
-            </div>
-        </div>
-        <div class="grid-item c-2">
-            <h2 class="title">FAQ</h2>
-            <div class="content">
-                <ul>
-                    <li>
-                        <h3>Что значит "Автоматическое размещение кнопок?</h3>
-                        <p>- Кнопки автоматически разместятся после форм входа и регистрации на вашем сайте. Работает в Wordpress и Woocommerce.</p>
-                    </li>
-                    <li>
-                        <h3>Нажимаю на виджет/кнопку, прохожу авторизацию в Яндекс, окно закрывается и ничего не происходит:</h3>
-                        <p>- Проверьте нет ли плагинов "безопасности", блокирующих работу WP JSON API. Если нашли, отключите эту опцию, либо добавьте плагин в исключение. Login Via Yandex активно использует возможности WP JSON API</p>
-                    </li>
-                    <li>
-                        <h3>Нажимаю на виджет/кнопку, прохожу авторизацию в Яндекс, окно закрывается, страница перезагружается и ничего не происходит:</h3>
-                        <p>- Попробуйте активировать "Альтернативная авторизация" в настройках плагина.</p>
-                    </li>
-                    <li>
-                        <h3>Не могу вывести кнопку авторизации:</h3>
-                        <p>- Посмотрите <a href="https://youtu.be/iEn4-2ybuHI" target="_blank">видео-объяснение</a> по работе с плагином</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="grid-item d-2">
-            <h2 class="title">Видео-объяснение</h2>
-            <div class="content">
-                <iframe width="100%" height="400" src="https://rutube.ru/play/embed/5c9a1ea4e1d64606b1534945655643a3/" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-            </div>
-        </div>
-        <div class="grid-item e">
-            <div class="content login">
-                <div class="login-btn">
-                    <div class="login-btn-img">
-                        <img class="login-img"
-                             src="<?php echo sprintf('%s', esc_attr(plugins_url('img/login-btn.gif', __FILE__))) ?>"
-                             alt="Авторизация через кнопки Яндекс ID"
-                             srcset="">
+                        <div class="lvyid-input-group">
+                            <label class="lvyid-label" for="client_secret">
+                                Client Secret <span class="lvyid-required">*</span>
+                            </label>
+                            <div class="lvyid-input-wrapper">
+                                <input class="lvyid-input" type="password" id="client_secret" name="client_secret"
+                                       value="<?php echo sprintf('%s', esc_attr($options['client_secret'] ?? '')) ?>"
+                                       placeholder="32-значный пароль приложения" required maxlength="32" minlength="32">
+                                <button type="button" class="lvyid-input-action" id="lvyid-toggle-secret" onclick="const input = document.getElementById('client_secret'); if(input.type === 'password'){ input.type = 'text'; this.innerText = '🙈'; } else { input.type = 'password'; this.innerText = '👁️'; }" title="Показать/скрыть">👁️</button>
+                            </div>
+                            <div class="lvyid-form-error hidden" id="client_secret_error"></div>
+                        </div>
                     </div>
-                    <div class="login-btn-desc">
-                        <h2>Кнопка авторизации «Вход в два клика»</h2>
-                        <p>
-                            Кнопки Яндекс ID могут выглядеть по-разному. Подберите вариант, который будет хорошо
-                            смотреться на вашем сайте или в приложении
-                        </p>
+                </div>
+            </section>
+
+            <!-- Card 2: Options & Switches -->
+            <section class="lvyid-card">
+                <div class="lvyid-card-header">
+                    <div class="lvyid-card-icon" style="background: #e8f5e9; color: #2e7d32;">⚙️</div>
+                    <div>
+                        <h2 class="lvyid-card-title">Режимы работы и отображение</h2>
+                        <p class="lvyid-card-subtitle">Настройте способы вывода кнопок и механизмы авторизации</p>
+                    </div>
+                </div>
+                <div class="lvyid-card-body">
+                    <div class="lvyid-switches-list">
+
+                        <!-- Toggle: Button Default Placement -->
+                        <label class="lvyid-switch-row" for="button_default">
+                            <div class="lvyid-switch-info">
+                                <div class="lvyid-switch-title">
+                                    <span>⚡ Автоматическое размещение кнопок</span>
+                                    <span class="lvyid-pill-recommended">Рекомендуется</span>
+                                </div>
+                                <div class="lvyid-switch-desc">Автоматически добавляет кнопку «Войти с Яндекс ID» под стандартными формами входа и регистрации в WordPress и WooCommerce.</div>
+                            </div>
+                            <div class="lvyid-toggle-wrapper">
+                                <input type="checkbox" id="button_default" <?php if (isset($options['button_default']) && $options['button_default']) echo 'checked' ?> />
+                                <span class="lvyid-toggle-slider"></span>
+                            </div>
+                        </label>
+
+                        <!-- Toggle: Widget -->
+                        <label class="lvyid-switch-row" for="check-widget">
+                            <div class="lvyid-switch-info">
+                                <div class="lvyid-switch-title">
+                                    <span>💬 Виджет «Мгновенного входа»</span>
+                                </div>
+                                <div class="lvyid-switch-desc">Всплывающий бейдж Яндекса в правом нижнем углу сайта для быстрого входа в один клик.</div>
+                            </div>
+                            <div class="lvyid-toggle-wrapper">
+                                <input type="checkbox" id="check-widget" <?php if (isset($options['widget']) && $options['widget']) echo 'checked' ?> />
+                                <span class="lvyid-toggle-slider"></span>
+                            </div>
+                        </label>
+
+                        <!-- Toggle: Alternative Auth -->
+                        <label class="lvyid-switch-row" for="alternative">
+                            <div class="lvyid-switch-info">
+                                <div class="lvyid-switch-title">
+                                    <span>🔀 Альтернативная авторизация (Code Flow)</span>
+                                </div>
+                                <div class="lvyid-switch-desc">Обмен токена через серверный бэкенд. Включите, если у пользователей на вашем сервере не срабатывает всплывающее окно входа.</div>
+                            </div>
+                            <div class="lvyid-toggle-wrapper">
+                                <input type="checkbox" id="alternative" <?php if (isset($options['alternative']) && $options['alternative']) echo 'checked' ?> />
+                                <span class="lvyid-toggle-slider"></span>
+                            </div>
+                        </label>
+
+                        <!-- Toggle: AJAX Webhook -->
+                        <label class="lvyid-switch-row" for="use_ajax_webhook">
+                            <div class="lvyid-switch-info">
+                                <div class="lvyid-switch-title">
+                                    <span>🛡️ Использовать AJAX Redirect URI (admin-ajax.php)</span>
+                                </div>
+                                <div class="lvyid-switch-desc">Переключает обработчик с <code>/wp-json/</code> на <code>admin-ajax.php</code>. Рекомендуется, если на хостинге или плагинами безопасности отключен WP REST API.</div>
+                            </div>
+                            <div class="lvyid-toggle-wrapper">
+                                <input type="checkbox" id="use_ajax_webhook" <?php if (!empty($options['use_ajax_webhook'])) echo 'checked' ?> />
+                                <span class="lvyid-toggle-slider"></span>
+                            </div>
+                        </label>
+
+                        <!-- Toggle: Copyright -->
+                        <label class="lvyid-switch-row" for="copyright">
+                            <div class="lvyid-switch-info">
+                                <div class="lvyid-switch-title">
+                                    <span>❤️ Поддержать разработчиков ссылкой в подвале</span>
+                                </div>
+                                <div class="lvyid-switch-desc">Выводит аккуратную строчку в подвале сайта: <i>«Вход через Яндекс ID — webseed.ru»</i>. Спасибо за вашу поддержку!</div>
+                            </div>
+                            <div class="lvyid-toggle-wrapper">
+                                <input type="checkbox" id="copyright" <?php if (!isset($options['copyright']) || $options['copyright']) echo 'checked' ?> />
+                                <span class="lvyid-toggle-slider"></span>
+                            </div>
+                        </label>
 
                     </div>
                 </div>
-                <div class="login-widget">
-                    <div class="login-widget-img">
-                        <img class="login-img"
-                             src="<?php echo sprintf('%s', esc_attr(plugins_url('img/login-widget.gif', __FILE__))) ?>"
-                             alt="Виджет «Мгновенного входа» Яндекс ID"
-                             srcset="">
+            </section>
+
+            <!-- Card 3: Shortcode Placement -->
+            <section class="lvyid-card">
+                <div class="lvyid-card-header">
+                    <div class="lvyid-card-icon" style="background: #ede7f6; color: #512da8;">📋</div>
+                    <div>
+                        <h2 class="lvyid-card-title">Размещение через Шорткод</h2>
+                        <p class="lvyid-card-subtitle">Выводите кнопку Яндекс ID в произвольном месте вашего сайта</p>
                     </div>
-                    <div class="login-widget-desc">
-                        <h2>Виджет «Мгновенного входа»</h2>
-                        <p>
-                            Всё происходит моментально — клиент видит всплывающее окно со своим именем и аватаркой и
-                            может подтвердить вход. «Мгновенный вход» можно внедрить на любом этапе воронки
-                        </p>
+                </div>
+                <div class="lvyid-card-body">
+                    <div class="lvyid-shortcode-boxes">
+                        <div class="lvyid-shortcode-item">
+                            <div class="lvyid-shortcode-label">Шорткод для Elementor, Gutenberg и записей:</div>
+                            <div class="lvyid-copy-box">
+                                <code>[login_via_yandex]</code>
+                                <button type="button" class="lvyid-copy-btn" onclick="navigator.clipboard.writeText('[login_via_yandex]'); this.innerText='Скопировано!'; setTimeout(()=>this.innerText='Копировать', 1500);">Копировать</button>
+                            </div>
+                        </div>
+                        <div class="lvyid-shortcode-item">
+                            <div class="lvyid-shortcode-label">PHP-код для вставки в файлы темы (header.php, попапы):</div>
+                            <div class="lvyid-copy-box">
+                                <code>&lt;?php echo do_shortcode('[login_via_yandex]'); ?&gt;</code>
+                                <button type="button" class="lvyid-copy-btn" onclick="navigator.clipboard.writeText('<?php echo esc_js("<?php echo do_shortcode('[login_via_yandex]'); ?>"); ?>'); this.innerText='Скопировано!'; setTimeout(()=>this.innerText='Копировать', 1500);">Копировать</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lvyid-tip-note">
+                        💡 <b>Подсказка:</b> Кнопка через шорткод автоматически скрывается, если пользователь уже авторизован на сайте.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Card 4: Step-by-Step Guide -->
+            <section class="lvyid-card">
+                <div class="lvyid-card-header">
+                    <div class="lvyid-card-icon" style="background: #e1f5fe; color: #0288d1;">📖</div>
+                    <div>
+                        <h2 class="lvyid-card-title">Пошаговая инструкция по настройке</h2>
+                        <p class="lvyid-card-subtitle">Создайте приложение в Яндексе за 4 простых шага</p>
+                    </div>
+                </div>
+                <div class="lvyid-card-body">
+                    <div class="lvyid-steps">
+                        
+                        <div class="lvyid-step">
+                            <div class="lvyid-step-number">1</div>
+                            <div class="lvyid-step-content">
+                                <h3>Создайте приложение в кабинете Яндекса</h3>
+                                <p>Перейдите на <a href="https://oauth.yandex.ru/client/new/id/" target="_blank" rel="noopener" class="lvyid-link">oauth.yandex.ru/client/new/id</a>, войдите под своим Яндекс-аккаунтом, укажите название (например, <i>«Вход на сайте»</i>) и выберите платформу <b>«Веб-сервисы»</b>.</p>
+                            </div>
+                        </div>
+
+                        <div class="lvyid-step">
+                            <div class="lvyid-step-number">2</div>
+                            <div class="lvyid-step-content">
+                                <h3>Укажите Redirect URI и Разрешенный домен</h3>
+                                <div class="lvyid-uri-block">
+                                    <div class="lvyid-uri-item">
+                                        <div class="lvyid-uri-label">Redirect URI:</div>
+                                        <div class="lvyid-copy-box">
+                                            <code id="step-redirect-uri" data-rest-uri="<?php echo esc_attr(home_url('/wp-json/login_via_yandex/webhook')); ?>" data-ajax-uri="<?php echo esc_attr(admin_url('admin-ajax.php') . '?action=lvyid_webhook'); ?>"><?php echo esc_html(!empty($options['use_ajax_webhook']) ? (admin_url('admin-ajax.php') . '?action=lvyid_webhook') : home_url('/wp-json/login_via_yandex/webhook')); ?></code>
+                                            <button type="button" class="lvyid-copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('step-redirect-uri').innerText); this.innerText='Скопировано!'; setTimeout(()=>this.innerText='Копировать', 1500);">Копировать</button>
+                                        </div>
+                                    </div>
+                                    <div class="lvyid-uri-item">
+                                        <div class="lvyid-uri-label">Разрешенные источники (Web origin):</div>
+                                        <div class="lvyid-copy-box">
+                                            <code><?php echo esc_html(home_url()); ?></code>
+                                            <button type="button" class="lvyid-copy-btn" onclick="navigator.clipboard.writeText('<?php echo esc_js(home_url()); ?>'); this.innerText='Скопировано!'; setTimeout(()=>this.innerText='Копировать', 1500);">Копировать</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lvyid-step">
+                            <div class="lvyid-step-number">3</div>
+                            <div class="lvyid-step-content">
+                                <h3>Отметьте права доступа (Скоупы)</h3>
+                                <p>В блоке <b>«Яндекс ID (Паспорт)»</b> отметьте следующие галочки:</p>
+                                <div class="lvyid-scopes-list">
+                                    <span class="lvyid-scope-badge">📧 Доступ к адресу электронной почты (<code>login:email</code>)</span>
+                                    <span class="lvyid-scope-badge">👤 Доступ к имени, фамилии и полу (<code>login:info</code>)</span>
+                                    <span class="lvyid-scope-badge">📱 Доступ к номеру телефона (<code>login:phone</code>) <i>(для WooCommerce)</i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lvyid-step">
+                            <div class="lvyid-step-number">4</div>
+                            <div class="lvyid-step-content">
+                                <h3>Скопируйте ключи и сохраните изменения</h3>
+                                <p>Скопируйте полученные <b>ClientID</b> и <b>ClientSecret</b> в поля формы выше и нажмите <b>«Сохранить изменения»</b>.</p>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
+            </section>
+
+            <!-- Card 5: FAQ -->
+            <section class="lvyid-card">
+                <div class="lvyid-card-header">
+                    <div class="lvyid-card-icon" style="background: #fce4ec; color: #c2185b;">❓</div>
+                    <div>
+                        <h2 class="lvyid-card-title">Часто задаваемые вопросы (FAQ)</h2>
+                        <p class="lvyid-card-subtitle">Решения частых вопросов и тонкостей настройки</p>
+                    </div>
+                </div>
+                <div class="lvyid-card-body">
+                    <div class="lvyid-faq-list">
+                        
+                        <details class="lvyid-faq-item">
+                            <summary class="lvyid-faq-question">Что делает переключатель «Автоматическое размещение кнопок»?</summary>
+                            <div class="lvyid-faq-answer">
+                                Кнопки авторизации автоматически встраиваются под формами входа и регистрации WordPress (<code>/wp-login.php</code>), а также на странице «Мой аккаунт» и при оформлении заказа в WooCommerce.
+                            </div>
+                        </details>
+
+                        <details class="lvyid-faq-item">
+                            <summary class="lvyid-faq-question">Как работает автозаполнение данных в WooCommerce?</summary>
+                            <div class="lvyid-faq-answer">
+                                При авторизации через Яндекс ID плагин автоматически подставляет в поля оформления заказа имя, фамилию, email и номер телефона покупателя. Это существенно ускоряет процесс покупки и снижает процент брошенных корзин.
+                            </div>
+                        </details>
+
+                        <details class="lvyid-faq-item">
+                            <summary class="lvyid-faq-question">Зачем нужен переключатель «AJAX Redirect URI»?</summary>
+                            <div class="lvyid-faq-answer">
+                                Если на вашем сервере отключен или блокируется WP REST API (<code>/wp-json/</code>), включите эту опцию и укажите в Яндекс OAuth адрес <code>admin-ajax.php?action=lvyid_webhook</code>.
+                            </div>
+                        </details>
+
+                        <details class="lvyid-faq-item">
+                            <summary class="lvyid-faq-question">После авторизации окно закрывается, но вход не выполняется?</summary>
+                            <div class="lvyid-faq-answer">
+                                Попробуйте включить переключатель <b>«Альтернативная авторизация»</b> выше в настройках, после чего сохраните изменения.
+                            </div>
+                        </details>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Right Column: Sidebar Actions & Author -->
+        <aside class="lvyid-sidebar-col">
+            
+            <!-- Sticky Save Card -->
+            <div class="lvyid-sticky-card">
+                <div class="lvyid-card lvyid-card-action">
+                    <div class="lvyid-status-indicator">
+                        <?php if ($is_configured): ?>
+                            <div class="lvyid-status-badge lvyid-status-ready">
+                                <span class="lvyid-pulse"></span>
+                                <span>Плагин настроен и активен</span>
+                            </div>
+                        <?php else: ?>
+                            <div class="lvyid-status-badge lvyid-status-warning">
+                                <span class="lvyid-pulse lvyid-pulse-yellow"></span>
+                                <span>Требуется ввод ключей</span>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="button" class="lvyid-save-btn save-btn">
+                        <span>💾 Сохранить изменения</span>
+                    </button>
+                    <p class="lvyid-save-hint">Настройки применяются мгновенно без перезагрузки страницы.</p>
+                </div>
             </div>
+
+            <!-- Webseed Project Card -->
+            <div class="lvyid-card">
+                <div class="lvyid-card-header" style="border-bottom: none; padding-bottom: 0;">
+                    <div class="lvyid-author-box">
+                        <div class="lvyid-card-icon" style="background: #0f172a; color: #ffcc00; width: 44px; height: 44px; border-radius: 14px; font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center;">WS</div>
+                        <div>
+                            <h3 class="lvyid-author-name">Webseed.ru</h3>
+                            <p class="lvyid-author-role">Разработка и поддержка</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lvyid-card-body">
+                    <p class="lvyid-author-text">
+                        Создание сайтов под ключ, разработка плагинов, API-интеграции и техническая оптимизация WordPress.
+                    </p>
+                    <div class="lvyid-author-links">
+                        <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex" target="_blank" rel="noopener" class="lvyid-author-btn lvyid-btn-site">
+                            🌐 Официальный сайт Webseed.ru
+                        </a>
+                        <a href="https://boosty.to/webseed/donate" target="_blank" rel="noopener" class="lvyid-author-btn lvyid-btn-boosty">
+                            ☕ Поддержать проект (Boosty)
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Card -->
+            <div class="lvyid-card lvyid-card-review">
+                <div class="lvyid-card-body" style="text-align: center;">
+                    <div class="lvyid-stars-row">⭐⭐⭐⭐⭐</div>
+                    <h3 style="margin: 8px 0 6px 0; font-size: 16px; font-weight: 700;">Понравился плагин?</h3>
+                    <p style="font-size: 13px; color: #64748b; margin: 0 0 14px 0; line-height: 1.45;">Поставьте 5 звёзд на WordPress.org — ваша поддержка помогает нам развивать проект!</p>
+                    <a href="https://wordpress.org/support/plugin/login-via-yandex/reviews/#new-post" target="_blank" rel="noopener" class="lvyid-review-btn">
+                        ⭐ Оставить отзыв на WordPress.org
+                    </a>
+                </div>
+            </div>
+
+        </aside>
+
+    </div>
+</div>
+
+<!-- Full-screen What's New Modal -->
+<div id="lvyid-welcome-modal" class="lvyid-modal-overlay" style="display: none;">
+    <div class="lvyid-modal-card">
+        <button type="button" class="lvyid-modal-close" id="lvyid-modal-close-btn" title="Закрыть">×</button>
+        
+        <div class="lvyid-modal-header">
+            <div class="lvyid-modal-badge">Глобальный релиз v2.0.0</div>
+            <h2 class="lvyid-modal-title">🚀 Встречайте Login via Yandex 2.0!</h2>
+            <p class="lvyid-modal-subtitle">Масштабное обновление: современный интерфейс настроек, шорткоды без привязки к ID, автозаполнение WooCommerce, переход на AJAX и 100% стабильность.</p>
+        </div>
+
+        <div class="lvyid-modal-body">
+            <div class="lvyid-features-grid">
+                
+                <div class="lvyid-feature-card">
+                    <div class="lvyid-feature-icon" style="background: #fff8e1; color: #f57f17;">⚡</div>
+                    <div class="lvyid-feature-content">
+                        <h3>Шорткод [login_via_yandex]</h3>
+                        <p>Больше никаких ID блоков и сложных настроек! Размещайте кнопки в Elementor, Gutenberg, сайдбарах, попапах и коде темы.</p>
+                    </div>
+                </div>
+
+                <div class="lvyid-feature-card">
+                    <div class="lvyid-feature-icon" style="background: #e3f2fd; color: #1976d2;">🛒</div>
+                    <div class="lvyid-feature-content">
+                        <h3>Автозаполнение в WooCommerce</h3>
+                        <p>При авторизации на этапе оформления заказа поля покупателя (Имя, Телефон, Email) заполняются мгновенно из профиля Яндекс ID.</p>
+                    </div>
+                </div>
+
+                <div class="lvyid-feature-card">
+                    <div class="lvyid-feature-icon" style="background: #e8f5e9; color: #388e3c;">🛡️</div>
+                    <div class="lvyid-feature-content">
+                        <h3>Переход на WordPress AJAX</h3>
+                        <p>Авторизация и сохранение переведены на <code>admin-ajax.php</code> — плагины безопасности (Wordfence, Clearfy) больше не блокируют работу.</p>
+                    </div>
+                </div>
+
+                <div class="lvyid-feature-card">
+                    <div class="lvyid-feature-icon" style="background: #f3e5f5; color: #7b1fa2;">✨</div>
+                    <div class="lvyid-feature-content">
+                        <h3>Множество кнопок на странице</h3>
+                        <p>Инициализация любого количества кнопок одновременно (в шапке, меню и формах) без конфликтов скриптов и дублирования.</p>
+                    </div>
+                </div>
+
+                <div class="lvyid-feature-card">
+                    <div class="lvyid-feature-icon" style="background: #e0f7fa; color: #00838f;">🎨</div>
+                    <div class="lvyid-feature-content">
+                        <h3>Новый интерфейс управления</h3>
+                        <p>Премиальная двухколоночная панель настроек, мгновенное копирование ключей в 1 клик, скрытие паролей и интерактивная инструкция.</p>
+                    </div>
+                </div>
+
+                <div class="lvyid-feature-card">
+                    <div class="lvyid-feature-icon" style="background: #fbe9e7; color: #d84315;">🔄</div>
+                    <div class="lvyid-feature-content">
+                        <h3>100% обратная совместимость</h3>
+                        <p>Автоматическая плавная миграция базы данных и полная поддержка старых вебхуков без нарушения работы существующих сайтов.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="lvyid-modal-footer">
+            <button type="button" class="lvyid-modal-primary-btn" id="lvyid-modal-ok-btn">Отлично, перейти к настройкам →</button>
         </div>
     </div>
 </div>

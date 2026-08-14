@@ -1,13 +1,13 @@
 <?php
 /**
- * @since             1.0.9
+ * @since             2.0.0
  * @package           Login via Yandex
  *
  * @wordpress-plugin
  * Plugin Name:       Login via Yandex - авторизация через Яндекс для вашего сайта или интернет магазина.
  * Plugin URI:        https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id
  * Description:       Плагин для входа через Яндекс для WordPress и Woocommerce. Укажите Client Token и Secret Token в настройках плагина, а также, выберите тип отображения на сайте (в контейнере или всплывающем окне, или и то и другое).
- * Version:           1.0.9
+ * Version:           2.0.0
  * Author:            Никита Ив (веб-разработчик webseed.ru)
  * Author URI:        https://webseed.ru
  * License:           GPLv2
@@ -21,7 +21,7 @@ if (!defined('WPINC')) {
 }
 
 if (!defined('LVYID_VERSION')) {
-    define('LVYID_VERSION', '1.0.9');
+    define('LVYID_VERSION', '2.0.0');
 }
 
 if (!defined('LVYID_PLUGIN_FILE')) {
@@ -75,6 +75,12 @@ function lvyid_woocommerce_checkout_get_value($value, $input)
 add_action('wp_ajax_nopriv_lvyid_auth_user', 'lvyid_ajax_auth_user');
 add_action('wp_ajax_lvyid_auth_user', 'lvyid_ajax_auth_user');
 
+add_action('wp_ajax_nopriv_lvyid_webhook', 'lvyid_ajax_webhook');
+add_action('wp_ajax_lvyid_webhook', 'lvyid_ajax_webhook');
+
+add_action('wp_ajax_lvyid_update_settings', 'lvyid_ajax_update_settings');
+add_action('wp_ajax_lvyid_dismiss_welcome', 'lvyid_ajax_dismiss_welcome');
+
 add_filter('clearfy_rest_api_white_list', function ($white_list) {
     $white_list[] = 'login_via_yandex';
     return $white_list;
@@ -93,6 +99,35 @@ function lvyid_ajax_auth_user()
     require_once plugin_dir_path(__FILE__) . 'app/Controllers/LVYID_UserController.php';
     $result = new LVYID_UserController();
     $result->handler($access_token);
+}
+
+function lvyid_ajax_webhook()
+{
+    require_once plugin_dir_path(__FILE__) . 'app/Controllers/LVYID_MainRequestController.php';
+    $controller = new LVYID_MainRequestController();
+    $controller->handleWebhook();
+}
+
+function lvyid_ajax_update_settings()
+{
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error('Доступ запрещен');
+    }
+
+    check_ajax_referer('lvyid_admin_nonce', 'nonce');
+
+    require_once plugin_dir_path(__FILE__) . 'admin/LVYID_AdminController.php';
+    return LVYID_AdminController::ajaxUpdateSettings($_POST);
+}
+
+function lvyid_ajax_dismiss_welcome()
+{
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error('Доступ запрещен');
+    }
+
+    require_once plugin_dir_path(__FILE__) . 'admin/LVYID_AdminController.php';
+    LVYID_AdminController::ajaxDismissWelcome();
 }
 
 function lvyid_add_default_auth_button()
@@ -167,7 +202,7 @@ function lvyid_upgrade_function($upgrader_object, $options)
 function lvyid_add_script_to_head()
 {
     if (!is_user_logged_in()) {
-        wp_enqueue_script('sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '1.0.9', 'in_footer');
+        wp_enqueue_script('sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '2.0.0', 'in_footer');
     }
 
 }
@@ -193,7 +228,18 @@ function lvyid_add_copyright()
 
         if ($show_copyright) {
             $hostname = isset($_SERVER['HTTP_HOST']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) : '';
-            echo '<a title="Вход через Яндекс ID разработан webseed.ru" class="login_via_yandex" href="' . esc_url("https://webseed.ru/?utm_source=$hostname&utm_medium=login_via_yandex&utm_campaign=login_via_yandex") . '" target="_blank" rel="noopener">Вход через Яндекс ID — webseed.ru</a>';
+            $locale   = function_exists('determine_locale') ? determine_locale() : get_locale();
+            $is_ru    = (stripos($locale, 'ru') === 0);
+
+            $title = $is_ru
+                ? 'Вход через Яндекс ID разработан webseed.ru'
+                : 'Login with Yandex ID developed by webseed.ru';
+
+            $text = $is_ru
+                ? 'Вход через Яндекс ID — webseed.ru'
+                : 'Login with Yandex ID — webseed.ru';
+
+            echo '<a title="' . esc_attr($title) . '" class="login_via_yandex" href="' . esc_url("https://webseed.ru/?utm_source=$hostname&utm_medium=login_via_yandex&utm_campaign=login_via_yandex") . '" target="_blank" rel="noopener">' . esc_html($text) . '</a>';
         }
     }
 }

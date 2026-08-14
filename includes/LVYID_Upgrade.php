@@ -20,7 +20,7 @@ class LVYID_Upgrade
     public function check_and_run_upgrades()
     {
         $installed_version = get_option('lvyid_plugin_version', false);
-        $current_version   = defined('LVYID_VERSION') ? LVYID_VERSION : '1.0.9';
+        $current_version   = defined('LVYID_VERSION') ? LVYID_VERSION : '2.0.0';
 
         if ($installed_version === false) {
             // Если опция в БД еще не создана, проверяем legacy plugin_data.json
@@ -53,6 +53,7 @@ class LVYID_Upgrade
         $this->add_alternative_column();
         $this->add_button_default_column();
         $this->add_copyright_column();
+        $this->add_use_ajax_webhook_column();
 
         $this->log_class->info("Миграции базы данных успешно завершены для версии {$to_version}");
     }
@@ -149,6 +150,28 @@ class LVYID_Upgrade
              ADD COLUMN `copyright` BOOLEAN DEFAULT TRUE;"
             );
             $this->log_class->info("Столбец `copyright` был успешно добавлен в таблицу опций плагина");
+        }
+        return true;
+    }
+
+    public function add_use_ajax_webhook_column()
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'login_via_yandex_options';
+
+        $column_exists = $wpdb->get_results(
+            $wpdb->prepare(
+                "SHOW COLUMNS FROM `$table_name` LIKE %s",
+                'use_ajax_webhook'
+            )
+        );
+
+        if (empty($column_exists)) {
+            $wpdb->query(
+                "ALTER TABLE `$table_name`
+             ADD COLUMN `use_ajax_webhook` BOOLEAN DEFAULT FALSE;"
+            );
+            $this->log_class->info("Столбец `use_ajax_webhook` был успешно добавлен в таблицу опций плагина");
         }
         return true;
     }

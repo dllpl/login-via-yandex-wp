@@ -2,7 +2,7 @@ if (typeof yaWpData !== 'undefined' && !yaWpData.error) {
     const oauthQueryParams = {
         client_id: yaWpData.client_id,
         response_type: yaWpData.alternative ? 'code' : 'token',
-        redirect_uri: location.origin + "/wp-json/login_via_yandex/webhook"
+        redirect_uri: yaWpData.redirect_uri || (location.origin + "/wp-json/login_via_yandex/webhook")
     };
 
     const tokenPageOrigin = location.origin;
@@ -29,7 +29,7 @@ if (typeof yaWpData !== 'undefined' && !yaWpData.error) {
             method: 'POST',
             body: formData
         }).then(() => redirect_handler())
-          .catch(error => console.log('Ошибка авторизации', error));
+            .catch(error => console.log('Ошибка авторизации', error));
     }
 
     function initButton(container) {
@@ -56,7 +56,7 @@ if (typeof yaWpData !== 'undefined' && !yaWpData.error) {
             buttonBorderRadius: "0",
             buttonIcon: 'ya',
         })
-            .then(({handler}) => handler())
+            .then(({ handler }) => handler())
             .then(data => {
                 if (!yaWpData.alternative && data && data.access_token) {
                     authUser(data.access_token);
@@ -102,7 +102,7 @@ if (typeof yaWpData !== 'undefined' && !yaWpData.error) {
 
         setTimeout(() => {
             YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin)
-                .then(({handler}) => handler())
+                .then(({ handler }) => handler())
                 .then(data => {
                     if (!yaWpData.alternative && data && data.access_token) {
                         authUser(data.access_token);

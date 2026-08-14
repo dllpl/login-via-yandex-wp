@@ -1,90 +1,157 @@
-const client_id_error = document.getElementById('client_id_error')
-const client_secret_error = document.getElementById('client_secret_error')
-const container_id_error = document.getElementById('container_id_error')
-const url = (typeof REST_API_data !== 'undefined' && REST_API_data.url) ? REST_API_data.url : '/wp-json/login_via_yandex/update-settings';
+const client_id_error = document.getElementById('client_id_error');
+const client_secret_error = document.getElementById('client_secret_error');
+const ajax_url = (typeof LVYID_Admin !== 'undefined' && LVYID_Admin.ajax_url) ? LVYID_Admin.ajax_url : '/wp-admin/admin-ajax.php';
+const ajax_nonce = (typeof LVYID_Admin !== 'undefined' && LVYID_Admin.nonce) ? LVYID_Admin.nonce : '';
 
 function showNotify(title, text, status = 'success') {
-    alert(text)
+    alert(text);
 }
 
-document.querySelector('.save-btn').addEventListener('click', () => {
+// 1. Сохранение настроек плагина
+const saveBtn = document.querySelector('.save-btn');
+if (saveBtn) {
+    saveBtn.addEventListener('click', () => {
+        let errors = false;
 
-    let errors = false
+        if (client_id_error) client_id_error.innerText = '';
+        if (client_secret_error) client_secret_error.innerText = '';
 
-    client_id_error.innerText = ''
-    client_secret_error.innerText = ''
-    container_id_error.innerText = ''
+        const client_id = document.getElementById('client_id') ? document.getElementById('client_id').value.trim() : '';
+        const client_secret = document.getElementById('client_secret') ? document.getElementById('client_secret').value.trim() : '';
 
-    const client_id = document.getElementById('client_id').value.trim()
-    const client_secret = document.getElementById('client_secret').value.trim()
-    const container_id = document.getElementById('container_id').value.trim()
+        const widget_checked = document.getElementById('check-widget') ? document.getElementById('check-widget').checked : false;
+        const button_default = document.getElementById('button_default') ? document.getElementById('button_default').checked : false;
+        const alternative_checked = document.getElementById('alternative') ? document.getElementById('alternative').checked : false;
+        const copyright_checked = document.getElementById('copyright') ? document.getElementById('copyright').checked : true;
+        const use_ajax_webhook = document.getElementById('use_ajax_webhook') ? document.getElementById('use_ajax_webhook').checked : false;
 
-    const widget_checked = document.getElementById('check-widget').checked
-    const btn_checked = document.getElementById('check-btn').checked
-    const button_default = document.getElementById('button_default').checked
+        if (client_id.length !== 32) {
+            if (client_id_error) {
+                client_id_error.innerText = 'ClientID должен содержать 32 символа';
+                client_id_error.classList.remove('hidden');
+            }
+            errors = true;
+        }
 
-    const alternative_checked = document.getElementById('alternative').checked
-    const copyright_checked = document.getElementById('copyright') ? document.getElementById('copyright').checked : true
+        if (client_secret.length !== 32) {
+            if (client_secret_error) {
+                client_secret_error.innerText = 'ClientSecret должен содержать 32 символа';
+                client_secret_error.classList.remove('hidden');
+            }
+            errors = true;
+        }
 
+        if (!errors) {
+            const formData = new FormData();
+            formData.append('action', 'lvyid_update_settings');
+            formData.append('nonce', ajax_nonce);
+            formData.append('client_id', client_id);
+            formData.append('client_secret', client_secret);
+            formData.append('widget', widget_checked);
+            formData.append('button_default', button_default);
+            formData.append('alternative', alternative_checked);
+            formData.append('copyright', copyright_checked);
+            formData.append('use_ajax_webhook', use_ajax_webhook);
 
-    if (client_id.length !== 32) {
-        client_id_error.innerText = 'ClientID должен содержать 32 символа'
-        client_id_error.classList.remove('hidden')
-        errors = true
-    }
-
-    if (client_secret.length !== 32) {
-        client_secret_error.innerText = 'ClientSecret должен содержать 32 символа'
-        client_secret_error.classList.remove('hidden')
-        errors = true
-    }
-
-    if (btn_checked && container_id.length < 3) {
-        container_id_error.innerText = 'ID - контейнера должен содержать 3 или более символов'
-        container_id_error.classList.remove('hidden')
-        errors = true
-    }
-
-    if (!errors) {
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'X-WP-Nonce': REST_API_data.nonce,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                client_id: client_id,
-                client_secret: client_secret,
-                widget: widget_checked,
-                button: btn_checked,
-                button_default: button_default,
-                alternative: alternative_checked,
-                copyright: copyright_checked,
-                ...(btn_checked && {
-                    container_id: container_id
+            fetch(ajax_url, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        showNotify('Произошла ошибка', data.data || 'Проверьте правильность введённых данных', 'error');
+                    } else {
+                        showNotify('Успешно сохранено', data.data || 'Данные сохранены', 'success');
+                    }
                 })
-            })
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (!data.success) {
-                    showNotify('Произошла ошибка', 'Напишите в Telegram, разберемся', 'error')
-                } else {
-                    showNotify('Успешно сохранено', data.data, 'success')
-                }
-            })
-            .catch(error => {
-                showNotify('Произошла ошибка', 'Напишите в Telegram, разберемся', 'error')
-            })
-    } else {
-        showNotify('Внимание', 'Проверьте поля на ошибки', 'error')
-    }
-})
+                .catch(error => {
+                    showNotify('Произошла ошибка', 'Не удалось сохранить настройки. Попробуйте ещё раз.', 'error');
+                });
+        } else {
+            showNotify('Внимание', 'Проверьте поля на ошибки', 'error');
+        }
+    });
+}
 
-document.getElementById('check-btn').onchange = (event) => {
-    if (event.target.checked) {
-        document.getElementById('container_id').removeAttribute('disabled')
-    } else {
-        document.getElementById('container_id').setAttribute("disabled", "disabled");
+// 2. Интерактивное переключение подсказки Redirect URI
+const ajaxWebhookToggle = document.getElementById('use_ajax_webhook');
+const stepRedirectUri = document.getElementById('step-redirect-uri');
+if (ajaxWebhookToggle && stepRedirectUri) {
+    ajaxWebhookToggle.addEventListener('change', (e) => {
+        if (e.target.checked) {
+            stepRedirectUri.innerText = stepRedirectUri.getAttribute('data-ajax-uri');
+        } else {
+            stepRedirectUri.innerText = stepRedirectUri.getAttribute('data-rest-uri');
+        }
+    });
+}
+
+// 3. Полноэкранное модальное окно "Что нового в 2.0.0"
+const welcomeModal = document.getElementById('lvyid-welcome-modal');
+const openModalBtn = document.getElementById('lvyid-open-whats-new-btn');
+const closeModalBtn = document.getElementById('lvyid-modal-close-btn');
+const okModalBtn = document.getElementById('lvyid-modal-ok-btn');
+
+function openWelcomeModal() {
+    if (welcomeModal) {
+        welcomeModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeWelcomeModal(saveDismiss = true) {
+    if (welcomeModal) {
+        welcomeModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    if (saveDismiss) {
+        try {
+            localStorage.setItem('lvyid_v200_modal_seen', '1');
+        } catch (e) {}
+
+        const formData = new FormData();
+        formData.append('action', 'lvyid_dismiss_welcome');
+        formData.append('nonce', ajax_nonce);
+
+        fetch(ajax_url, {
+            method: 'POST',
+            body: formData
+        }).catch(() => {});
+    }
+}
+
+if (openModalBtn) {
+    openModalBtn.addEventListener('click', () => openWelcomeModal());
+}
+
+if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => closeWelcomeModal(true));
+}
+
+if (okModalBtn) {
+    okModalBtn.addEventListener('click', () => closeWelcomeModal(true));
+}
+
+if (welcomeModal) {
+    welcomeModal.addEventListener('click', (e) => {
+        if (e.target === welcomeModal) {
+            closeWelcomeModal(true);
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && welcomeModal.style.display === 'flex') {
+            closeWelcomeModal(true);
+        }
+    });
+}
+
+// Автоматический показ при первом открытии версии 2.0.0
+if (typeof LVYID_Admin !== 'undefined' && LVYID_Admin.show_welcome) {
+    const locallySeen = localStorage.getItem('lvyid_v200_modal_seen');
+    if (!locallySeen) {
+        setTimeout(openWelcomeModal, 200);
     }
 }

@@ -38,9 +38,13 @@ class LVYID_PublicController
                     'widget'         => $options['widget'] ?? false,
                     'alternative'    => $options['alternative'] ?? false,
                     'button_default' => $options['button_default'] ?? false,
-                    'woo_active'     => $woo_active,
-                    'ajaxurl'        => admin_url('admin-ajax.php'),
-                    'ajax_nonce'     => wp_create_nonce('lvyid_auth_nonce'),
+                    'woo_active'       => $woo_active,
+                    'ajaxurl'          => admin_url('admin-ajax.php'),
+                    'ajax_nonce'       => wp_create_nonce('lvyid_auth_nonce'),
+                    'use_ajax_webhook' => !empty($options['use_ajax_webhook']),
+                    'redirect_uri'     => !empty($options['use_ajax_webhook'])
+                        ? (admin_url('admin-ajax.php') . '?action=lvyid_webhook')
+                        : home_url('/wp-json/login_via_yandex/webhook'),
                 ]), 'before');
 
         } else {

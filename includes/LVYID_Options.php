@@ -20,6 +20,7 @@ trait LVYID_Options
                 'alternative' => (bool)$row->alternative ?? false,
                 'button_default' => (bool)$row->button_default ?? false,
                 'copyright' => isset($row->copyright) ? (bool)$row->copyright : true,
+                'use_ajax_webhook' => !empty($row->use_ajax_webhook),
             ];
         } else {
             return false;
