@@ -30,6 +30,7 @@ class LVYID_AdminController
         wp_enqueue_script('login_via_yandex_admin', plugins_url('public/js/script.js', __FILE__), [], '1.0.8', true);
         wp_add_inline_script('login_via_yandex_admin', 'const REST_API_data = ' . wp_json_encode([
                 'nonce' => wp_create_nonce('wp_rest'),
+                'url'   => rest_url('login_via_yandex/update-settings'),
             ]), 'before');
     }
 

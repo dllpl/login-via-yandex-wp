@@ -44,6 +44,56 @@ class LVYID_MainRequestController extends WP_REST_Controller
                 ]
             ]
         ]);
+        register_rest_route(self::NAMESPACE, 'update-settings', [
+            'methods' => 'POST',
+            'callback' => [$this, 'updateSettings'],
+            'permission_callback' => function () {
+                return current_user_can('manage_options');
+            },
+            'args' => [
+                'client_id' => [
+                    'description' => 'Проверьте поле client_id',
+                    'type' => 'string',
+                    'minLength' => 32,
+                    'maxLength' => 32,
+                    'required' => true,
+                ],
+                'client_secret' => [
+                    'description' => 'Проверьте поле client_secret',
+                    'type' => 'string',
+                    'minLength' => 32,
+                    'maxLength' => 32,
+                    'required' => true,
+                ],
+                'button' => [
+                    'description' => 'Проверьте поле button',
+                    'type' => 'boolean',
+                    'required' => false,
+                ],
+                'container_id' => [
+                    'description' => 'Проверьте поле container_id',
+                    'type' => 'string',
+                    'minLength' => 3,
+                    'maxLength' => 100,
+                    'required' => false,
+                ],
+                'widget' => [
+                    'description' => 'Проверьте поле widget',
+                    'type' => 'boolean',
+                    'required' => false,
+                ],
+                'alternative' => [
+                    'description' => 'Проверьте поле alternative',
+                    'type' => 'boolean',
+                    'required' => false,
+                ],
+                'button_default' => [
+                    'description' => 'Проверьте поле button_default',
+                    'type' => 'boolean',
+                    'required' => false,
+                ]
+            ]
+        ]);
         register_rest_route(self::NAMESPACE, 'updateSettings', [
             'methods' => 'POST',
             'callback' => [$this, 'updateSettings'],

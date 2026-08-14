@@ -1,7 +1,7 @@
 const client_id_error = document.getElementById('client_id_error')
 const client_secret_error = document.getElementById('client_secret_error')
 const container_id_error = document.getElementById('container_id_error')
-const url = '/wp-json/login_via_yandex/updateSettings';
+const url = (typeof REST_API_data !== 'undefined' && REST_API_data.url) ? REST_API_data.url : '/wp-json/login_via_yandex/update-settings';
 
 function showNotify(title, text, status = 'success') {
     alert(text)
