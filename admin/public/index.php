@@ -258,6 +258,16 @@ if (!defined('ABSPATH')) exit;
                         </div>
                         <h3 class="check-title">Автоматическое размещение кнопок</h3>
                     </li>
+                    <li class="check-item" style="opacity: 0.85; margin-top: 10px;">
+                        <div class="">
+                            <input type="checkbox"
+                                   id="copyright" <?php if (!isset($options['copyright']) || $options['copyright']) echo 'checked' ?> />
+                            <label for="copyright" class="check">
+                                <span class="move"></span>
+                            </label>
+                        </div>
+                        <h3 class="check-title" style="font-size: 13px; font-weight: normal; color: #666;">Поддержать разработчиков ссылкой в подвале</h3>
+                    </li>
                     <li>
                         <button class="save-btn">
                             Сохранить изменения

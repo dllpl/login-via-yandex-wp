@@ -19,6 +19,7 @@ trait LVYID_Options
                 'widget' => (bool)$row->widget ?? false,
                 'alternative' => (bool)$row->alternative ?? false,
                 'button_default' => (bool)$row->button_default ?? false,
+                'copyright' => isset($row->copyright) ? (bool)$row->copyright : true,
             ];
         } else {
             return false;

@@ -24,6 +24,7 @@ document.querySelector('.save-btn').addEventListener('click', () => {
     const button_default = document.getElementById('button_default').checked
 
     const alternative_checked = document.getElementById('alternative').checked
+    const copyright_checked = document.getElementById('copyright') ? document.getElementById('copyright').checked : true
 
 
     if (client_id.length !== 32) {
@@ -58,6 +59,7 @@ document.querySelector('.save-btn').addEventListener('click', () => {
                 button: btn_checked,
                 button_default: button_default,
                 alternative: alternative_checked,
+                copyright: copyright_checked,
                 ...(btn_checked && {
                     container_id: container_id
                 })

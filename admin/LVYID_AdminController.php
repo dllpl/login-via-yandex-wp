@@ -25,9 +25,9 @@ class LVYID_AdminController
     {
         $options = $this->options;
 
-        wp_enqueue_style('login_via_yandex_admin', plugins_url('public/css/style.css', __FILE__), [], '1.0.8');
+        wp_enqueue_style('login_via_yandex_admin', plugins_url('public/css/style.css', __FILE__), [], '1.0.9');
         include plugin_dir_path(__FILE__) . 'public/index.php';
-        wp_enqueue_script('login_via_yandex_admin', plugins_url('public/js/script.js', __FILE__), [], '1.0.8', true);
+        wp_enqueue_script('login_via_yandex_admin', plugins_url('public/js/script.js', __FILE__), [], '1.0.9', true);
         wp_add_inline_script('login_via_yandex_admin', 'const REST_API_data = ' . wp_json_encode([
                 'nonce' => wp_create_nonce('wp_rest'),
                 'url'   => rest_url('login_via_yandex/update-settings'),
@@ -50,12 +50,14 @@ class LVYID_AdminController
             'container_id' => isset($request['container_id']) ? sanitize_text_field($request['container_id']) : null,
             'widget' => $request['widget'] ?? null,
             'alternative' => $request['alternative'] ?? null,
-            'button_default' => $request['button_default'] ?? null
+            'button_default' => $request['button_default'] ?? null,
+            'copyright' => isset($request['copyright']) ? (bool)$request['copyright'] : true,
         ];
 
         $upgrade = new LVYID_Upgrade();
         $upgrade->add_button_default_column();
         $upgrade->add_alternative_column();
+        $upgrade->add_copyright_column();
 
         $result = $wpdb->insert($table_name, $data);
 

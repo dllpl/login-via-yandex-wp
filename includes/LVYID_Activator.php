@@ -22,6 +22,7 @@ class LVYID_Activator
             `widget` BOOLEAN DEFAULT NULL,
             `alternative` BOOLEAN DEFAULT FALSE,
             `button_default` BOOLEAN DEFAULT FALSE,
+            `copyright` BOOLEAN DEFAULT TRUE,
             `created_at` DATETIME DEFAULT NOW(),
             PRIMARY KEY (`id`)
         ) $charset_collate"];

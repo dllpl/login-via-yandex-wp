@@ -3,8 +3,8 @@ Contributors: dllpl
 Tags: yandexid, login, авторизация, через, яндекс
 Donate link: https://boosty.to/webseed/donate
 Requires at least: 4.7
-Tested up to: 6.7
-Stable tag: 1.0.8
+Tested up to: 7.0.4
+Stable tag: 1.0.9
 License: GPLv2
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html#SEC1
 
@@ -71,3 +71,10 @@ https://www.youtube.com/watch?v=iEn4-2ybuHI
 * Изменено поведение при авторизации
 = 1.0.8 =
 * Добавлена проверка на существование функции
+= 1.0.9 =
+* Автоматическое заполнение данных покупателя (имя, телефон, email) при оформлении заказа в WooCommerce
+* Поддержка одновременной инициализации множества кнопок на одной странице
+* Добавлены шорткоды [login_via_yandex] и [yandex_login]
+* Исправлена совместимость эндпоинта настроек (update-settings) с регистрозависимыми веб-серверами
+* Обновлена совместимость с последней версией WordPress 7.0.4
+

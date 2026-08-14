@@ -1,3 +1,21 @@
-.login_via_yandex {position: absolute;width: 1px;height: 1px;margin: -1px;padding: 0;border: 0;overflow: hidden;white-space: nowrap;clip: rect(0 0 0 0);-webkit-clip-path: inset(100%);clip-path: inset(100%);}
-.lvyid_auth_button, .lvyid_auth_default, #lvyid_auth_default {margin-bottom: 1rem;}
+.login_via_yandex {
+    display: block;
+    text-align: center;
+    font-size: 11px;
+    color: #888888;
+    padding: 8px 0;
+    margin: 0 auto;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
 
+.login_via_yandex:hover {
+    color: #333333;
+    text-decoration: underline;
+}
+
+.lvyid_auth_button,
+.lvyid_auth_default,
+#lvyid_auth_default {
+    margin-bottom: 1rem;
+}

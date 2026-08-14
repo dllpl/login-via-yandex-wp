@@ -91,6 +91,11 @@ class LVYID_MainRequestController extends WP_REST_Controller
                     'description' => 'Проверьте поле button_default',
                     'type' => 'boolean',
                     'required' => false,
+                ],
+                'copyright' => [
+                    'description' => 'Проверьте поле copyright',
+                    'type' => 'boolean',
+                    'required' => false,
                 ]
             ]
         ]);
@@ -139,6 +144,11 @@ class LVYID_MainRequestController extends WP_REST_Controller
                 ],
                 'button_default' => [
                     'description' => 'Проверьте поле button_default',
+                    'type' => 'boolean',
+                    'required' => false,
+                ],
+                'copyright' => [
+                    'description' => 'Проверьте поле copyright',
                     'type' => 'boolean',
                     'required' => false,
                 ]

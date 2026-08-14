@@ -1,13 +1,13 @@
 <?php
 /**
- * @since             1.0.8
+ * @since             1.0.9
  * @package           Login via Yandex
  *
  * @wordpress-plugin
  * Plugin Name:       Login via Yandex - авторизация через Яндекс для вашего сайта или интернет магазина.
  * Plugin URI:        https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id
  * Description:       Плагин для входа через Яндекс для WordPress и Woocommerce. Укажите Client Token и Secret Token в настройках плагина, а также, выберите тип отображения на сайте (в контейнере или всплывающем окне, или и то и другое).
- * Version:           1.0.8
+ * Version:           1.0.9
  * Author:            Никита Ив (веб-разработчик webseed.ru)
  * Author URI:        https://webseed.ru
  * License:           GPLv2
@@ -20,6 +20,14 @@ if (!defined('WPINC')) {
     die;
 }
 
+if (!defined('LVYID_VERSION')) {
+    define('LVYID_VERSION', '1.0.9');
+}
+
+if (!defined('LVYID_PLUGIN_FILE')) {
+    define('LVYID_PLUGIN_FILE', __FILE__);
+}
+
 add_action('rest_api_init', 'lvyid_register_routes');
 add_action('wp_head', 'lvyid_add_script_to_head');
 add_action('wp_footer', 'lvyid_init_script_and_style');
@@ -28,9 +36,10 @@ add_action('login_head', 'lvyid_add_script_to_head');
 add_action('login_footer', 'lvyid_init_script_and_style');
 
 add_action('admin_menu', 'lvyid_admin_menu_init');
+add_action('admin_init', 'lvyid_check_for_upgrade');
+add_action('admin_init', 'lvyid_redirect_after_activation');
 add_action('upgrader_process_complete', 'lvyid_upgrade_function', 10, 2);
 add_action('wp_footer', 'lvyid_add_copyright');
-add_action('admin_init', 'lvyid_redirect_after_activation');
 
 add_filter('plugin_action_links', 'lvyid_plugin_action_links', 10, 2);
 add_filter('rest_authentication_errors', 'lvyid_rest_api_wp', 999);
@@ -138,6 +147,15 @@ function lvyid_admin_menu_init()
     $option->addMenu();
 }
 
+function lvyid_check_for_upgrade()
+{
+    if (is_admin()) {
+        require_once plugin_dir_path(__FILE__) . 'includes/LVYID_Upgrade.php';
+        $upgrade = new LVYID_Upgrade();
+        $upgrade->check_and_run_upgrades();
+    }
+}
+
 function lvyid_upgrade_function($upgrader_object, $options)
 {
     require_once plugin_dir_path(__FILE__) . 'includes/LVYID_Upgrade.php';
@@ -149,7 +167,7 @@ function lvyid_upgrade_function($upgrader_object, $options)
 function lvyid_add_script_to_head()
 {
     if (!is_user_logged_in()) {
-        wp_enqueue_script('sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '1.0.8', 'in_footer');
+        wp_enqueue_script('sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '1.0.9', 'in_footer');
     }
 
 }
@@ -169,8 +187,14 @@ function lvyid_init_script_and_style()
 function lvyid_add_copyright()
 {
     if (!is_user_logged_in()) {
-        $hostname = $_SERVER['HTTP_HOST'];
-        echo '<a title="Создание и продвижение сайтов. Закажите создание и продвижение сайта. Полный цикл разработки: дизайн, программирование, оптимизация. «Вебсид» – ваш партнер в онлайн-бизнесе." class="login_via_yandex" href="' . esc_url("https://webseed.ru/?utm_source=$hostname&utm_medium=login_via_yandex&utm_campaign=login_via_yandex") . '">Разработка и продвижение сайтов webseed.ru</a>';
+        require_once plugin_dir_path(__FILE__) . 'includes/LVYID_Options.php';
+        $options = LVYID_Options::getOptions();
+        $show_copyright = isset($options['copyright']) ? (bool)$options['copyright'] : true;
+
+        if ($show_copyright) {
+            $hostname = isset($_SERVER['HTTP_HOST']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) : '';
+            echo '<a title="Вход через Яндекс ID разработан webseed.ru" class="login_via_yandex" href="' . esc_url("https://webseed.ru/?utm_source=$hostname&utm_medium=login_via_yandex&utm_campaign=login_via_yandex") . '" target="_blank" rel="noopener">Вход через Яндекс ID — webseed.ru</a>';
+        }
     }
 }
 
