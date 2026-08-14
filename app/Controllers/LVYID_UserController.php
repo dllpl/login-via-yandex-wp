@@ -41,17 +41,23 @@ class LVYID_UserController
 
     private function yandexid_update_user($user_id, $user_data)
     {
+        $first_name = $user_data->first_name ?? '';
+        $last_name  = $user_data->last_name ?? '';
+        $display_name = trim($first_name . ' ' . $last_name);
+
         $userdata = [
             'ID'           => $user_id,
-            'first_name'   => $user_data->first_name ?? '',
-            'last_name'    => $user_data->last_name ?? '',
-            'display_name' => ($user_data->first_name ?? '') . ' ' . ($user_data->last_name ?? ''),
+            'first_name'   => $first_name,
+            'last_name'    => $last_name,
+            'display_name' => !empty($display_name) ? $display_name : ($user_data->display_name ?? $user_data->login ?? ''),
         ];
 
         wp_update_user($userdata);
 
+        $phone = $user_data->default_phone->number ?? null;
+
         $meta = [
-            'yandex_phone'        => $user_data->default_phone->number ?? null,
+            'yandex_phone'        => $phone,
             'yandex_birthday'     => $user_data->birthday ?? null,
             'yandex_gender'       => $user_data->sex ?? null,
             'yandex_login'        => $user_data->login ?? null,
@@ -64,8 +70,33 @@ class LVYID_UserController
             $meta['yandex_avatar'] = "https://avatars.yandex.net/get-yapic/{$user_data->default_avatar_id}/islands-200";
         }
 
+        // Поля WooCommerce для оформления заказа (billing / shipping)
+        if (!empty($phone) && empty(get_user_meta($user_id, 'billing_phone', true))) {
+            $meta['billing_phone'] = sanitize_text_field($phone);
+        }
+
+        if (!empty($first_name) && empty(get_user_meta($user_id, 'billing_first_name', true))) {
+            $meta['billing_first_name'] = sanitize_text_field($first_name);
+        }
+
+        if (!empty($last_name) && empty(get_user_meta($user_id, 'billing_last_name', true))) {
+            $meta['billing_last_name'] = sanitize_text_field($last_name);
+        }
+
+        if (!empty($user_data->default_email) && empty(get_user_meta($user_id, 'billing_email', true))) {
+            $meta['billing_email'] = sanitize_email($user_data->default_email);
+        }
+
+        if (!empty($first_name) && empty(get_user_meta($user_id, 'shipping_first_name', true))) {
+            $meta['shipping_first_name'] = sanitize_text_field($first_name);
+        }
+
+        if (!empty($last_name) && empty(get_user_meta($user_id, 'shipping_last_name', true))) {
+            $meta['shipping_last_name'] = sanitize_text_field($last_name);
+        }
+
         foreach ($meta as $key => $value) {
-            if (!is_null($value)) {
+            if (!is_null($value) && $value !== '') {
                 update_user_meta($user_id, $key, $value);
             }
         }
@@ -73,27 +104,49 @@ class LVYID_UserController
 
     private function yandexid_create_user($user_data)
     {
-        $userdata = [
-            'first_name' => $user_data->first_name ?? null,
-            'last_name' => $user_data->last_name ?? null,
-            'display_name' => ($user_data->first_name ?? '') . ' ' . ($user_data->last_name ?? ''),
-            'user_login' => $user_data->default_email,
-            'user_pass' => wp_generate_password(8, false),
-            'user_email' => $user_data->default_email,
-            'meta_input' => [
-                'yandex_phone' => $user_data->default_phone->number ?? null,
-                'yandex_birthday' => $user_data->birthday ?? null,
-                'yandex_gender' => $user_data->sex ?? null,
-                'yandex_login' => $user_data->login ?? null,
-                'yandex_id' => $user_data->id ?? null,
-                'yandex_real_name' => $user_data->real_name ?? null,
-                'yandex_display_name' => $user_data->display_name ?? null,
-            ]
+        $first_name = $user_data->first_name ?? '';
+        $last_name  = $user_data->last_name ?? '';
+        $email      = $user_data->default_email ?? '';
+        $phone      = $user_data->default_phone->number ?? null;
+        $display_name = trim($first_name . ' ' . $last_name);
+
+        $meta_input = [
+            'yandex_phone'        => $phone,
+            'yandex_birthday'     => $user_data->birthday ?? null,
+            'yandex_gender'       => $user_data->sex ?? null,
+            'yandex_login'        => $user_data->login ?? null,
+            'yandex_id'           => $user_data->id ?? null,
+            'yandex_real_name'    => $user_data->real_name ?? null,
+            'yandex_display_name' => $user_data->display_name ?? null,
+            'billing_first_name'  => $first_name,
+            'billing_last_name'   => $last_name,
+            'billing_email'       => $email,
+            'shipping_first_name' => $first_name,
+            'shipping_last_name'  => $last_name,
         ];
 
-        if (isset($user_data->is_avatar_empty, $user_data->default_avatar_id) && !$user_data->is_avatar_empty && !empty($user_data->default_avatar_id)) {
-            $userdata['meta_input']['yandex_avatar'] = "https://avatars.yandex.net/get-yapic/{$user_data->default_avatar_id}/islands-200";
+        if (!empty($phone)) {
+            $meta_input['billing_phone'] = sanitize_text_field($phone);
         }
+
+        if (isset($user_data->is_avatar_empty, $user_data->default_avatar_id) && !$user_data->is_avatar_empty && !empty($user_data->default_avatar_id)) {
+            $meta_input['yandex_avatar'] = "https://avatars.yandex.net/get-yapic/{$user_data->default_avatar_id}/islands-200";
+        }
+
+        // Фильтруем пустые значения
+        $meta_input = array_filter($meta_input, function ($val) {
+            return !is_null($val) && $val !== '';
+        });
+
+        $userdata = [
+            'first_name'   => $first_name,
+            'last_name'    => $last_name,
+            'display_name' => !empty($display_name) ? $display_name : ($user_data->display_name ?? $user_data->login ?? $email),
+            'user_login'   => $email,
+            'user_pass'    => wp_generate_password(8, false),
+            'user_email'   => $email,
+            'meta_input'   => $meta_input,
+        ];
 
         $user_id = wp_insert_user($userdata);
 

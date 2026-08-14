@@ -44,6 +44,24 @@ add_action('register_form', 'lvyid_add_default_auth_button');
 add_action('woocommerce_register_form_end', 'lvyid_add_default_auth_button');
 add_action('woocommerce_login_form_end', 'lvyid_add_default_auth_button');
 
+/** Автоматическое заполнение телефона в чекауте WooCommerce из данных Яндекс ID */
+add_filter('woocommerce_checkout_get_value', 'lvyid_woocommerce_checkout_get_value', 10, 2);
+
+function lvyid_woocommerce_checkout_get_value($value, $input)
+{
+    if (empty($value) && is_user_logged_in()) {
+        $user_id = get_current_user_id();
+        if ($input === 'billing_phone') {
+            $phone = get_user_meta($user_id, 'billing_phone', true);
+            if (empty($phone)) {
+                $phone = get_user_meta($user_id, 'yandex_phone', true);
+            }
+            return !empty($phone) ? $phone : $value;
+        }
+    }
+    return $value;
+}
+
 /** AJAX-авторизация (работает даже при заблокированном WP JSON API) */
 add_action('wp_ajax_nopriv_lvyid_auth_user', 'lvyid_ajax_auth_user');
 add_action('wp_ajax_lvyid_auth_user', 'lvyid_ajax_auth_user');
