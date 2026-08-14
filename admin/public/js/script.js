@@ -3,11 +3,62 @@ const client_secret_error = document.getElementById('client_secret_error');
 const ajax_url = (typeof LVYID_Admin !== 'undefined' && LVYID_Admin.ajax_url) ? LVYID_Admin.ajax_url : '/wp-admin/admin-ajax.php';
 const ajax_nonce = (typeof LVYID_Admin !== 'undefined' && LVYID_Admin.nonce) ? LVYID_Admin.nonce : '';
 
+// --------------------------------------------------------------------------
+// 1. Кастомная система Toast-уведомлений
+// --------------------------------------------------------------------------
 function showNotify(title, text, status = 'success') {
-    alert(text);
+    let container = document.getElementById('lvyid-toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'lvyid-toast-container';
+        container.className = 'lvyid-toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `lvyid-toast lvyid-toast-${status}`;
+
+    const iconSymbol = status === 'success' ? '✓' : (status === 'error' ? '✕' : 'ℹ');
+
+    toast.innerHTML = `
+        <div class="lvyid-toast-icon">${iconSymbol}</div>
+        <div class="lvyid-toast-content">
+            <h4 class="lvyid-toast-title">${title}</h4>
+            <p class="lvyid-toast-text">${text}</p>
+        </div>
+        <button type="button" class="lvyid-toast-close" title="Закрыть">×</button>
+        <div class="lvyid-toast-progress"></div>
+    `;
+
+    container.appendChild(toast);
+
+    // Анимация появления
+    requestAnimationFrame(() => {
+        toast.classList.add('show');
+    });
+
+    const closeToast = () => {
+        toast.classList.remove('show');
+        toast.classList.add('hide');
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 350);
+    };
+
+    const closeBtn = toast.querySelector('.lvyid-toast-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeToast);
+    }
+
+    // Автоматическое скрытие через 3.5 секунды
+    setTimeout(closeToast, 3500);
 }
 
-// 1. Сохранение настроек плагина
+// --------------------------------------------------------------------------
+// 2. Сохранение настроек плагина с AJAX и Loading-статусом
+// --------------------------------------------------------------------------
 const saveBtn = document.querySelector('.save-btn');
 if (saveBtn) {
     saveBtn.addEventListener('click', () => {
@@ -27,7 +78,7 @@ if (saveBtn) {
 
         if (client_id.length !== 32) {
             if (client_id_error) {
-                client_id_error.innerText = 'ClientID должен содержать 32 символа';
+                client_id_error.innerText = 'ClientID должен содержать ровно 32 символа';
                 client_id_error.classList.remove('hidden');
             }
             errors = true;
@@ -35,13 +86,18 @@ if (saveBtn) {
 
         if (client_secret.length !== 32) {
             if (client_secret_error) {
-                client_secret_error.innerText = 'ClientSecret должен содержать 32 символа';
+                client_secret_error.innerText = 'ClientSecret должен содержать ровно 32 символа';
                 client_secret_error.classList.remove('hidden');
             }
             errors = true;
         }
 
         if (!errors) {
+            // Включаем состояние загрузки на кнопке
+            const originalBtnHtml = saveBtn.innerHTML;
+            saveBtn.classList.add('loading');
+            saveBtn.innerHTML = '<span>⏳ Сохранение настроек...</span>';
+
             const formData = new FormData();
             formData.append('action', 'lvyid_update_settings');
             formData.append('nonce', ajax_nonce);
@@ -59,22 +115,82 @@ if (saveBtn) {
             })
                 .then(response => response.json())
                 .then(data => {
+                    saveBtn.classList.remove('loading');
+                    saveBtn.innerHTML = originalBtnHtml;
+
                     if (!data.success) {
-                        showNotify('Произошла ошибка', data.data || 'Проверьте правильность введённых данных', 'error');
+                        showNotify('Ошибка сохранения', data.data || 'Проверьте правильность введённых данных', 'error');
                     } else {
-                        showNotify('Успешно сохранено', data.data || 'Данные сохранены', 'success');
+                        showNotify('Успешно сохранено', data.data || 'Настройки плагина обновлены', 'success');
+
+                        // Обновляем статус готовности плагина в сайдбаре
+                        const statusBadge = document.querySelector('.lvyid-status-badge');
+                        if (statusBadge && client_id.length === 32 && client_secret.length === 32) {
+                            statusBadge.className = 'lvyid-status-badge lvyid-status-ready';
+                            statusBadge.innerHTML = '<span class="lvyid-pulse"></span><span>Плагин настроен и активен</span>';
+                        }
                     }
                 })
                 .catch(error => {
-                    showNotify('Произошла ошибка', 'Не удалось сохранить настройки. Попробуйте ещё раз.', 'error');
+                    saveBtn.classList.remove('loading');
+                    saveBtn.innerHTML = originalBtnHtml;
+                    showNotify('Сбой соединения', 'Не удалось сохранить настройки. Попробуйте ещё раз.', 'error');
                 });
         } else {
-            showNotify('Внимание', 'Проверьте поля на ошибки', 'error');
+            showNotify('Внимание', 'Пожалуйста, проверьте заполненные поля на ошибки.', 'warning');
         }
     });
 }
 
-// 2. Интерактивное переключение подсказки Redirect URI
+// --------------------------------------------------------------------------
+// 3. Интерактивная навигация по разделам в шапке
+// --------------------------------------------------------------------------
+const navLinks = document.querySelectorAll('.lvyid-nav-link');
+if (navLinks.length > 0) {
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Отслеживание активного раздела при скролле (Intersection Observer)
+    if ('IntersectionObserver' in window) {
+        const sections = document.querySelectorAll('.lvyid-card[id]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-target') === id) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        });
+
+        sections.forEach(sec => observer.observe(sec));
+    }
+}
+
+// --------------------------------------------------------------------------
+// 4. Интерактивное переключение подсказки Redirect URI
+// --------------------------------------------------------------------------
 const ajaxWebhookToggle = document.getElementById('use_ajax_webhook');
 const stepRedirectUri = document.getElementById('step-redirect-uri');
 if (ajaxWebhookToggle && stepRedirectUri) {
@@ -87,7 +203,9 @@ if (ajaxWebhookToggle && stepRedirectUri) {
     });
 }
 
-// 3. Полноэкранное модальное окно "Что нового в 2.0.0"
+// --------------------------------------------------------------------------
+// 5. Полноэкранное модальное окно "Что нового в 2.0.0"
+// --------------------------------------------------------------------------
 const welcomeModal = document.getElementById('lvyid-welcome-modal');
 const openModalBtn = document.getElementById('lvyid-open-whats-new-btn');
 const closeModalBtn = document.getElementById('lvyid-modal-close-btn');

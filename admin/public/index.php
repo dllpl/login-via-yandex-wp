@@ -8,32 +8,53 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
 <div class="lvyid-app-container">
     <!-- Header Bar -->
     <header class="lvyid-header">
-        <div class="lvyid-header-left">
-            <div class="lvyid-brand-logo">
-                <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="48" height="48" rx="12" fill="#FFCC00"/>
-                    <path d="M26.5 13H22.2C17.7 13 14.5 16.2 14.5 20.7C14.5 24.3 16.6 27 20 28.1L14 36H19L24.8 28.3H26.5V36H31V13H26.5ZM26.5 24.2H22.5C20.3 24.2 18.9 22.8 18.9 20.7C18.9 18.5 20.3 17.1 22.5 17.1H26.5V24.2Z" fill="#111111"/>
-                </svg>
-            </div>
-            <div class="lvyid-brand-info">
-                <div class="lvyid-title-row">
-                    <h1 class="lvyid-app-title">Вход через Яндекс ID</h1>
-                    <span class="lvyid-version-tag">v2.0.0</span>
-                    <?php if ($woo_installed): ?>
-                        <span class="lvyid-badge lvyid-badge-woo">WooCommerce Active</span>
-                    <?php endif; ?>
+        <div class="lvyid-header-top">
+            <div class="lvyid-header-left">
+                <div class="lvyid-brand-logo">
+                    <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="48" height="48" rx="12" fill="#FFCC00"/>
+                        <path d="M26.5 13H22.2C17.7 13 14.5 16.2 14.5 20.7C14.5 24.3 16.6 27 20 28.1L14 36H19L24.8 28.3H26.5V36H31V13H26.5ZM26.5 24.2H22.5C20.3 24.2 18.9 22.8 18.9 20.7C18.9 18.5 20.3 17.1 22.5 17.1H26.5V24.2Z" fill="#111111"/>
+                    </svg>
                 </div>
-                <p class="lvyid-app-desc">Разработка и поддержка: <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex" target="_blank" rel="noopener">Webseed.ru</a> — создание сайтов и плагинов</p>
+                <div class="lvyid-brand-info">
+                    <div class="lvyid-title-row">
+                        <h1 class="lvyid-app-title">Вход через Яндекс ID</h1>
+                        <span class="lvyid-version-tag">v2.0.0</span>
+                        <?php if ($woo_installed): ?>
+                            <span class="lvyid-badge lvyid-badge-woo">WooCommerce Active</span>
+                        <?php endif; ?>
+                    </div>
+                    <p class="lvyid-app-desc">Разработка и поддержка: <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex" target="_blank" rel="noopener">Webseed.ru</a> — создание сайтов и плагинов</p>
+                </div>
+            </div>
+            <div class="lvyid-header-right">
+                <button type="button" id="lvyid-open-whats-new-btn" class="lvyid-btn-whats-new">
+                    <span class="lvyid-btn-icon">✨</span> Что нового в 2.0.0
+                </button>
+                <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex" target="_blank" rel="noopener" class="lvyid-btn-social">
+                    🌐 Webseed.ru
+                </a>
             </div>
         </div>
-        <div class="lvyid-header-right">
-            <button type="button" id="lvyid-open-whats-new-btn" class="lvyid-btn-whats-new">
-                <span class="lvyid-btn-icon">✨</span> Что нового в 2.0.0
-            </button>
-            <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex" target="_blank" rel="noopener" class="lvyid-btn-social">
-                🌐 Webseed.ru
+
+        <!-- Section Navigation Bar in Header -->
+        <nav class="lvyid-nav-bar" id="lvyid-nav-bar">
+            <a href="#lvyid-sec-keys" class="lvyid-nav-link active" data-target="lvyid-sec-keys">
+                <span class="lvyid-nav-icon">🔑</span> Ключи API
             </a>
-        </div>
+            <a href="#lvyid-sec-options" class="lvyid-nav-link" data-target="lvyid-sec-options">
+                <span class="lvyid-nav-icon">⚙️</span> Режимы работы
+            </a>
+            <a href="#lvyid-sec-shortcode" class="lvyid-nav-link" data-target="lvyid-sec-shortcode">
+                <span class="lvyid-nav-icon">📋</span> Шорткод
+            </a>
+            <a href="#lvyid-sec-guide" class="lvyid-nav-link" data-target="lvyid-sec-guide">
+                <span class="lvyid-nav-icon">📖</span> Инструкция
+            </a>
+            <a href="#lvyid-sec-faq" class="lvyid-nav-link" data-target="lvyid-sec-faq">
+                <span class="lvyid-nav-icon">❓</span> FAQ
+            </a>
+        </nav>
     </header>
 
     <!-- Main 2-Column Layout -->
@@ -43,7 +64,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
         <main class="lvyid-main-col">
             
             <!-- Card 1: API Keys -->
-            <section class="lvyid-card">
+            <section class="lvyid-card" id="lvyid-sec-keys">
                 <div class="lvyid-card-header">
                     <div class="lvyid-card-icon" style="background: #fff8e1; color: #f57f17;">🔑</div>
                     <div>
@@ -83,7 +104,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
             </section>
 
             <!-- Card 2: Options & Switches -->
-            <section class="lvyid-card">
+            <section class="lvyid-card" id="lvyid-sec-options">
                 <div class="lvyid-card-header">
                     <div class="lvyid-card-icon" style="background: #e8f5e9; color: #2e7d32;">⚙️</div>
                     <div>
@@ -170,7 +191,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
             </section>
 
             <!-- Card 3: Shortcode Placement -->
-            <section class="lvyid-card">
+            <section class="lvyid-card" id="lvyid-sec-shortcode">
                 <div class="lvyid-card-header">
                     <div class="lvyid-card-icon" style="background: #ede7f6; color: #512da8;">📋</div>
                     <div>
@@ -202,7 +223,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
             </section>
 
             <!-- Card 4: Step-by-Step Guide -->
-            <section class="lvyid-card">
+            <section class="lvyid-card" id="lvyid-sec-guide">
                 <div class="lvyid-card-header">
                     <div class="lvyid-card-icon" style="background: #e1f5fe; color: #0288d1;">📖</div>
                     <div>
@@ -270,7 +291,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
             </section>
 
             <!-- Card 5: FAQ -->
-            <section class="lvyid-card">
+            <section class="lvyid-card" id="lvyid-sec-faq">
                 <div class="lvyid-card-header">
                     <div class="lvyid-card-icon" style="background: #fce4ec; color: #c2185b;">❓</div>
                     <div>
@@ -455,3 +476,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
         </div>
     </div>
 </div>
+
+<!-- Custom Toast Notification Container -->
+<div id="lvyid-toast-container" class="lvyid-toast-container"></div>
+
