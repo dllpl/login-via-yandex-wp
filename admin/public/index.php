@@ -543,10 +543,18 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
             <div class="lvyid-features-grid">
                 
                 <div class="lvyid-feature-card">
+                    <div class="lvyid-feature-icon" style="background: #fdf4ff; color: #c026d3;">🎨</div>
+                    <div class="lvyid-feature-content">
+                        <h3>Конфигуратор кнопки Яндекс ID</h3>
+                        <p>Полная кастомизация внешнего вида по спецификации Яндекса: вид (main, additional, icon), тема кнопки (light, dark), размеры (xs...xxl), тип иконки и радиус скругления (0...14).</p>
+                    </div>
+                </div>
+
+                <div class="lvyid-feature-card">
                     <div class="lvyid-feature-icon" style="background: #fff8e1; color: #f57f17;">⚡</div>
                     <div class="lvyid-feature-content">
                         <h3>Шорткод [login_via_yandex]</h3>
-                        <p>Больше никаких ID блоков и сложных настроек! Размещайте кнопки в Elementor, Gutenberg, сайдбарах, попапах и коде темы.</p>
+                        <p>Больше никаких ID блоков и сложных настроек! Размещайте кнопки в Elementor, Gutenberg, сайдбарах, попапах и коде темы с поддержкой параметров конфигуратора.</p>
                     </div>
                 </div>
 
