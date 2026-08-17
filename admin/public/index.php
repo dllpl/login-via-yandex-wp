@@ -574,13 +574,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
                     </div>
                 </div>
 
-                <div class="lvyid-feature-card">
-                    <div class="lvyid-feature-icon" style="background: #f3e5f5; color: #7b1fa2;">✨</div>
-                    <div class="lvyid-feature-content">
-                        <h3>Множество кнопок на странице</h3>
-                        <p>Инициализация любого количества кнопок одновременно (в шапке, меню и формах) без конфликтов скриптов и дублирования.</p>
-                    </div>
-                </div>
+
 
                 <div class="lvyid-feature-card">
                     <div class="lvyid-feature-icon" style="background: #e0f7fa; color: #00838f;">🎨</div>
