@@ -536,7 +536,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
         <div class="lvyid-modal-header">
             <div class="lvyid-modal-badge">Глобальный релиз v2.0.0</div>
             <h2 class="lvyid-modal-title">🚀 Встречайте Login via Yandex 2.0!</h2>
-            <p class="lvyid-modal-subtitle">Масштабное обновление: современный интерфейс настроек, шорткоды без привязки к ID, автозаполнение WooCommerce, переход на AJAX и 100% стабильность.</p>
+            <p class="lvyid-modal-subtitle">Масштабное обновление: встроенный конфигуратор кнопки входа, универсальные шорткоды, автозаполнение WooCommerce, переход на надёжный AJAX и современная панель управления.</p>
         </div>
 
         <div class="lvyid-modal-body">
@@ -546,7 +546,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
                     <div class="lvyid-feature-icon" style="background: #fdf4ff; color: #c026d3;">🎨</div>
                     <div class="lvyid-feature-content">
                         <h3>Конфигуратор кнопки Яндекс ID</h3>
-                        <p>Полная кастомизация внешнего вида по спецификации Яндекса: вид (main, additional, icon), тема кнопки (light, dark), размеры (xs...xxl), тип иконки и радиус скругления (0...14).</p>
+                        <p>Гибкая настройка внешнего вида: выбор вида (main, additional, icon), светлой/тёмной темы, размеров от XS до XXL, типа иконки (русская «Я» / латиница «Y») и скругление углов от 0 до 14 px.</p>
                     </div>
                 </div>
 
