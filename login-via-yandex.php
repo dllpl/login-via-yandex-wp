@@ -239,7 +239,7 @@ function lvyid_add_copyright()
                 ? 'Вход через Яндекс ID — webseed.ru'
                 : 'Login with Yandex ID — webseed.ru';
 
-            echo '<a title="' . esc_attr($title) . '" class="login_via_yandex" href="' . esc_url("https://webseed.ru/?utm_source=$hostname&utm_medium=login_via_yandex&utm_campaign=login_via_yandex") . '" target="_blank" rel="noopener">' . esc_html($text) . '</a>';
+            echo '<a title="' . esc_attr($title) . '" class="login_via_yandex" href="' . esc_url("https://webseed.ru/?utm_source=$hostname&utm_medium=login_via_yandex&utm_campaign=login_via_yandex") . '">' . esc_html($text) . '</a>';
         }
     }
 }

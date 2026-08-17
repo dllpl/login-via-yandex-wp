@@ -287,6 +287,19 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
                         </div>
 
                     </div>
+
+                    <!-- Turnkey Service Callout Banner -->
+                    <div class="lvyid-service-banner">
+                        <div class="lvyid-service-banner-icon">🛠️</div>
+                        <div class="lvyid-service-banner-content">
+                            <h4>Нужна помощь в установке и доработке?</h4>
+                            <p>Команда <b>Webseed.ru</b> зарегистрирует приложение в Яндексе, настроит плагин и аккуратно встроит кнопку под цветовую гамму вашей темы или попапа.</p>
+                        </div>
+                        <a href="https://webseed.ru/?utm_source=wp-admin&utm_medium=plugin_admin&utm_campaign=turnkey_service" target="_blank" rel="noopener" class="lvyid-service-banner-btn">
+                            Заказать настройку под ключ →
+                        </a>
+                    </div>
+
                 </div>
             </section>
 
@@ -336,7 +349,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
 
         </main>
 
-        <!-- Right Column: Sidebar Actions & Author -->
+        <!-- Right Column: Sidebar Actions & Monetization Services -->
         <aside class="lvyid-sidebar-col">
             
             <!-- Sticky Save Card -->
@@ -359,28 +372,53 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
                     <button type="button" class="lvyid-save-btn save-btn">
                         <span>💾 Сохранить изменения</span>
                     </button>
-                    <p class="lvyid-save-hint">Настройки применяются мгновенно без перезагрузки страницы.</p>
                 </div>
             </div>
 
-            <!-- Webseed Project Card -->
+            <!-- Turnkey Setup & Customization Card (Lead Generation) -->
+            <div class="lvyid-card lvyid-card-service">
+                <div class="lvyid-service-header">
+                    <div class="lvyid-service-badge">Услуга под ключ</div>
+                    <h3 class="lvyid-service-title">Индивидуальная настройка и доработка</h3>
+                    <div class="lvyid-service-price">от 1 990 ₽</div>
+                </div>
+                <div class="lvyid-card-body" style="padding-top: 14px;">
+                    <ul class="lvyid-service-list">
+                        <li><span class="lvyid-check-icon">✓</span> Регистрация и настройка приложения в Яндекс OAuth</li>
+                        <li><span class="lvyid-check-icon">✓</span> Адаптация стиля кнопки под цвета и дизайн сайта</li>
+                        <li><span class="lvyid-check-icon">✓</span> Внедрение в попапы, шапку и чекаут WooCommerce</li>
+                        <li><span class="lvyid-check-icon">✓</span> Проверка и гарантия стабильной работы</li>
+                    </ul>
+                    <a href="https://webseed.ru/?utm_source=wp-admin&utm_medium=plugin_admin&utm_campaign=sidebar_setup_order" target="_blank" rel="noopener" class="lvyid-service-order-btn">
+                        🚀 Заказать настройку под ключ
+                    </a>
+                </div>
+            </div>
+
+            <!-- Webseed Services Card -->
             <div class="lvyid-card">
                 <div class="lvyid-card-header" style="border-bottom: none; padding-bottom: 0;">
                     <div class="lvyid-author-box">
                         <div class="lvyid-card-icon" style="background: #0f172a; color: #ffcc00; width: 44px; height: 44px; border-radius: 14px; font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center;">WS</div>
                         <div>
                             <h3 class="lvyid-author-name">Webseed.ru</h3>
-                            <p class="lvyid-author-role">Разработка и поддержка</p>
+                            <p class="lvyid-author-role">Разработка и продвижение</p>
                         </div>
                     </div>
                 </div>
                 <div class="lvyid-card-body">
                     <p class="lvyid-author-text">
-                        Создание сайтов под ключ, разработка плагинов, API-интеграции и техническая оптимизация WordPress.
+                        Создание сайтов под ключ, разработка плагинов, API-интеграции и техническая оптимизация WordPress. Разработка AI агентов, продвижение в AI-поиске.
                     </p>
-                    <div class="lvyid-author-links">
+                    <div class="lvyid-agency-services">
+                        <div class="lvyid-agency-item">🛍️ Интернет-магазины на WooCommerce</div>
+                        <div class="lvyid-agency-item">🤖 Разработка AI-агентов и LLM-ботов</div>
+                        <div class="lvyid-agency-item">🔌 API интеграции (1С, МойСклад, CRM)</div>
+                        <div class="lvyid-agency-item">⚡ Ускорение сайтов (PageSpeed 95+)</div>
+                    </div>
+                    <div class="lvyid-author-links" style="margin-top: 16px;">
                         <a href="https://webseed.ru?utm_source=wp-admin&utm_medium=plugin&utm_campaign=wp-login-via-yandex" target="_blank" rel="noopener" class="lvyid-author-btn lvyid-btn-site">
-                            🌐 Официальный сайт Webseed.ru
+                            🌐 Заказать проект на Webseed.ru
                         </a>
                         <a href="https://boosty.to/webseed/donate" target="_blank" rel="noopener" class="lvyid-author-btn lvyid-btn-boosty">
                             ☕ Поддержать проект (Boosty)
