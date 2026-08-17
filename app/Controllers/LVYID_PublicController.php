@@ -28,8 +28,8 @@ class LVYID_PublicController
                 $woo_active = false;
             }
 
-            wp_enqueue_script('login_via_yandex', plugins_url('../../public/login_via_yandex.js', __FILE__), [],
-                filemtime(plugin_dir_path(__FILE__) . '../../public/login_via_yandex.js'), 'in_footer');
+            wp_enqueue_script('login_via_yandex', plugins_url('../../public/login_via_yandex.js', __FILE__), ['sdk-suggest-with-polyfills-latest'],
+                filemtime(plugin_dir_path(__FILE__) . '../../public/login_via_yandex.js'), true);
 
             wp_add_inline_script('login_via_yandex', 'const yaWpData = ' . wp_json_encode([
                     'client_id'      => $options['client_id'],

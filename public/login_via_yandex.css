@@ -18,4 +18,13 @@
 .lvyid_auth_default,
 #lvyid_auth_default {
     margin-bottom: 1rem;
+    min-height: 28px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.lvyid_auth_button[data-lvyid-inited="true"],
+.lvyid_auth_default[data-lvyid-inited="true"],
+#lvyid_auth_default[data-lvyid-inited="true"] {
+    opacity: 1;
 }

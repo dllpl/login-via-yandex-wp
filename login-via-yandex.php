@@ -202,9 +202,8 @@ function lvyid_upgrade_function($upgrader_object, $options)
 function lvyid_add_script_to_head()
 {
     if (!is_user_logged_in()) {
-        wp_enqueue_script('sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '2.0.0', 'in_footer');
+        wp_enqueue_script('sdk-suggest-with-polyfills-latest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], '2.0.0', false);
     }
-
 }
 
 function lvyid_init_script_and_style()
