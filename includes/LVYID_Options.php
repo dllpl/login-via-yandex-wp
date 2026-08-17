@@ -21,6 +21,11 @@ trait LVYID_Options
                 'button_default' => (bool)$row->button_default ?? false,
                 'copyright' => isset($row->copyright) ? (bool)$row->copyright : true,
                 'use_ajax_webhook' => !empty($row->use_ajax_webhook),
+                'button_view' => !empty($row->button_view) ? $row->button_view : 'main',
+                'button_theme' => !empty($row->button_theme) ? $row->button_theme : 'light',
+                'button_size' => !empty($row->button_size) ? $row->button_size : 'm',
+                'button_border_radius' => isset($row->button_border_radius) && $row->button_border_radius !== '' ? (string)$row->button_border_radius : '8',
+                'button_icon' => !empty($row->button_icon) ? $row->button_icon : 'ya',
             ];
         } else {
             return false;

@@ -47,14 +47,20 @@ if (typeof yaWpData !== 'undefined' && !yaWpData.error) {
             return;
         }
 
+        const bSize = container.getAttribute('data-size') || yaWpData.button_size || 'm';
+        const bView = container.getAttribute('data-view') || yaWpData.button_view || 'main';
+        const bTheme = container.getAttribute('data-theme') || yaWpData.button_theme || 'light';
+        const bRadius = container.getAttribute('data-radius') || yaWpData.button_border_radius || '8';
+        const bIcon = container.getAttribute('data-icon') || yaWpData.button_icon || 'ya';
+
         YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin, {
             view: "button",
             parentId: container.id,
-            buttonSize: 'xl',
-            buttonView: 'main',
-            buttonTheme: 'light',
-            buttonBorderRadius: "0",
-            buttonIcon: 'ya',
+            buttonSize: bSize,
+            buttonView: bView,
+            buttonTheme: bTheme,
+            buttonBorderRadius: bRadius,
+            buttonIcon: bIcon,
         })
             .then(({ handler }) => handler())
             .then(data => {

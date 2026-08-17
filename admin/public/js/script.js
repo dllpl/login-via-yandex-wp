@@ -57,7 +57,130 @@ function showNotify(title, text, status = 'success') {
 }
 
 // --------------------------------------------------------------------------
-// 2. Сохранение настроек плагина с AJAX и Loading-статусом
+// 2. Интерактивный Конфигуратор Кнопки Яндекс ID (Live Button Constructor)
+// --------------------------------------------------------------------------
+function getConstructorValues() {
+    const viewInput = document.querySelector('input[name="button_view"]:checked');
+    const themeInput = document.querySelector('input[name="button_theme"]:checked');
+    const sizeInput = document.querySelector('input[name="button_size"]:checked');
+    const radiusInput = document.getElementById('lvyid-radius-range');
+    const iconInput = document.querySelector('input[name="button_icon"]:checked');
+
+    return {
+        view: viewInput ? viewInput.value : 'main',         // main, additional, icon
+        theme: themeInput ? themeInput.value : 'light',     // light, dark
+        size: sizeInput ? sizeInput.value : 'm',            // xs, s, m, l, xl, xxl
+        radius: radiusInput ? radiusInput.value : '8',      // 0..14
+        icon: iconInput ? iconInput.value : 'ya'            // ya, yaEng
+    };
+}
+
+function renderButtonPreview() {
+    const previewContainer = document.getElementById('lvyid-constructor-preview');
+    if (!previewContainer) return;
+
+    const values = getConstructorValues();
+
+    // 1. Обновляем текстовый индикатор скругления
+    const radiusValEl = document.getElementById('lvyid-radius-val');
+    if (radiusValEl) {
+        radiusValEl.innerText = `${values.radius} px`;
+    }
+
+    // 2. Обновляем сгенерированный шорткод
+    const shortcodeCodeEl = document.getElementById('lvyid-code-shortcode');
+    if (shortcodeCodeEl) {
+        let shortcodeStr = '[login_via_yandex';
+        if (values.view !== 'main') shortcodeStr += ` view="${values.view}"`;
+        if (values.theme !== 'light') shortcodeStr += ` theme="${values.theme}"`;
+        if (values.size !== 'm') shortcodeStr += ` size="${values.size}"`;
+        if (values.radius !== '8') shortcodeStr += ` radius="${values.radius}"`;
+        if (values.icon !== 'ya') shortcodeStr += ` icon="${values.icon}"`;
+        shortcodeStr += ']';
+        shortcodeCodeEl.innerText = shortcodeStr;
+    }
+
+    // 3. Отрисовываем визуальный макет кнопки по спецификации Яндекс ID
+    previewContainer.innerHTML = '';
+
+    const btn = document.createElement('div');
+    btn.className = `lvyid-mockup-btn view-${values.view} theme-${values.theme} size-${values.size}`;
+    btn.style.borderRadius = `${values.radius}px`;
+
+    // Размеры иконки и шрифта по размерам (xs..xxl)
+    const iconSizes = { xs: 16, s: 20, m: 24, l: 28, xl: 32, xxl: 36 };
+    const fontSizes = { xs: '10px', s: '12px', m: '14px', l: '16px', xl: '18px', xxl: '20px' };
+    const iconSize = iconSizes[values.size] || 24;
+    const fontSize = fontSizes[values.size] || '14px';
+
+    const letter = values.icon === 'yaEng' ? 'Y' : 'Я';
+    const textLabel = values.icon === 'yaEng' ? 'Sign in with Yandex ID' : 'Войти с Яндекс ID';
+
+    const iconHtml = `
+        <span class="lvyid-mockup-icon-circle" style="width: ${iconSize}px; height: ${iconSize}px; font-size: ${fontSize};">
+            ${letter}
+        </span>`;
+
+    if (values.view === 'icon') {
+        btn.innerHTML = iconHtml;
+        btn.title = textLabel;
+    } else {
+        btn.innerHTML = `${iconHtml}<span class="lvyid-mockup-text">${textLabel}</span>`;
+    }
+
+    previewContainer.appendChild(btn);
+}
+
+// Слушатели контролов конфигуратора
+const constructorInputs = document.querySelectorAll('#lvyid-sec-constructor input[type="radio"]');
+if (constructorInputs.length > 0) {
+    constructorInputs.forEach(input => {
+        input.addEventListener('change', renderButtonPreview);
+    });
+}
+
+// Слушатель слайдера скругления (0..14)
+const radiusSlider = document.getElementById('lvyid-radius-range');
+if (radiusSlider) {
+    radiusSlider.addEventListener('input', renderButtonPreview);
+}
+
+// Переключатель фона предпросмотра (Светлый / Тёмный)
+const bgButtons = document.querySelectorAll('.lvyid-bg-btn');
+const stage = document.getElementById('lvyid-stage');
+if (bgButtons.length > 0 && stage) {
+    bgButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            bgButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const bgType = btn.getAttribute('data-bg');
+            if (bgType === 'dark') {
+                stage.className = 'lvyid-preview-stage lvyid-stage-dark';
+            } else {
+                stage.className = 'lvyid-preview-stage lvyid-stage-light';
+            }
+        });
+    });
+}
+
+// Копирование сгенерированного шорткода
+const copyShortcodeBtn = document.getElementById('lvyid-copy-const-shortcode');
+if (copyShortcodeBtn) {
+    copyShortcodeBtn.addEventListener('click', () => {
+        const shortcodeText = document.getElementById('lvyid-code-shortcode') ? document.getElementById('lvyid-code-shortcode').innerText : '[login_via_yandex]';
+        navigator.clipboard.writeText(shortcodeText);
+        copyShortcodeBtn.innerText = 'Скопировано!';
+        setTimeout(() => {
+            copyShortcodeBtn.innerText = 'Копировать';
+        }, 1500);
+    });
+}
+
+// Первичный рендер предпросмотра кнопки при загрузке страницы
+renderButtonPreview();
+
+// --------------------------------------------------------------------------
+// 3. Сохранение настроек плагина с AJAX и Loading-статусом
 // --------------------------------------------------------------------------
 const saveBtn = document.querySelector('.save-btn');
 if (saveBtn) {
@@ -75,6 +198,9 @@ if (saveBtn) {
         const alternative_checked = document.getElementById('alternative') ? document.getElementById('alternative').checked : false;
         const copyright_checked = document.getElementById('copyright') ? document.getElementById('copyright').checked : true;
         const use_ajax_webhook = document.getElementById('use_ajax_webhook') ? document.getElementById('use_ajax_webhook').checked : false;
+
+        // Параметры конфигуратора кнопки
+        const constValues = getConstructorValues();
 
         if (client_id.length !== 32) {
             if (client_id_error) {
@@ -108,6 +234,13 @@ if (saveBtn) {
             formData.append('alternative', alternative_checked);
             formData.append('copyright', copyright_checked);
             formData.append('use_ajax_webhook', use_ajax_webhook);
+
+            // Передаем параметры конфигуратора кнопки
+            formData.append('button_view', constValues.view);
+            formData.append('button_theme', constValues.theme);
+            formData.append('button_size', constValues.size);
+            formData.append('button_border_radius', constValues.radius);
+            formData.append('button_icon', constValues.icon);
 
             fetch(ajax_url, {
                 method: 'POST',
@@ -143,7 +276,7 @@ if (saveBtn) {
 }
 
 // --------------------------------------------------------------------------
-// 3. Интерактивная навигация по разделам в шапке
+// 4. Интерактивная навигация по разделам в шапке
 // --------------------------------------------------------------------------
 const navLinks = document.querySelectorAll('.lvyid-nav-link');
 if (navLinks.length > 0) {
@@ -189,7 +322,7 @@ if (navLinks.length > 0) {
 }
 
 // --------------------------------------------------------------------------
-// 4. Интерактивное переключение подсказки Redirect URI
+// 5. Интерактивное переключение подсказки Redirect URI
 // --------------------------------------------------------------------------
 const ajaxWebhookToggle = document.getElementById('use_ajax_webhook');
 const stepRedirectUri = document.getElementById('step-redirect-uri');
@@ -204,7 +337,7 @@ if (ajaxWebhookToggle && stepRedirectUri) {
 }
 
 // --------------------------------------------------------------------------
-// 5. Полноэкранное модальное окно "Что нового в 2.0.0"
+// 6. Полноэкранное модальное окно "Что нового в 2.0.0"
 // --------------------------------------------------------------------------
 const welcomeModal = document.getElementById('lvyid-welcome-modal');
 const openModalBtn = document.getElementById('lvyid-open-whats-new-btn');

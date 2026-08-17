@@ -54,6 +54,7 @@ class LVYID_Upgrade
         $this->add_button_default_column();
         $this->add_copyright_column();
         $this->add_use_ajax_webhook_column();
+        $this->add_button_constructor_columns();
 
         $this->log_class->info("Миграции базы данных успешно завершены для версии {$to_version}");
     }
@@ -172,6 +173,31 @@ class LVYID_Upgrade
              ADD COLUMN `use_ajax_webhook` BOOLEAN DEFAULT FALSE;"
             );
             $this->log_class->info("Столбец `use_ajax_webhook` был успешно добавлен в таблицу опций плагина");
+        }
+        return true;
+    }
+
+    public function add_button_constructor_columns()
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'login_via_yandex_options';
+
+        $columns = [
+            'button_view'          => "VARCHAR(32) DEFAULT 'main'",
+            'button_theme'         => "VARCHAR(32) DEFAULT 'light'",
+            'button_size'          => "VARCHAR(16) DEFAULT 'm'",
+            'button_border_radius' => "VARCHAR(16) DEFAULT '8'",
+            'button_icon'          => "VARCHAR(32) DEFAULT 'ya'",
+        ];
+
+        foreach ($columns as $col => $def) {
+            $exists = $wpdb->get_results(
+                $wpdb->prepare("SHOW COLUMNS FROM `$table_name` LIKE %s", $col)
+            );
+            if (empty($exists)) {
+                $wpdb->query("ALTER TABLE `$table_name` ADD COLUMN `$col` $def;");
+                $this->log_class->info("Столбец `$col` был успешно добавлен в таблицу опций плагина");
+            }
         }
         return true;
     }

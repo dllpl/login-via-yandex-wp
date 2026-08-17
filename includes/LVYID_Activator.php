@@ -24,6 +24,11 @@ class LVYID_Activator
             `button_default` BOOLEAN DEFAULT FALSE,
             `copyright` BOOLEAN DEFAULT TRUE,
             `use_ajax_webhook` BOOLEAN DEFAULT FALSE,
+            `button_view` VARCHAR(32) DEFAULT 'main',
+            `button_theme` VARCHAR(32) DEFAULT 'light',
+            `button_size` VARCHAR(16) DEFAULT 'm',
+            `button_border_radius` VARCHAR(16) DEFAULT '8',
+            `button_icon` VARCHAR(32) DEFAULT 'ya',
             `created_at` DATETIME DEFAULT NOW(),
             PRIMARY KEY (`id`)
         ) $charset_collate"];

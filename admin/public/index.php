@@ -42,6 +42,9 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
             <a href="#lvyid-sec-keys" class="lvyid-nav-link active" data-target="lvyid-sec-keys">
                 <span class="lvyid-nav-icon">🔑</span> Ключи API
             </a>
+            <a href="#lvyid-sec-constructor" class="lvyid-nav-link" data-target="lvyid-sec-constructor">
+                <span class="lvyid-nav-icon">🎨</span> Конструктор
+            </a>
             <a href="#lvyid-sec-options" class="lvyid-nav-link" data-target="lvyid-sec-options">
                 <span class="lvyid-nav-icon">⚙️</span> Режимы работы
             </a>
@@ -100,6 +103,167 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
                             <div class="lvyid-form-error hidden" id="client_secret_error"></div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- Card: Button Constructor / Configurator -->
+            <section class="lvyid-card" id="lvyid-sec-constructor">
+                <div class="lvyid-card-header">
+                    <div class="lvyid-card-icon" style="background: #fdf4ff; color: #c026d3;">🎨</div>
+                    <div>
+                        <h2 class="lvyid-card-title">Конфигуратор кнопки Яндекс ID</h2>
+                        <p class="lvyid-card-subtitle">Настройка внешнего вида по официальной <a href="https://yandex.ru/dev/id/doc/ru/suggest/but-const" target="_blank" rel="noopener">документации Яндекс ID</a></p>
+                    </div>
+                </div>
+                <div class="lvyid-card-body">
+                    
+                    <div class="lvyid-const-grid">
+                        
+                        <!-- Controls Column -->
+                        <div class="lvyid-const-controls">
+                            
+                            <!-- 1. buttonView: main, additional, icon -->
+                            <div class="lvyid-const-group">
+                                <label class="lvyid-const-label">Вид кнопки (buttonView):</label>
+                                <div class="lvyid-segmented-group" id="lvyid-const-view">
+                                    <label class="lvyid-segmented-btn">
+                                        <input type="radio" name="button_view" value="main" <?php checked($options['button_view'] ?? 'main', 'main'); ?>>
+                                        <span>📝 main (Основная)</span>
+                                    </label>
+                                    <label class="lvyid-segmented-btn">
+                                        <input type="radio" name="button_view" value="additional" <?php checked($options['button_view'] ?? 'main', 'additional'); ?>>
+                                        <span>✨ additional</span>
+                                    </label>
+                                    <label class="lvyid-segmented-btn">
+                                        <input type="radio" name="button_view" value="icon" <?php checked($options['button_view'] ?? 'main', 'icon'); ?>>
+                                        <span>🔲 icon (Иконка)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- 2. buttonTheme: light, dark -->
+                            <div class="lvyid-const-group">
+                                <label class="lvyid-const-label">Цветовая тема (buttonTheme):</label>
+                                <div class="lvyid-theme-picker" id="lvyid-const-theme">
+                                    <label class="lvyid-theme-card lvyid-theme-light">
+                                        <input type="radio" name="button_theme" value="light" <?php checked($options['button_theme'] ?? 'light', 'light'); ?>>
+                                        <div class="lvyid-theme-preview" style="background: #ffffff; color: #000000; border: 1px solid #cbd5e1;">
+                                            <span class="lvyid-preview-dot" style="background: #fc3f1d;">Я</span>
+                                            <span>light (Светлая)</span>
+                                        </div>
+                                    </label>
+                                    <label class="lvyid-theme-card lvyid-theme-dark">
+                                        <input type="radio" name="button_theme" value="dark" <?php checked($options['button_theme'] ?? 'light', 'dark'); ?>>
+                                        <div class="lvyid-theme-preview" style="background: #22262f; color: #ffffff; border: 1px solid #334155;">
+                                            <span class="lvyid-preview-dot" style="background: #fc3f1d;">Я</span>
+                                            <span>dark (Тёмная)</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- 3. buttonSize: xs, s, m, l, xl, xxl -->
+                            <div class="lvyid-const-group">
+                                <label class="lvyid-const-label">Размер кнопки (buttonSize):</label>
+                                <div class="lvyid-pills-group" id="lvyid-const-size">
+                                    <label class="lvyid-pill-btn">
+                                        <input type="radio" name="button_size" value="xs" <?php checked($options['button_size'] ?? 'm', 'xs'); ?>>
+                                        <span>xs</span>
+                                    </label>
+                                    <label class="lvyid-pill-btn">
+                                        <input type="radio" name="button_size" value="s" <?php checked($options['button_size'] ?? 'm', 's'); ?>>
+                                        <span>s</span>
+                                    </label>
+                                    <label class="lvyid-pill-btn">
+                                        <input type="radio" name="button_size" value="m" <?php checked($options['button_size'] ?? 'm', 'm'); ?>>
+                                        <span>m <small>Стандарт</small></span>
+                                    </label>
+                                    <label class="lvyid-pill-btn">
+                                        <input type="radio" name="button_size" value="l" <?php checked($options['button_size'] ?? 'm', 'l'); ?>>
+                                        <span>l</span>
+                                    </label>
+                                    <label class="lvyid-pill-btn">
+                                        <input type="radio" name="button_size" value="xl" <?php checked($options['button_size'] ?? 'm', 'xl'); ?>>
+                                        <span>xl</span>
+                                    </label>
+                                    <label class="lvyid-pill-btn">
+                                        <input type="radio" name="button_size" value="xxl" <?php checked($options['button_size'] ?? 'm', 'xxl'); ?>>
+                                        <span>xxl</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- 4. buttonBorderRadius: Slider 0 to 14 -->
+                            <div class="lvyid-const-group">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                    <label class="lvyid-const-label" style="margin-bottom: 0;">Скругление углов (buttonBorderRadius: 0...14):</label>
+                                    <span class="lvyid-radius-badge" id="lvyid-radius-val"><?php echo esc_html($options['button_border_radius'] ?? '8'); ?> px</span>
+                                </div>
+                                <div class="lvyid-slider-wrap">
+                                    <input type="range" id="lvyid-radius-range" name="button_border_radius" min="0" max="14" step="1"
+                                           value="<?php echo esc_attr($options['button_border_radius'] ?? '8'); ?>" class="lvyid-range-slider">
+                                </div>
+                                <div class="lvyid-slider-ticks">
+                                    <span>0 (квадрат)</span>
+                                    <span>7</span>
+                                    <span>14 (капсула)</span>
+                                </div>
+                            </div>
+
+                            <!-- 5. buttonIcon: ya, yaEng -->
+                            <div class="lvyid-const-group">
+                                <label class="lvyid-const-label">Тип иконки (buttonIcon):</label>
+                                <div class="lvyid-segmented-group" id="lvyid-const-icon">
+                                    <label class="lvyid-segmented-btn">
+                                        <input type="radio" name="button_icon" value="ya" <?php checked($options['button_icon'] ?? 'ya', 'ya'); ?>>
+                                        <span>🔴 ya (Русская «Я»)</span>
+                                    </label>
+                                    <label class="lvyid-segmented-btn">
+                                        <input type="radio" name="button_icon" value="yaEng" <?php checked($options['button_icon'] ?? 'ya', 'yaEng'); ?>>
+                                        <span>🔴 yaEng (Латиница «Y»)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Live Preview & Shortcode Column -->
+                        <div class="lvyid-const-preview-col">
+                            
+                            <!-- Live Preview Card Box -->
+                            <div class="lvyid-preview-box">
+                                <div class="lvyid-preview-header">
+                                    <span class="lvyid-preview-badge">Живой предпросмотр кнопки</span>
+                                    <div class="lvyid-preview-bg-switch">
+                                        <button type="button" class="lvyid-bg-btn active" data-bg="light" title="Светлый фон">☀️ Светлый</button>
+                                        <button type="button" class="lvyid-bg-btn" data-bg="dark" title="Тёмный фон">🌙 Тёмный</button>
+                                    </div>
+                                </div>
+                                <div class="lvyid-preview-stage lvyid-stage-light" id="lvyid-stage">
+                                    <div id="lvyid-constructor-preview" class="lvyid-constructor-preview">
+                                        <!-- Real-time Button Preview Rendered Here -->
+                                    </div>
+                                </div>
+                                <div class="lvyid-preview-footer">
+                                    💡 <b>Автоматическое применение:</b> выбранный стиль кнопки будет использоваться в формах входа, чекауте WooCommerce и шорткоде.
+                                </div>
+                            </div>
+
+                            <!-- Generated Shortcode Box -->
+                            <div class="lvyid-generated-code-box">
+                                <div class="lvyid-generated-header">
+                                    <span>📋 Шорткод с параметрами:</span>
+                                    <button type="button" class="lvyid-copy-btn" id="lvyid-copy-const-shortcode">Копировать</button>
+                                </div>
+                                <div class="lvyid-code-snippet">
+                                    <code id="lvyid-code-shortcode">[login_via_yandex]</code>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
             </section>
 

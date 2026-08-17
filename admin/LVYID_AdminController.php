@@ -36,7 +36,8 @@ class LVYID_AdminController
         $user_id = get_current_user_id();
         $show_welcome = empty(get_user_meta($user_id, 'lvyid_v200_welcome_seen', true));
 
-        wp_enqueue_script('login_via_yandex_admin', plugins_url('public/js/script.js', __FILE__), [], file_exists($js_file) ? filemtime($js_file) : '2.0.0', true);
+        wp_enqueue_script('yandex-sdk-suggest', 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js', [], null, true);
+        wp_enqueue_script('login_via_yandex_admin', plugins_url('public/js/script.js', __FILE__), ['yandex-sdk-suggest'], file_exists($js_file) ? filemtime($js_file) : '2.0.0', true);
         wp_add_inline_script('login_via_yandex_admin', 'const LVYID_Admin = ' . wp_json_encode([
                 'ajax_url'     => admin_url('admin-ajax.php'),
                 'nonce'        => wp_create_nonce('lvyid_admin_nonce'),
@@ -91,16 +92,28 @@ class LVYID_AdminController
         $copyright = !isset($request_data['copyright']) || ($request_data['copyright'] === true || $request_data['copyright'] === 'true' || $request_data['copyright'] === '1');
         $use_ajax_webhook = !empty($request_data['use_ajax_webhook']) && ($request_data['use_ajax_webhook'] === true || $request_data['use_ajax_webhook'] === 'true' || $request_data['use_ajax_webhook'] === '1');
 
+        $button_view = isset($request_data['button_view']) && in_array($request_data['button_view'], ['main', 'additional', 'icon'], true) ? $request_data['button_view'] : 'main';
+        $button_theme = isset($request_data['button_theme']) && in_array($request_data['button_theme'], ['light', 'dark'], true) ? $request_data['button_theme'] : 'light';
+        $button_size = isset($request_data['button_size']) && in_array($request_data['button_size'], ['xs', 's', 'm', 'l', 'xl', 'xxl'], true) ? $request_data['button_size'] : 'm';
+        $radius_raw = isset($request_data['button_border_radius']) ? intval($request_data['button_border_radius']) : 8;
+        $button_border_radius = (string)max(0, min(14, $radius_raw));
+        $button_icon = isset($request_data['button_icon']) && in_array($request_data['button_icon'], ['ya', 'yaEng'], true) ? $request_data['button_icon'] : 'ya';
+
         $data = [
-            'client_id'        => isset($request_data['client_id']) ? trim(sanitize_text_field($request_data['client_id'])) : '',
-            'client_secret'    => isset($request_data['client_secret']) ? trim(sanitize_text_field($request_data['client_secret'])) : '',
-            'button'           => $button,
-            'container_id'     => $container_id,
-            'widget'           => $widget,
-            'alternative'      => $alternative,
-            'button_default'   => $button_default,
-            'copyright'        => $copyright,
-            'use_ajax_webhook' => $use_ajax_webhook,
+            'client_id'            => isset($request_data['client_id']) ? trim(sanitize_text_field($request_data['client_id'])) : '',
+            'client_secret'        => isset($request_data['client_secret']) ? trim(sanitize_text_field($request_data['client_secret'])) : '',
+            'button'               => $button,
+            'container_id'         => $container_id,
+            'widget'               => $widget,
+            'alternative'          => $alternative,
+            'button_default'       => $button_default,
+            'copyright'            => $copyright,
+            'use_ajax_webhook'     => $use_ajax_webhook,
+            'button_view'          => $button_view,
+            'button_theme'         => $button_theme,
+            'button_size'          => $button_size,
+            'button_border_radius' => $button_border_radius,
+            'button_icon'          => $button_icon,
         ];
 
         $upgrade = new LVYID_Upgrade();
@@ -108,6 +121,7 @@ class LVYID_AdminController
         $upgrade->add_alternative_column();
         $upgrade->add_copyright_column();
         $upgrade->add_use_ajax_webhook_column();
+        $upgrade->add_button_constructor_columns();
 
         $result = $wpdb->insert($table_name, $data);
 

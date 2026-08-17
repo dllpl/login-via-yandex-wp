@@ -378,6 +378,446 @@ html {
 }
 
 /* --------------------------------------------------------------------------
+   Yandex ID Button Configurator
+   -------------------------------------------------------------------------- */
+.lvyid-const-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+.lvyid-const-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.lvyid-const-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lvyid-const-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #334155;
+}
+
+/* Segmented Toggle Control */
+.lvyid-segmented-group {
+    display: flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: var(--lvyid-radius-sm);
+    gap: 4px;
+    border: 1px solid var(--lvyid-border);
+}
+
+.lvyid-segmented-btn {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    margin: 0;
+}
+
+.lvyid-segmented-btn input[type="radio"] {
+    display: none;
+}
+
+.lvyid-segmented-btn span {
+    display: block;
+    padding: 9px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.lvyid-segmented-btn input[type="radio"]:checked + span {
+    background: #ffffff;
+    color: #0f172a;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Theme Picker Cards */
+.lvyid-theme-picker {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.lvyid-theme-card {
+    cursor: pointer;
+    margin: 0;
+}
+
+.lvyid-theme-card input[type="radio"] {
+    display: none;
+}
+
+.lvyid-theme-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 14px;
+    border-radius: var(--lvyid-radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.lvyid-preview-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lvyid-theme-card input[type="radio"]:checked + .lvyid-theme-preview {
+    box-shadow: 0 0 0 3px #ffcc00, 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+}
+
+/* Pills Radio Groups */
+.lvyid-pills-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.lvyid-pill-btn {
+    cursor: pointer;
+    margin: 0;
+}
+
+.lvyid-pill-btn input[type="radio"] {
+    display: none;
+}
+
+.lvyid-pill-btn span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    background: #f8fafc;
+    border: 1.5px solid var(--lvyid-border);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.lvyid-pill-btn span small {
+    font-size: 10px;
+    background: #e2e8f0;
+    padding: 2px 6px;
+    border-radius: 6px;
+    color: #475569;
+}
+
+.lvyid-pill-btn input[type="radio"]:checked + span {
+    background: #fff8e1;
+    border-color: #ffcc00;
+    color: #0f172a;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(255, 204, 0, 0.35);
+}
+
+.lvyid-pill-btn input[type="radio"]:checked + span small {
+    background: #ffcc00;
+    color: #111111;
+}
+
+/* Slider & Radius Badge */
+.lvyid-radius-badge {
+    font-size: 12px;
+    font-weight: 700;
+    background: #fff8e1;
+    color: #b45309;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #fde68a;
+}
+
+.lvyid-slider-wrap {
+    padding: 6px 0 2px 0;
+}
+
+.lvyid-range-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #e2e8f0;
+    outline: none;
+    -webkit-appearance: none;
+    accent-color: #ffcc00;
+    cursor: pointer;
+}
+
+.lvyid-slider-ticks {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+/* Preview Box and Stage */
+.lvyid-const-preview-col {
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.lvyid-preview-box {
+    background: #ffffff;
+    border: 1.5px solid var(--lvyid-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--lvyid-shadow);
+}
+
+.lvyid-preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--lvyid-border-light);
+    background: #fafbfc;
+}
+
+.lvyid-preview-badge {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.lvyid-preview-bg-switch {
+    display: flex;
+    gap: 4px;
+}
+
+.lvyid-bg-btn {
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #475569;
+    transition: all 0.2s ease;
+}
+
+.lvyid-bg-btn.active {
+    background: #0f172a;
+    color: #ffffff;
+    border-color: #0f172a;
+}
+
+.lvyid-preview-stage {
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 20px;
+    transition: all 0.3s ease;
+}
+
+.lvyid-stage-light {
+    background: radial-gradient(#cbd5e1 1px, transparent 1px) 0 0/16px 16px, #f8fafc;
+}
+
+.lvyid-stage-dark {
+    background: radial-gradient(#334155 1px, transparent 1px) 0 0/16px 16px, #0f172a;
+}
+
+.lvyid-constructor-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lvyid-preview-footer {
+    padding: 12px 16px;
+    font-size: 12px;
+    color: var(--lvyid-text-muted);
+    background: #fafbfc;
+    border-top: 1px solid var(--lvyid-border-light);
+    line-height: 1.45;
+}
+
+/* Generated Code Snippet Box */
+.lvyid-generated-code-box {
+    background: #0f172a;
+    border-radius: 14px;
+    padding: 14px 16px;
+    color: #f8fafc;
+}
+
+.lvyid-generated-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-bottom: 8px;
+}
+
+.lvyid-code-snippet {
+    background: #1e293b;
+    padding: 8px 12px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.lvyid-code-snippet code {
+    font-family: Consolas, Monaco, monospace;
+    color: #38bdf8;
+    font-size: 13px;
+    word-break: break-all;
+}
+
+/* Rendered Button Mockup Styles (Exact Official Yandex ID Spec) */
+.lvyid-mockup-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: 1px solid transparent;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+/* Views & Themes */
+.lvyid-mockup-btn.view-main.theme-light {
+    background: #ffffff;
+    color: #000000;
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.lvyid-mockup-btn.view-main.theme-dark {
+    background: #22262f;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+.lvyid-mockup-btn.view-additional.theme-light {
+    background: #f4f4f5;
+    color: #000000;
+    border-color: transparent;
+}
+
+.lvyid-mockup-btn.view-additional.theme-dark {
+    background: #333842;
+    color: #ffffff;
+    border-color: transparent;
+}
+
+.lvyid-mockup-btn.view-icon.theme-light {
+    background: #ffffff;
+    color: #000000;
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.lvyid-mockup-btn.view-icon.theme-dark {
+    background: #22262f;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Sizes */
+.lvyid-mockup-btn.size-xs {
+    height: 28px;
+    padding: 0 10px;
+    font-size: 11px;
+    gap: 6px;
+}
+
+.lvyid-mockup-btn.size-s {
+    height: 36px;
+    padding: 0 14px;
+    font-size: 13px;
+    gap: 8px;
+}
+
+.lvyid-mockup-btn.size-m {
+    height: 44px;
+    padding: 0 18px;
+    font-size: 15px;
+    gap: 10px;
+}
+
+.lvyid-mockup-btn.size-l {
+    height: 52px;
+    padding: 0 22px;
+    font-size: 16px;
+    gap: 12px;
+}
+
+.lvyid-mockup-btn.size-xl {
+    height: 60px;
+    padding: 0 26px;
+    font-size: 18px;
+    gap: 14px;
+}
+
+.lvyid-mockup-btn.size-xxl {
+    height: 68px;
+    padding: 0 30px;
+    font-size: 20px;
+    gap: 16px;
+}
+
+/* Icon-only dimensions */
+.lvyid-mockup-btn.view-icon.size-xs { width: 28px; height: 28px; padding: 0; }
+.lvyid-mockup-btn.view-icon.size-s  { width: 36px; height: 36px; padding: 0; }
+.lvyid-mockup-btn.view-icon.size-m  { width: 44px; height: 44px; padding: 0; }
+.lvyid-mockup-btn.view-icon.size-l  { width: 52px; height: 52px; padding: 0; }
+.lvyid-mockup-btn.view-icon.size-xl { width: 60px; height: 60px; padding: 0; }
+.lvyid-mockup-btn.view-icon.size-xxl{ width: 68px; height: 68px; padding: 0; }
+
+.lvyid-mockup-icon-circle {
+    background: #fc3f1d;
+    border-radius: 50%;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.lvyid-mockup-text {
+    white-space: nowrap;
+    letter-spacing: -0.1px;
+}
+
+/* --------------------------------------------------------------------------
    Switches & Toggles
    -------------------------------------------------------------------------- */
 .lvyid-switches-list {
