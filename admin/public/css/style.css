@@ -244,12 +244,13 @@ html {
    -------------------------------------------------------------------------- */
 .lvyid-cards-row {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 24px;
     align-items: stretch;
+    width: 100%;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 820px) {
     .lvyid-cards-row {
         grid-template-columns: 1fr;
     }
@@ -326,12 +327,14 @@ html {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
 }
 
 .lvyid-input-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: 100%;
 }
 
 .lvyid-label {
@@ -348,10 +351,12 @@ html {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .lvyid-input {
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
     padding: 12px 48px 12px 16px;
     font-size: 14px;
     font-family: Consolas, Monaco, monospace;
@@ -360,6 +365,8 @@ html {
     border: 1.5px solid var(--lvyid-border);
     border-radius: var(--lvyid-radius-sm);
     transition: all 0.2s ease;
+    box-sizing: border-box;
+    display: block;
 }
 
 .lvyid-input:focus {
@@ -408,7 +415,8 @@ html {
     border: 1.5px solid var(--lvyid-border);
     border-radius: var(--lvyid-radius-sm);
     padding: 10px 14px;
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box;
     transition: all 0.2s ease;
 }
@@ -431,10 +439,11 @@ html {
 
 .lvyid-slider-wrap {
     padding: 4px 0 2px 0;
+    width: 100%;
 }
 
 .lvyid-range-slider {
-    width: 100%;
+    width: 100% !important;
     height: 6px;
     border-radius: 3px;
     background: #cbd5e1;
@@ -443,6 +452,7 @@ html {
     accent-color: #ffcc00;
     cursor: pointer;
     margin: 0;
+    display: block;
 }
 
 .lvyid-slider-ticks {
@@ -450,6 +460,7 @@ html {
     justify-content: space-between;
     font-size: 11px;
     color: #94a3b8;
+    width: 100%;
 }
 
 /* --------------------------------------------------------------------------

@@ -124,7 +124,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
                             <!-- 1. buttonView: main, additional, icon -->
                             <div class="lvyid-input-group">
                                 <label class="lvyid-label" for="button_view">Вид кнопки (buttonView)</label>
-                                <select class="lvyid-input" id="button_view" name="button_view">
+                                <select id="button_view" name="button_view">
                                     <option value="main" <?php selected($options['button_view'] ?? 'main', 'main'); ?>>main — Основная кнопка (с текстом)</option>
                                     <option value="additional" <?php selected($options['button_view'] ?? 'main', 'additional'); ?>>additional — Дополнительная кнопка</option>
                                     <option value="icon" <?php selected($options['button_view'] ?? 'main', 'icon'); ?>>icon — Только иконка</option>
@@ -134,7 +134,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
                             <!-- 2. buttonTheme: light, dark -->
                             <div class="lvyid-input-group">
                                 <label class="lvyid-label" for="button_theme">Тема кнопки (buttonTheme)</label>
-                                <select class="lvyid-input" id="button_theme" name="button_theme">
+                                <select id="button_theme" name="button_theme">
                                     <option value="light" <?php selected($options['button_theme'] ?? 'light', 'light'); ?>>light — Светлая кнопка</option>
                                     <option value="dark" <?php selected($options['button_theme'] ?? 'light', 'dark'); ?>>dark — Тёмная кнопка</option>
                                 </select>
@@ -143,7 +143,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
                             <!-- 3. buttonSize: xs, s, m, l, xl, xxl -->
                             <div class="lvyid-input-group">
                                 <label class="lvyid-label" for="button_size">Размер кнопки (buttonSize)</label>
-                                <select class="lvyid-input" id="button_size" name="button_size">
+                                <select id="button_size" name="button_size">
                                     <option value="xs" <?php selected($options['button_size'] ?? 'm', 'xs'); ?>>xs (28px)</option>
                                     <option value="s" <?php selected($options['button_size'] ?? 'm', 's'); ?>>s (36px)</option>
                                     <option value="m" <?php selected($options['button_size'] ?? 'm', 'm'); ?>>m (44px, стандарт)</option>
@@ -156,7 +156,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
                             <!-- 4. buttonIcon: ya, yaEng -->
                             <div class="lvyid-input-group">
                                 <label class="lvyid-label" for="button_icon">Тип иконки (buttonIcon)</label>
-                                <select class="lvyid-input" id="button_icon" name="button_icon">
+                                <select id="button_icon" name="button_icon">
                                     <option value="ya" <?php selected($options['button_icon'] ?? 'ya', 'ya'); ?>>ya — Русская буква «Я»</option>
                                     <option value="yaEng" <?php selected($options['button_icon'] ?? 'ya', 'yaEng'); ?>>yaEng — Латинская буква «Y»</option>
                                 </select>
@@ -536,7 +536,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
         <div class="lvyid-modal-header">
             <div class="lvyid-modal-badge">Глобальный релиз v2.0.0</div>
             <h2 class="lvyid-modal-title">🚀 Встречайте Login via Yandex 2.0!</h2>
-            <p class="lvyid-modal-subtitle">Масштабное обновление: встроенный конфигуратор кнопки входа, универсальные шорткоды, автозаполнение WooCommerce, переход на надёжный AJAX и современная панель управления.</p>
+            <p class="lvyid-modal-subtitle">Масштабное обновление: встроенный конструктор кнопки входа, универсальные шорткоды, автозаполнение WooCommerce, переход на надёжный AJAX и современная панель управления.</p>
         </div>
 
         <div class="lvyid-modal-body">
@@ -545,8 +545,8 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
                 <div class="lvyid-feature-card">
                     <div class="lvyid-feature-icon" style="background: #fdf4ff; color: #c026d3;">🎨</div>
                     <div class="lvyid-feature-content">
-                        <h3>Конфигуратор кнопки Яндекс ID</h3>
-                        <p>Гибкая настройка внешнего вида: выбор вида (main, additional, icon), светлой/тёмной темы, размеров от XS до XXL, типа иконки (русская «Я» / латиница «Y») и скругление углов от 0 до 14 px.</p>
+                        <h3>Конструктор кнопки Яндекс ID</h3>
+                        <p>Полный контроль над внешним видом кнопки: выбор вида (основная, дополнительная, иконка), светлой/тёмной темы, размеров от XS до XXL, типа иконки («Я» / «Y») и скругление углов от 0 до 14 px.</p>
                     </div>
                 </div>
 
@@ -554,7 +554,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
                     <div class="lvyid-feature-icon" style="background: #fff8e1; color: #f57f17;">⚡</div>
                     <div class="lvyid-feature-content">
                         <h3>Шорткод [login_via_yandex]</h3>
-                        <p>Больше никаких ID блоков и сложных настроек! Размещайте кнопки в Elementor, Gutenberg, сайдбарах, попапах и коде темы с поддержкой параметров конфигуратора.</p>
+                        <p>Больше никаких ID блоков и сложных настроек! Размещайте кнопки в Elementor, Gutenberg, сайдбарах, попапах и коде темы с поддержкой параметров конструктора.</p>
                     </div>
                 </div>
 
