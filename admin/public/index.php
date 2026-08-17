@@ -66,206 +66,126 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
         <!-- Left Column: Settings & Documentation -->
         <main class="lvyid-main-col">
             
-            <!-- Card 1: API Keys -->
-            <section class="lvyid-card" id="lvyid-sec-keys">
-                <div class="lvyid-card-header">
-                    <div class="lvyid-card-icon" style="background: #fff8e1; color: #f57f17;">🔑</div>
-                    <div>
-                        <h2 class="lvyid-card-title">Данные приложения Яндекс ID</h2>
-                        <p class="lvyid-card-subtitle">Введите ключи доступа из кабинета <a href="https://oauth.yandex.ru/client/new/id/" target="_blank" rel="noopener">oauth.yandex.ru</a></p>
-                    </div>
-                </div>
-                <div class="lvyid-card-body">
-                    <div class="lvyid-form-grid">
-                        <div class="lvyid-input-group">
-                            <label class="lvyid-label" for="client_id">
-                                ClientID <span class="lvyid-required">*</span>
-                            </label>
-                            <div class="lvyid-input-wrapper">
-                                <input class="lvyid-input" type="text" id="client_id" name="client_id"
-                                       value="<?php echo sprintf('%s', esc_attr($options['client_id'] ?? '')) ?>"
-                                       placeholder="32-значный идентификатор приложения" required maxlength="32" minlength="32">
-                                <button type="button" class="lvyid-input-action" onclick="navigator.clipboard.writeText(document.getElementById('client_id').value); this.innerText='✓'; setTimeout(()=>this.innerText='📋', 1500);" title="Копировать">📋</button>
-                            </div>
-                            <div class="lvyid-form-error hidden" id="client_id_error"></div>
-                        </div>
-
-                        <div class="lvyid-input-group">
-                            <label class="lvyid-label" for="client_secret">
-                                Client Secret <span class="lvyid-required">*</span>
-                            </label>
-                            <div class="lvyid-input-wrapper">
-                                <input class="lvyid-input" type="password" id="client_secret" name="client_secret"
-                                       value="<?php echo sprintf('%s', esc_attr($options['client_secret'] ?? '')) ?>"
-                                       placeholder="32-значный пароль приложения" required maxlength="32" minlength="32">
-                                <button type="button" class="lvyid-input-action" id="lvyid-toggle-secret" onclick="const input = document.getElementById('client_secret'); if(input.type === 'password'){ input.type = 'text'; this.innerText = '🙈'; } else { input.type = 'password'; this.innerText = '👁️'; }" title="Показать/скрыть">👁️</button>
-                            </div>
-                            <div class="lvyid-form-error hidden" id="client_secret_error"></div>
+            <!-- Row: API Keys (Left) & Button Configurator (Right) in 2 Columns -->
+            <div class="lvyid-cards-row">
+                
+                <!-- Card 1: API Keys -->
+                <section class="lvyid-card" id="lvyid-sec-keys">
+                    <div class="lvyid-card-header">
+                        <div class="lvyid-card-icon" style="background: #fff8e1; color: #f57f17;">🔑</div>
+                        <div>
+                            <h2 class="lvyid-card-title">Данные приложения Яндекс ID</h2>
+                            <p class="lvyid-card-subtitle">Введите ключи доступа из кабинета <a href="https://oauth.yandex.ru/client/new/id/" target="_blank" rel="noopener">oauth.yandex.ru</a></p>
                         </div>
                     </div>
-                </div>
-            </section>
+                    <div class="lvyid-card-body">
+                        <div class="lvyid-form-grid">
+                            <div class="lvyid-input-group">
+                                <label class="lvyid-label" for="client_id">
+                                    ClientID <span class="lvyid-required">*</span>
+                                </label>
+                                <div class="lvyid-input-wrapper">
+                                    <input class="lvyid-input" type="text" id="client_id" name="client_id"
+                                           value="<?php echo sprintf('%s', esc_attr($options['client_id'] ?? '')) ?>"
+                                           placeholder="32-значный идентификатор приложения" required maxlength="32" minlength="32">
+                                    <button type="button" class="lvyid-input-action" onclick="navigator.clipboard.writeText(document.getElementById('client_id').value); this.innerText='✓'; setTimeout(()=>this.innerText='📋', 1500);" title="Копировать">📋</button>
+                                </div>
+                                <div class="lvyid-form-error hidden" id="client_id_error"></div>
+                            </div>
 
-            <!-- Card: Button Constructor / Configurator -->
-            <section class="lvyid-card" id="lvyid-sec-constructor">
-                <div class="lvyid-card-header">
-                    <div class="lvyid-card-icon" style="background: #fdf4ff; color: #c026d3;">🎨</div>
-                    <div>
-                        <h2 class="lvyid-card-title">Конфигуратор кнопки Яндекс ID</h2>
-                        <p class="lvyid-card-subtitle">Настройка внешнего вида по официальной <a href="https://yandex.ru/dev/id/doc/ru/suggest/but-const" target="_blank" rel="noopener">документации Яндекс ID</a></p>
+                            <div class="lvyid-input-group">
+                                <label class="lvyid-label" for="client_secret">
+                                    Client Secret <span class="lvyid-required">*</span>
+                                </label>
+                                <div class="lvyid-input-wrapper">
+                                    <input class="lvyid-input" type="password" id="client_secret" name="client_secret"
+                                           value="<?php echo sprintf('%s', esc_attr($options['client_secret'] ?? '')) ?>"
+                                           placeholder="32-значный пароль приложения" required maxlength="32" minlength="32">
+                                    <button type="button" class="lvyid-input-action" id="lvyid-toggle-secret" onclick="const input = document.getElementById('client_secret'); if(input.type === 'password'){ input.type = 'text'; this.innerText = '🙈'; } else { input.type = 'password'; this.innerText = '👁️'; }" title="Показать/скрыть">👁️</button>
+                                </div>
+                                <div class="lvyid-form-error hidden" id="client_secret_error"></div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="lvyid-card-body">
-                    
-                    <div class="lvyid-const-grid">
-                        
-                        <!-- Controls Column -->
-                        <div class="lvyid-const-controls">
+                </section>
+
+                <!-- Card 2: Button Constructor / Configurator -->
+                <section class="lvyid-card" id="lvyid-sec-constructor">
+                    <div class="lvyid-card-header">
+                        <div class="lvyid-card-icon" style="background: #fdf4ff; color: #c026d3;">🎨</div>
+                        <div>
+                            <h2 class="lvyid-card-title">Конфигуратор кнопки Яндекс ID</h2>
+                            <p class="lvyid-card-subtitle">Настройка внешнего вида по параметрам <a href="https://yandex.ru/dev/id/doc/ru/suggest/but-const" target="_blank" rel="noopener">документации Яндекс ID</a></p>
+                        </div>
+                    </div>
+                    <div class="lvyid-card-body">
+                        <div class="lvyid-form-grid">
                             
                             <!-- 1. buttonView: main, additional, icon -->
-                            <div class="lvyid-const-group">
-                                <label class="lvyid-const-label">Вид кнопки (buttonView):</label>
-                                <div class="lvyid-segmented-group" id="lvyid-const-view">
-                                    <label class="lvyid-segmented-btn">
-                                        <input type="radio" name="button_view" value="main" <?php checked($options['button_view'] ?? 'main', 'main'); ?>>
-                                        <span>📝 main (Основная)</span>
-                                    </label>
-                                    <label class="lvyid-segmented-btn">
-                                        <input type="radio" name="button_view" value="additional" <?php checked($options['button_view'] ?? 'main', 'additional'); ?>>
-                                        <span>✨ additional</span>
-                                    </label>
-                                    <label class="lvyid-segmented-btn">
-                                        <input type="radio" name="button_view" value="icon" <?php checked($options['button_view'] ?? 'main', 'icon'); ?>>
-                                        <span>🔲 icon (Иконка)</span>
-                                    </label>
-                                </div>
+                            <div class="lvyid-input-group">
+                                <label class="lvyid-label" for="button_view">Вид кнопки (buttonView)</label>
+                                <select class="lvyid-input" id="button_view" name="button_view">
+                                    <option value="main" <?php selected($options['button_view'] ?? 'main', 'main'); ?>>main — Основная кнопка (с текстом)</option>
+                                    <option value="additional" <?php selected($options['button_view'] ?? 'main', 'additional'); ?>>additional — Дополнительная кнопка</option>
+                                    <option value="icon" <?php selected($options['button_view'] ?? 'main', 'icon'); ?>>icon — Только иконка</option>
+                                </select>
                             </div>
 
                             <!-- 2. buttonTheme: light, dark -->
-                            <div class="lvyid-const-group">
-                                <label class="lvyid-const-label">Цветовая тема (buttonTheme):</label>
-                                <div class="lvyid-theme-picker" id="lvyid-const-theme">
-                                    <label class="lvyid-theme-card lvyid-theme-light">
-                                        <input type="radio" name="button_theme" value="light" <?php checked($options['button_theme'] ?? 'light', 'light'); ?>>
-                                        <div class="lvyid-theme-preview" style="background: #ffffff; color: #000000; border: 1px solid #cbd5e1;">
-                                            <span class="lvyid-preview-dot" style="background: #fc3f1d;">Я</span>
-                                            <span>light (Светлая)</span>
-                                        </div>
-                                    </label>
-                                    <label class="lvyid-theme-card lvyid-theme-dark">
-                                        <input type="radio" name="button_theme" value="dark" <?php checked($options['button_theme'] ?? 'light', 'dark'); ?>>
-                                        <div class="lvyid-theme-preview" style="background: #22262f; color: #ffffff; border: 1px solid #334155;">
-                                            <span class="lvyid-preview-dot" style="background: #fc3f1d;">Я</span>
-                                            <span>dark (Тёмная)</span>
-                                        </div>
-                                    </label>
-                                </div>
+                            <div class="lvyid-input-group">
+                                <label class="lvyid-label" for="button_theme">Тема кнопки (buttonTheme)</label>
+                                <select class="lvyid-input" id="button_theme" name="button_theme">
+                                    <option value="light" <?php selected($options['button_theme'] ?? 'light', 'light'); ?>>light — Светлая кнопка</option>
+                                    <option value="dark" <?php selected($options['button_theme'] ?? 'light', 'dark'); ?>>dark — Тёмная кнопка</option>
+                                </select>
                             </div>
 
                             <!-- 3. buttonSize: xs, s, m, l, xl, xxl -->
-                            <div class="lvyid-const-group">
-                                <label class="lvyid-const-label">Размер кнопки (buttonSize):</label>
-                                <div class="lvyid-pills-group" id="lvyid-const-size">
-                                    <label class="lvyid-pill-btn">
-                                        <input type="radio" name="button_size" value="xs" <?php checked($options['button_size'] ?? 'm', 'xs'); ?>>
-                                        <span>xs</span>
-                                    </label>
-                                    <label class="lvyid-pill-btn">
-                                        <input type="radio" name="button_size" value="s" <?php checked($options['button_size'] ?? 'm', 's'); ?>>
-                                        <span>s</span>
-                                    </label>
-                                    <label class="lvyid-pill-btn">
-                                        <input type="radio" name="button_size" value="m" <?php checked($options['button_size'] ?? 'm', 'm'); ?>>
-                                        <span>m <small>Стандарт</small></span>
-                                    </label>
-                                    <label class="lvyid-pill-btn">
-                                        <input type="radio" name="button_size" value="l" <?php checked($options['button_size'] ?? 'm', 'l'); ?>>
-                                        <span>l</span>
-                                    </label>
-                                    <label class="lvyid-pill-btn">
-                                        <input type="radio" name="button_size" value="xl" <?php checked($options['button_size'] ?? 'm', 'xl'); ?>>
-                                        <span>xl</span>
-                                    </label>
-                                    <label class="lvyid-pill-btn">
-                                        <input type="radio" name="button_size" value="xxl" <?php checked($options['button_size'] ?? 'm', 'xxl'); ?>>
-                                        <span>xxl</span>
-                                    </label>
-                                </div>
+                            <div class="lvyid-input-group">
+                                <label class="lvyid-label" for="button_size">Размер кнопки (buttonSize)</label>
+                                <select class="lvyid-input" id="button_size" name="button_size">
+                                    <option value="xs" <?php selected($options['button_size'] ?? 'm', 'xs'); ?>>xs (28px)</option>
+                                    <option value="s" <?php selected($options['button_size'] ?? 'm', 's'); ?>>s (36px)</option>
+                                    <option value="m" <?php selected($options['button_size'] ?? 'm', 'm'); ?>>m (44px, стандарт)</option>
+                                    <option value="l" <?php selected($options['button_size'] ?? 'm', 'l'); ?>>l (52px)</option>
+                                    <option value="xl" <?php selected($options['button_size'] ?? 'm', 'xl'); ?>>xl (60px)</option>
+                                    <option value="xxl" <?php selected($options['button_size'] ?? 'm', 'xxl'); ?>>xxl (68px)</option>
+                                </select>
                             </div>
 
-                            <!-- 4. buttonBorderRadius: Slider 0 to 14 -->
-                            <div class="lvyid-const-group">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                                    <label class="lvyid-const-label" style="margin-bottom: 0;">Скругление углов (buttonBorderRadius: 0...14):</label>
+                            <!-- 4. buttonIcon: ya, yaEng -->
+                            <div class="lvyid-input-group">
+                                <label class="lvyid-label" for="button_icon">Тип иконки (buttonIcon)</label>
+                                <select class="lvyid-input" id="button_icon" name="button_icon">
+                                    <option value="ya" <?php selected($options['button_icon'] ?? 'ya', 'ya'); ?>>ya — Русская буква «Я»</option>
+                                    <option value="yaEng" <?php selected($options['button_icon'] ?? 'ya', 'yaEng'); ?>>yaEng — Латинская буква «Y»</option>
+                                </select>
+                            </div>
+
+                            <!-- 5. buttonBorderRadius: Range Slider 0 to 14 -->
+                            <div class="lvyid-input-group">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <label class="lvyid-label" for="button_border_radius" style="margin-bottom: 0;">Скругление углов (buttonBorderRadius)</label>
                                     <span class="lvyid-radius-badge" id="lvyid-radius-val"><?php echo esc_html($options['button_border_radius'] ?? '8'); ?> px</span>
                                 </div>
-                                <div class="lvyid-slider-wrap">
-                                    <input type="range" id="lvyid-radius-range" name="button_border_radius" min="0" max="14" step="1"
-                                           value="<?php echo esc_attr($options['button_border_radius'] ?? '8'); ?>" class="lvyid-range-slider">
-                                </div>
-                                <div class="lvyid-slider-ticks">
-                                    <span>0 (квадрат)</span>
-                                    <span>7</span>
-                                    <span>14 (капсула)</span>
-                                </div>
-                            </div>
-
-                            <!-- 5. buttonIcon: ya, yaEng -->
-                            <div class="lvyid-const-group">
-                                <label class="lvyid-const-label">Тип иконки (buttonIcon):</label>
-                                <div class="lvyid-segmented-group" id="lvyid-const-icon">
-                                    <label class="lvyid-segmented-btn">
-                                        <input type="radio" name="button_icon" value="ya" <?php checked($options['button_icon'] ?? 'ya', 'ya'); ?>>
-                                        <span>🔴 ya (Русская «Я»)</span>
-                                    </label>
-                                    <label class="lvyid-segmented-btn">
-                                        <input type="radio" name="button_icon" value="yaEng" <?php checked($options['button_icon'] ?? 'ya', 'yaEng'); ?>>
-                                        <span>🔴 yaEng (Латиница «Y»)</span>
-                                    </label>
+                                <div class="lvyid-slider-box">
+                                    <div class="lvyid-slider-wrap">
+                                        <input type="range" id="button_border_radius" name="button_border_radius" min="0" max="14" step="1"
+                                               value="<?php echo esc_attr($options['button_border_radius'] ?? '8'); ?>" class="lvyid-range-slider">
+                                    </div>
+                                    <div class="lvyid-slider-ticks">
+                                        <span>0 (квадрат)</span>
+                                        <span>7</span>
+                                        <span>14 (капсула)</span>
+                                    </div>
                                 </div>
                             </div>
 
                         </div>
-
-                        <!-- Live Preview & Shortcode Column -->
-                        <div class="lvyid-const-preview-col">
-                            
-                            <!-- Live Preview Card Box -->
-                            <div class="lvyid-preview-box">
-                                <div class="lvyid-preview-header">
-                                    <span class="lvyid-preview-badge">Живой предпросмотр кнопки</span>
-                                    <div class="lvyid-preview-bg-switch">
-                                        <button type="button" class="lvyid-bg-btn active" data-bg="light" title="Светлый фон">☀️ Светлый</button>
-                                        <button type="button" class="lvyid-bg-btn" data-bg="dark" title="Тёмный фон">🌙 Тёмный</button>
-                                    </div>
-                                </div>
-                                <div class="lvyid-preview-stage lvyid-stage-light" id="lvyid-stage">
-                                    <div id="lvyid-constructor-preview" class="lvyid-constructor-preview">
-                                        <!-- Real-time Button Preview Rendered Here -->
-                                    </div>
-                                </div>
-                                <div class="lvyid-preview-footer">
-                                    💡 <b>Автоматическое применение:</b> выбранный стиль кнопки будет использоваться в формах входа, чекауте WooCommerce и шорткоде.
-                                </div>
-                            </div>
-
-                            <!-- Generated Shortcode Box -->
-                            <div class="lvyid-generated-code-box">
-                                <div class="lvyid-generated-header">
-                                    <span>📋 Шорткод с параметрами:</span>
-                                    <button type="button" class="lvyid-copy-btn" id="lvyid-copy-const-shortcode">Копировать</button>
-                                </div>
-                                <div class="lvyid-code-snippet">
-                                    <code id="lvyid-code-shortcode">[login_via_yandex]</code>
-                                </div>
-                            </div>
-
-                        </div>
-
                     </div>
+                </section>
 
-                </div>
-            </section>
+            </div>
 
             <!-- Card 2: Options & Switches -->
             <section class="lvyid-card" id="lvyid-sec-options">
