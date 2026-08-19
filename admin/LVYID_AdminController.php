@@ -18,7 +18,7 @@ class LVYID_AdminController
 
     public function addMenu()
     {
-        $hook = add_menu_page('Вход через Яндекс', 'Вход через Яндекс ', 'manage_options', 'login_via_yandex', [$this, 'settingsPage'], plugin_dir_url(__FILE__) . '../public/plugin-icon.png', "79.8");
+        $hook = add_menu_page('Вход через Яндекс', 'Вход через Яндекс ', 'manage_options', 'login_via_yandex', [$this, 'settingsPage'], plugin_dir_url(__FILE__) . '../public/plugin-icon-20x20.webp', "79.8");
         add_action('admin_print_styles-' . $hook, [$this, 'enqueueAdminStyles']);
         add_action('admin_print_scripts-' . $hook, [$this, 'enqueueAdminScripts']);
     }

@@ -5,13 +5,16 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Login via Yandex - авторизация через Яндекс для вашего сайта или интернет магазина.
- * Plugin URI:        https://webseed.ru/blog/wordpress-plagin-dlya-avtorizaczii-cherez-yandeks-id
+ * Plugin URI:        https://webseed.ru
  * Description:       Плагин для входа через Яндекс для WordPress и Woocommerce. Укажите Client Token и Secret Token в настройках плагина, а также, выберите тип отображения на сайте (в контейнере или всплывающем окне, или и то и другое).
  * Version:           2.0.0
  * Author:            Никита Ив (веб-разработчик webseed.ru)
  * Author URI:        https://webseed.ru
  * License:           GPLv2
  * License URI:       https://www.gnu.org/licenses/old-licenses/gpl-2.0.html#SEC1
+ * Requires at least: 5.0
+ * Requires PHP:      7.4
+ * Text Domain:       login-via-yandex
  */
 
 if (!defined('ABSPATH')) exit;
@@ -238,7 +241,11 @@ function lvyid_add_copyright()
                 ? 'Вход через Яндекс ID — webseed.ru'
                 : 'Login with Yandex ID — webseed.ru';
 
-            echo '<a title="' . esc_attr($title) . '" class="login_via_yandex" href="' . esc_url("https://webseed.ru/?utm_source=$hostname&utm_medium=login_via_yandex&utm_campaign=login_via_yandex") . '">' . esc_html($text) . '</a>';
+            $info = $is_ru
+                ? 'Копирайт можно убрать в настройках плагина'
+                : 'Copyright can be removed in the plugin settings';
+
+            echo '<a data-info="' . esc_attr($info) . '" title="' . esc_attr($title) . '" class="login_via_yandex" href="' . esc_url("https://webseed.ru/?utm_source=$hostname&utm_medium=login_via_yandex&utm_campaign=login_via_yandex") . '" target="_blank" rel="noopener">' . esc_html($text) . '</a>';
         }
     }
 }

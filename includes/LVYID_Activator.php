@@ -23,7 +23,7 @@ class LVYID_Activator
             `alternative` BOOLEAN DEFAULT FALSE,
             `button_default` BOOLEAN DEFAULT FALSE,
             `copyright` BOOLEAN DEFAULT TRUE,
-            `use_ajax_webhook` BOOLEAN DEFAULT FALSE,
+            `use_ajax_webhook` BOOLEAN DEFAULT TRUE,
             `button_view` VARCHAR(32) DEFAULT 'main',
             `button_theme` VARCHAR(32) DEFAULT 'light',
             `button_size` VARCHAR(16) DEFAULT 'm',
@@ -34,5 +34,29 @@ class LVYID_Activator
         ) $charset_collate"];
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
+
+        // Если плагин устанавливается впервые (таблица пустая), добавляем начальную запись с активным AJAX Webhook
+        $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_options'") === $table_options;
+        if ($table_exists) {
+            $count = (int)$wpdb->get_var("SELECT COUNT(*) FROM $table_options");
+            if ($count === 0) {
+                $wpdb->insert($table_options, [
+                    'client_id'            => '',
+                    'client_secret'        => '',
+                    'button'               => 0,
+                    'container_id'         => '',
+                    'widget'               => 0,
+                    'alternative'          => 0,
+                    'button_default'       => 0,
+                    'copyright'            => 1,
+                    'use_ajax_webhook'     => 1,
+                    'button_view'          => 'main',
+                    'button_theme'         => 'light',
+                    'button_size'          => 'm',
+                    'button_border_radius' => '8',
+                    'button_icon'          => 'ya',
+                ]);
+            }
+        }
     }
 }

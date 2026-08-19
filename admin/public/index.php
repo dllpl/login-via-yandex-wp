@@ -11,10 +11,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
         <div class="lvyid-header-top">
             <div class="lvyid-header-left">
                 <div class="lvyid-brand-logo">
-                    <svg width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="48" height="48" rx="12" fill="#FFCC00"/>
-                        <path d="M26.5 13H22.2C17.7 13 14.5 16.2 14.5 20.7C14.5 24.3 16.6 27 20 28.1L14 36H19L24.8 28.3H26.5V36H31V13H26.5ZM26.5 24.2H22.5C20.3 24.2 18.9 22.8 18.9 20.7C18.9 18.5 20.3 17.1 22.5 17.1H26.5V24.2Z" fill="#111111"/>
-                    </svg>
+                    <img src="<?php echo esc_url(plugins_url('../../public/plugin-icon.webp', __FILE__)); ?>" alt="Login via Yandex" width="38" height="38">
                 </div>
                 <div class="lvyid-brand-info">
                     <div class="lvyid-title-row">
@@ -483,7 +480,9 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
             <div class="lvyid-card">
                 <div class="lvyid-card-header" style="border-bottom: none; padding-bottom: 0;">
                     <div class="lvyid-author-box">
-                        <div class="lvyid-card-icon" style="background: #0f172a; color: #ffcc00; width: 44px; height: 44px; border-radius: 14px; font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center;">WS</div>
+                        <div class="lvyid-card-icon" style="background: transparent; width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; padding: 0;">
+                            <img src="<?php echo esc_url(plugins_url('../../public/plugin-icon.webp', __FILE__)); ?>" alt="Webseed.ru" style="width: 44px; height: 44px; border-radius: 50%; object-fit: contain; display: block;">
+                        </div>
                         <div>
                             <h3 class="lvyid-author-name">Webseed.ru</h3>
                             <p class="lvyid-author-role">Разработка и продвижение</p>

@@ -76,6 +76,14 @@ html {
     flex-shrink: 0;
 }
 
+.lvyid-brand-logo img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: contain;
+    display: block;
+}
+
 .lvyid-title-row {
     display: flex;
     align-items: center;

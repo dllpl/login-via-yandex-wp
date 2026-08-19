@@ -2,7 +2,7 @@
 Contributors: dllpl
 Tags: yandexid, login, авторизация, яндекс, woocommerce
 Donate link: https://boosty.to/webseed/donate
-Requires at least: 4.7
+Requires at least: 5.0
 Tested up to: 7.0.4
 Stable tag: 2.0.0
 License: GPLv2
