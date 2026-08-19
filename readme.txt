@@ -1,9 +1,10 @@
 === Login via Yandex – вход через Яндекс ID ===
 Contributors: dllpl
-Tags: yandexid, login, авторизация, яндекс, woocommerce
+Tags: login, yandex, auth, authentication, woocommerce
 Donate link: https://boosty.to/webseed/donate
 Requires at least: 5.0
 Tested up to: 7.0.4
+Requires PHP: 7.4
 Stable tag: 2.0.0
 License: GPLv2
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html#SEC1
@@ -89,3 +90,8 @@ Wordpress плагин для входа через Яндекс позволя�
 * Устранено мерцание стилей в панели управления (FOUC) и мигание кнопки до инициализации
 * Интерактивное полноэкранное приветственное окно с обзором возможностей версии 2.0.0
 * Полная поддержка актуальных версий WordPress 7.0.4 и PHP 8.x
+
+== Upgrade Notice ==
+
+= 2.0.0 =
+Глобальный релиз 2.0.0: встроенный Конструктор кнопки Яндекс ID, универсальные шорткоды, поддержка WooCommerce и переход на AJAX. Обновление безопасно и полностью обратно совместимо.
