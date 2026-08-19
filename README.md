@@ -53,9 +53,8 @@
 3. В блоке **Платформы** выберите **Веб-сервисы**.
 4. В поле **Redirect URI (Callback URL)** укажите адрес вашего сайта:
    ```text
-   https://вашсайт.ру/wp-json/login_via_yandex/webhook
+   https://вашсайт.ру/wp-admin/admin-ajax.php?action=lvyid_webhook
    ```
-   *(Если в плагине включена опция «Использовать AJAX Webhook», укажите `https://вашсайт.ру/wp-admin/admin-ajax.php?action=lvyid_webhook`)*.
 5. В блоке **Доступ к данным** выберите необходимые разрешения:
    - `Почта` (`login:email`)
    - `Имя, фамилия и пол` (`login:info`)

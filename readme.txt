@@ -37,8 +37,7 @@ https://www.youtube.com/watch?v=iEn4-2ybuHI
 1. **Создание приложения в Яндекс OAuth:**
    * Перейдите по ссылке [oauth.yandex.ru/client/new/id](https://oauth.yandex.ru/client/new/id/) и заполните анкету создания приложения.
    * В поле **Redirect URI** обязательно укажите адрес вашего сайта:
-     `https://вашсайт.ру/wp-json/login_via_yandex/webhook`
-     *(или `https://вашсайт.ру/wp-admin/admin-ajax.php?action=lvyid_webhook`, если в настройках включен AJAX Webhook)*.
+     `https://вашсайт.ру/wp-admin/admin-ajax.php?action=lvyid_webhook`
    * Выберите доступы к данным (Email, Имя/Фамилия, Телефон, Аватар).
    * Скопируйте полученные **ClientID** и **Client Secret**.
 
