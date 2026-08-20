@@ -16,7 +16,7 @@ $is_configured = !empty($options['client_id']) && !empty($options['client_secret
                 <div class="lvyid-brand-info">
                     <div class="lvyid-title-row">
                         <h1 class="lvyid-app-title">Вход через Яндекс ID</h1>
-                        <span class="lvyid-version-tag">v2.0.0</span>
+                        <span class="lvyid-version-tag">v2.0.1</span>
                         <?php if ($woo_installed): ?>
                             <span class="lvyid-badge lvyid-badge-woo">WooCommerce Active</span>
                         <?php endif; ?>

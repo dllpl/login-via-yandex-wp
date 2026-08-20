@@ -7,7 +7,7 @@
  * Plugin Name:       Login via Yandex - авторизация через Яндекс для вашего сайта или интернет магазина.
  * Plugin URI:        https://webseed.ru
  * Description:       Плагин для входа через Яндекс для WordPress и Woocommerce. Укажите Client Token и Secret Token в настройках плагина, а также, выберите тип отображения на сайте (в контейнере или всплывающем окне, или и то и другое).
- * Version:           2.0.0
+ * Version:           2.0.1
  * Author:            Никита Ив (веб-разработчик webseed.ru)
  * Author URI:        https://webseed.ru
  * License:           GPLv2
@@ -24,7 +24,7 @@ if (!defined('WPINC')) {
 }
 
 if (!defined('LVYID_VERSION')) {
-    define('LVYID_VERSION', '2.0.0');
+    define('LVYID_VERSION', '2.0.1');
 }
 
 if (!defined('LVYID_PLUGIN_FILE')) {

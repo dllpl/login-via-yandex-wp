@@ -76,9 +76,6 @@ function getConstructorValues() {
 }
 
 function renderButtonPreview() {
-    const previewContainer = document.getElementById('lvyid-constructor-preview');
-    if (!previewContainer) return;
-
     const values = getConstructorValues();
 
     // 1. Обновляем текстовый индикатор скругления
@@ -99,6 +96,9 @@ function renderButtonPreview() {
         shortcodeStr += ']';
         shortcodeCodeEl.innerText = shortcodeStr;
     }
+
+    const previewContainer = document.getElementById('lvyid-constructor-preview');
+    if (!previewContainer) return;
 
     // 3. Отрисовываем визуальный макет кнопки по спецификации Яндекс ID
     previewContainer.innerHTML = '';
