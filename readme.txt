@@ -3,7 +3,7 @@ Contributors: dllpl
 Tags: login, yandex, auth, authentication, woocommerce
 Donate link: https://boosty.to/webseed/donate
 Requires at least: 5.0
-Tested up to: 7.0.4
+Tested up to: 7.1.0
 Requires PHP: 7.4
 Stable tag: 2.0.1
 License: GPLv2
