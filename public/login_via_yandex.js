@@ -32,57 +32,63 @@ if (typeof yaWpData !== 'undefined' && !yaWpData.error) {
     }
 
     function initButton() {
-        if (window._yaWpButtonInited || typeof YaAuthSuggest === 'undefined') {
+        if (typeof YaAuthSuggest === 'undefined') {
             return;
         }
 
-        // Поиск первого доступного контейнера кнопки на странице
-        let container = document.querySelector('.lvyid_auth_button, .lvyid_auth_default, .lvyid_shortcode_button, [id^="lvyid_auth_default"], [id="lvyid_auth_default"], [data-lvyid-button]');
+        let containers = Array.from(document.querySelectorAll('.lvyid_auth_button, .lvyid_auth_default, .lvyid_shortcode_button, [id^="lvyid_auth_default"], [id="lvyid_auth_default"], [data-lvyid-button]'));
 
-        if (!container && yaWpData.button && yaWpData.container_id) {
-            container = document.getElementById(yaWpData.container_id);
+        if (containers.length === 0 && yaWpData.button && yaWpData.container_id) {
+            const customContainer = document.getElementById(yaWpData.container_id);
+            if (customContainer) {
+                containers.push(customContainer);
+            }
         }
 
-        if (!container) {
+        if (containers.length === 0) {
             return;
         }
 
-        window._yaWpButtonInited = true;
+        containers.forEach(container => {
+            if (container.getAttribute('data-lvyid-inited') === 'true') {
+                return;
+            }
+            container.setAttribute('data-lvyid-inited', 'true');
 
-        if (!container.id) {
-            container.id = 'lvyid_btn_' + Math.random().toString(36).substring(2, 9);
-        }
+            if (!container.id) {
+                container.id = 'lvyid_btn_' + Math.random().toString(36).substring(2, 9);
+            }
 
-        const bSize = container.getAttribute('data-size') || yaWpData.button_size || 'm';
-        const bView = container.getAttribute('data-view') || yaWpData.button_view || 'main';
-        const bTheme = container.getAttribute('data-theme') || yaWpData.button_theme || 'light';
-        const bRadius = container.getAttribute('data-radius') || yaWpData.button_border_radius || '8';
-        const bIcon = container.getAttribute('data-icon') || yaWpData.button_icon || 'ya';
+            const bSize = container.getAttribute('data-size') || yaWpData.button_size || 'm';
+            const bView = container.getAttribute('data-view') || yaWpData.button_view || 'main';
+            const bTheme = container.getAttribute('data-theme') || yaWpData.button_theme || 'light';
+            const bRadius = container.getAttribute('data-radius') || yaWpData.button_border_radius || '8';
+            const bIcon = container.getAttribute('data-icon') || yaWpData.button_icon || 'ya';
 
-        YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin, {
-            view: "button",
-            parentId: container.id,
-            buttonSize: bSize,
-            buttonView: bView,
-            buttonTheme: bTheme,
-            buttonBorderRadius: bRadius,
-            buttonIcon: bIcon,
-        })
-            .then(({ handler }) => {
-                container.setAttribute('data-lvyid-inited', 'true');
-                if (typeof handler === 'function') {
-                    return handler();
-                }
+            YaAuthSuggest.init(oauthQueryParams, tokenPageOrigin, {
+                view: "button",
+                parentId: container.id,
+                buttonSize: bSize,
+                buttonView: bView,
+                buttonTheme: bTheme,
+                buttonBorderRadius: bRadius,
+                buttonIcon: bIcon,
             })
-            .then(data => {
-                if (!yaWpData.alternative && data && data.access_token) {
-                    authUser(data.access_token);
-                }
-            })
-            .catch(error => {
-                if (error && (error.code === 'in_progress' || error.code === 'cancelled')) return;
-                console.warn('[LoginViaYandex] Ошибка инициализации кнопки:', error);
-            });
+                .then(({ handler }) => {
+                    if (typeof handler === 'function') {
+                        return handler();
+                    }
+                })
+                .then(data => {
+                    if (!yaWpData.alternative && data && data.access_token) {
+                        authUser(data.access_token);
+                    }
+                })
+                .catch(error => {
+                    if (error && (error.code === 'in_progress' || error.code === 'cancelled')) return;
+                    console.warn('[LoginViaYandex] Ошибка инициализации кнопки:', error);
+                });
+        });
     }
 
     function initWidget() {

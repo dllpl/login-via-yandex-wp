@@ -60,11 +60,11 @@ function showNotify(title, text, status = 'success') {
 // 2. Интерактивный Конфигуратор Кнопки Яндекс ID (Live Button Constructor)
 // --------------------------------------------------------------------------
 function getConstructorValues() {
-    const viewInput = document.querySelector('input[name="button_view"]:checked');
-    const themeInput = document.querySelector('input[name="button_theme"]:checked');
-    const sizeInput = document.querySelector('input[name="button_size"]:checked');
-    const radiusInput = document.getElementById('lvyid-radius-range');
-    const iconInput = document.querySelector('input[name="button_icon"]:checked');
+    const viewInput = document.getElementById('button_view') || document.querySelector('input[name="button_view"]:checked');
+    const themeInput = document.getElementById('button_theme') || document.querySelector('input[name="button_theme"]:checked');
+    const sizeInput = document.getElementById('button_size') || document.querySelector('input[name="button_size"]:checked');
+    const radiusInput = document.getElementById('button_border_radius') || document.getElementById('lvyid-radius-range');
+    const iconInput = document.getElementById('button_icon') || document.querySelector('input[name="button_icon"]:checked');
 
     return {
         view: viewInput ? viewInput.value : 'main',         // main, additional, icon
@@ -131,18 +131,13 @@ function renderButtonPreview() {
     previewContainer.appendChild(btn);
 }
 
-// Слушатели контролов конфигуратора
-const constructorInputs = document.querySelectorAll('#lvyid-sec-constructor input[type="radio"]');
-if (constructorInputs.length > 0) {
-    constructorInputs.forEach(input => {
-        input.addEventListener('change', renderButtonPreview);
+// Слушатели контролов конфигуратора (select, range slider, radio)
+const constructorControls = document.querySelectorAll('#lvyid-sec-constructor select, #lvyid-sec-constructor input');
+if (constructorControls.length > 0) {
+    constructorControls.forEach(control => {
+        control.addEventListener('change', renderButtonPreview);
+        control.addEventListener('input', renderButtonPreview);
     });
-}
-
-// Слушатель слайдера скругления (0..14)
-const radiusSlider = document.getElementById('lvyid-radius-range');
-if (radiusSlider) {
-    radiusSlider.addEventListener('input', renderButtonPreview);
 }
 
 // Переключатель фона предпросмотра (Светлый / Тёмный)
